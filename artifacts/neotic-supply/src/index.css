@@ -331,3 +331,206 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
     inset: -1px;
   }
 }
+
+/* NEOTIC / transmission system — nocturnal editorial with acid-aqua signal */
+:root {
+  color-scheme: dark;
+  --background: 222 12% 6%;
+  --foreground: 45 18% 92%;
+  --border: 210 8% 22%;
+  --card: 220 10% 9%;
+  --card-foreground: 45 18% 92%;
+  --card-border: 210 8% 22%;
+  --sidebar: 222 12% 6%;
+  --sidebar-foreground: 45 18% 92%;
+  --sidebar-border: 210 8% 22%;
+  --sidebar-primary: 174 66% 66%;
+  --sidebar-primary-foreground: 222 12% 6%;
+  --sidebar-accent: 220 10% 13%;
+  --sidebar-accent-foreground: 45 18% 92%;
+  --sidebar-ring: 174 66% 66%;
+  --popover: 220 10% 9%;
+  --popover-foreground: 45 18% 92%;
+  --popover-border: 210 8% 22%;
+  --primary: 174 66% 66%;
+  --primary-foreground: 222 12% 6%;
+  --secondary: 220 10% 14%;
+  --secondary-foreground: 45 18% 92%;
+  --muted: 220 10% 14%;
+  --muted-foreground: 215 8% 63%;
+  --accent: 174 66% 66%;
+  --accent-foreground: 222 12% 6%;
+  --destructive: 4 60% 54%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 210 8% 24%;
+  --ring: 174 66% 66%;
+  --chart-1: 174 66% 66%;
+  --chart-2: 44 50% 72%;
+  --chart-3: 3 48% 56%;
+  --chart-4: 215 8% 63%;
+  --chart-5: 220 10% 34%;
+  --app-font-sans: 'Space Grotesk', sans-serif;
+  --app-font-mono: 'DM Mono', monospace;
+}
+.dark {
+  --background: 222 12% 6%;
+  --foreground: 45 18% 92%;
+  --primary: 174 66% 66%;
+  --accent: 174 66% 66%;
+}
+html { scroll-padding-top: 82px; }
+body { background:#0d0f12; color:#f0eee8; }
+.grain { opacity:.035; }
+.topbar { height:30px; background:#b3e9dc; color:#111818; gap:12px; font-size:8px; letter-spacing:.19em; }
+.topbar i { display:block; width:4px; height:4px; border-radius:50%; background:#313a37; }
+.nav { height:72px; padding-inline:clamp(20px,5vw,74px); background:rgba(12,14,17,.9); border-color:#ffffff1c; }
+.brand { font-size:21px; letter-spacing:-1.4px; }
+.brand small { color:#9caaa6; font-size:7px; }
+.navlinks { gap:clamp(18px,2.9vw,43px); }
+.navlinks a,.nav-action { font-size:9px; letter-spacing:.16em; }
+.nav-action { min-height:40px; }
+.bag-count { color:#afe8dc; font-size:9px; }
+.hero { min-height:min(820px,calc(100svh - 102px)); border-bottom-color:#ffffff20; }
+.hero:before {
+  background:
+    linear-gradient(90deg,#0a0b0ecc 0%,#0a0b0e4f 27%,#0a0b0e15 50%,#0a0b0e4f 74%,#0a0b0ecc 100%),
+    linear-gradient(0deg,#0d0f12 0%,transparent 28%,#090b0e55 100%),
+    url('/brand/char-vex.webp') left 4% top 8% / min(36vw,500px) 95% no-repeat,
+    url('/brand/char-neo.webp') right 4% top 8% / min(36vw,500px) 95% no-repeat,
+    radial-gradient(ellipse at 50% 44%,#435052 0%,#191d20 37%,#0d0f12 74%);
+  filter:saturate(.84);
+}
+.hero:after { content:'NEOTIC DISTRICT  /  001'; bottom:30px; right:5.2vw; color:#b4b9b3; }
+.hero-content { width:100%; margin:0; text-align:center; padding:100px clamp(22px,6vw,104px) 112px; }
+.eyebrow,.kicker { color:#a4e5d8; font-size:9px; letter-spacing:.23em; }
+.hero h1 { font-size:clamp(78px,12vw,166px); margin:25px 0 12px; letter-spacing:-.085em; text-shadow:0 3px 0 #545858; }
+.hero h1 em { color:#a9e8db; }
+.hero-sub { margin:24px auto 30px; max-width:320px; color:#d2d3cd; font-size:13px; }
+.button { background:#111518d9; border-color:#c2c7c1; padding:14px 17px; gap:32px; font-size:9px; letter-spacing:.13em; }
+.button:hover { background:#b5eadc; border-color:#b5eadc; color:#101514; }
+.hero-side { right:3.4vw; font-size:8px; color:#c8cdc7; }
+.side-star { right:50%; top:15%; transform:translateX(50%); width:30px; height:30px; }
+.side-star:before,.side-star:after { background:#b5eadc; }
+.section { border-bottom-color:#ffffff20; padding-block:clamp(76px,9vw,132px); }
+.shop-intro { align-items:end; margin-bottom:28px; }
+.section-title { font-size:clamp(48px,7vw,88px); letter-spacing:-.075em; }
+.section-title em { color:#a9e8db; }
+.section-note { color:#a7aaa5; }
+.shop-subline { display:flex; justify-content:space-between; border-top:1px solid #ffffff26; padding:13px 0 18px; margin-top:2px; color:#929b98; font:8px var(--app-font-mono); letter-spacing:.14em; }
+.search { border-bottom-color:#82928d; }
+.products { gap:16px; }
+.product { background:#14171a; border-color:#ffffff20; padding:8px; }
+.product:hover { border-color:#a5e4d9; }
+.product-visual { height:clamp(255px,32vw,440px); background:#d8d6cf; }
+.product-img { background-color:#d8d6cf; filter:saturate(.9); }
+.product-no { background:#ace6d9; color:#17201f; font-size:7px; }
+.product-meta { padding:15px 4px 13px; font-size:9px; letter-spacing:.075em; }
+.product-meta strong { color:#b0e9dc; font-size:10px; }
+.add-button { background:#191d20; border-color:#454d4b; font-size:8px; letter-spacing:.14em; }
+.add-button:hover { background:#b5eadc; border-color:#b5eadc; }
+.character-section { background:#111316; }
+.section-heading { margin-bottom:38px; }
+.character-stage { min-height:570px; border-color:#ffffff25; background:#14171a; grid-template-columns:1.15fr .85fr; }
+.character-image { min-height:570px; background-position:center 38%; }
+.character-image:after { background:linear-gradient(90deg,transparent 58%,#14171a 100%); }
+.character-info h3 { font-size:clamp(58px,8vw,112px); letter-spacing:-.09em; }
+.character-info p { min-height:60px; }
+.character-info .character-quote { color:#b5eadc; }
+.character-control { border-color:#ffffff27; margin-top:26px; }
+.arrow { border-color:#69716d; }
+.arrow:hover { background:#b5eadc; border-color:#b5eadc; }
+.character-select { display:flex; gap:8px; margin-top:17px; }
+.character-select button { flex:1; border:1px solid #ffffff24; background:transparent; color:#d3d5cf; padding:10px 8px; text-align:left; font:9px var(--app-font-mono); cursor:pointer; transition:background .2s,color .2s,border-color .2s; }
+.character-select button span { float:right; color:#79817d; }
+.character-select button:hover,.character-select button.selected { background:#b5eadc; border-color:#b5eadc; color:#131a18; }
+.character-select button.selected span { color:#4b625d; }
+.world { min-height:650px; }
+.world:before { background:linear-gradient(90deg,#0d0f12 0%,#0d0f12df 24%,#0d0f1252 73%,#0d0f1280),linear-gradient(0deg,#0d0f12,transparent 36%),url('/brand/neotic-city.webp') center 54%/cover; opacity:.95; }
+.world-copy { width:min(520px,68%); }
+.world-copy h2 { font-size:clamp(58px,8vw,102px); letter-spacing:-.075em; }
+.world-copy h2 em { color:#b5eadc; }
+.world-copy p { max-width:350px; }
+.coordinates { border-color:#d0d3ca63; background:#0d0f12cc; color:#e4e5de; }
+.drop-section { background:#131518; }
+.drop-section:before { background:linear-gradient(90deg,#0d0f12e8,#0d0f129c),url('/brand/char-miko.webp') 78% 42%/auto 120% no-repeat,url('/brand/char-raze.webp') 12% 38%/auto 110% no-repeat; filter:saturate(.72); opacity:.72; }
+.drop-inner h2 { letter-spacing:-.09em; }
+.drop-inner h2 em { color:#b5eadc; font-style:normal; }
+.drop-line { color:#c1c8c1; font-size:9px; letter-spacing:.24em; }
+.time-unit strong { color:#f2f0e8; }
+.time-unit span,.date-label { color:#a8e5d8; }
+.about { min-height:520px; }
+.about:before { color:#121518; }
+.about-content h2 { letter-spacing:-.075em; }
+.about-content h2 em { color:#b5eadc; font-style:normal; }
+.about-content p { max-width:510px; }
+.manifesto { border-color:#ffffff26; color:#afe8dc; font-size:9px; }
+.footer { color:#a2aaa5; }
+.footer-brand { font-size:17px; }
+.footer a:hover { color:#b5eadc; }
+.drawer { background:#121619; border-color:#ffffff2a; }
+.drawer-head { border-color:#ffffff27; }
+.drawer-head h2 { font-size:14px; }
+.close-button { border-color:#69716d; }
+.close-button:hover { color:#101514; background:#b5eadc; border-color:#b5eadc; }
+.cart-thumb { background-color:#dedbd1; background-size:cover; background-position:center; }
+.cart-item-price { color:#afe8dc; }
+.quantity button:hover { background:#b5eadc; color:#111; }
+.cart-total { border-color:#ffffff27; }
+.cart-empty { gap:16px; }
+.cart-empty .button { margin-top:12px; }
+.toast { background:#b5eadc; color:#101514; }
+.overlay { background:rgba(3,5,7,.73); backdrop-filter:blur(3px); }
+@media(max-width:900px) {
+  .hero:before { background-position:0 0,0 0,left top,right top,center; background-size:auto,auto,44% 92%,44% 92%,cover; }
+  .products { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .character-stage { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:680px) {
+  .topbar { height:29px; font-size:7px; letter-spacing:.13em; }
+  .nav { height:64px; }
+  .navlinks { top:64px; background:#111518; border-color:#ffffff29; }
+  .navlinks a { border-color:#ffffff18; }
+  .nav-actions { gap:12px; margin-right:14px; }
+  .hero { min-height:730px; }
+  .hero:before { background:linear-gradient(0deg,#0d0f12 0%,#0d0f1266 18%,#0d0f125c 66%,#0d0f12d9 100%),url('/brand/char-vex.webp') left -31% top 2%/81% 74% no-repeat,url('/brand/char-neo.webp') right -24% top 6%/83% 76% no-repeat,radial-gradient(ellipse at 50% 40%,#343b3d,#0d0f12 76%); }
+  .hero-content { padding:345px 22px 100px; }
+  .hero h1 { font-size:clamp(69px,17vw,105px); margin:18px 0 11px; }
+  .hero-sub { max-width:310px; font-size:12px; margin:18px auto 24px; }
+  .hero-side { display:none; }
+  .side-star { top:24px; }
+  .section-heading { display:block; }
+  .section-note { margin-top:20px; }
+  .shop-intro { display:block; }
+  .shop-intro > div:nth-child(2) { margin-top:16px; }
+  .shop-subline { font-size:7px; gap:8px; }
+  .shop-subline span:last-child { text-align:right; }
+  .search { width:100%; margin-top:12px; }
+  .products { gap:9px; }
+  .product { padding:5px; }
+  .product-visual { height:clamp(210px,64vw,350px); }
+  .product-meta { display:block; min-height:54px; padding:13px 4px 9px; line-height:1.4; }
+  .product-meta strong { display:block; margin-top:4px; }
+  .character-stage { grid-template-columns:1fr; }
+  .character-image { min-height:430px; background-position:center 35%; }
+  .character-image:after { background:linear-gradient(0deg,#14171a 0%,transparent 38%); }
+  .character-info { padding:22px 24px 28px; }
+  .character-info h3 { margin:16px 0 12px; }
+  .character-control { margin-top:22px; }
+  .world { min-height:620px; }
+  .world-copy { width:100%; }
+  .world:before { background-position:center,center,58% center; }
+  .coordinates { display:none; }
+  .drop-section:before { background-size:auto,auto 84%,auto 78%; background-position:center,90% center,0% center; }
+  .countdown { gap:11px; }
+  .time-unit { min-width:52px; }
+  .time-unit strong { font-size:38px; }
+  .drop-inner h2 { font-size:clamp(72px,19vw,115px); }
+  .footer { align-items:flex-start; flex-direction:column; }
+  .footer-nav { flex-wrap:wrap; }
+  .about { min-height:450px; }
+  .drawer { padding:22px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}

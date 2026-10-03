@@ -5,10 +5,10 @@ type Product = { id: string; name: string; price: number; image: string; tag: st
 type CartLine = { product: Product; quantity: number };
 
 const products: Product[] = [
-  { id: 'rick-tee', name: 'RICK & MORTY TEE', price: 34.99, image: 'tee-rick.webp', tag: 'DROP 001 / 01' },
-  { id: 'core-black', name: 'CORE LOGO TEE / BLACK', price: 29.99, image: 'tee-core-black.webp', tag: 'CORE / 02' },
-  { id: 'glitch-tee', name: 'GLITCH FACE TEE', price: 32.99, image: 'tee-glitch.webp', tag: 'DROP 001 / 03' },
-  { id: 'core-white', name: 'CORE LOGO TEE / BONE', price: 29.99, image: 'tee-core-white.webp', tag: 'CORE / 04' },
+  { id: 'crew-tee', name: 'AFTER HOURS / CREW TEE', price: 34.99, image: 'product-neo.webp', tag: 'DROP 001 / 01' },
+  { id: 'neo-tee', name: 'NEO / PORTRAIT TEE', price: 32.99, image: 'product-vex.webp', tag: 'DROP 001 / 02' },
+  { id: 'core-black', name: 'CORE / BACK PRINT TEE', price: 29.99, image: 'product-miko.webp', tag: 'CORE / 03' },
+  { id: 'neo-back', name: 'NEO / 001 BACK PRINT', price: 29.99, image: 'product-core.webp', tag: 'CORE / 04' },
 ];
 const characters = [
   { name: 'NEO', index: '01 / 04', title: 'THE CHAOS MIND', quote: '“Ideas too big for this dimension.”', description: "Neo is impulsive, chaotic and always 10 steps ahead. He doesn't follow rules, he rewrites them.", image: 'char-neo.webp' },
@@ -73,7 +73,7 @@ function App() {
       if (existing) return current.map((line) => line.product.id === product.id ? { ...line, quantity: line.quantity + 1 } : line);
       return [...current, { product, quantity: 1 }];
     });
-    setToast(`${product.name} — AÑADIDO A LA BOLSA`);
+    setToast(`${product.name} — ADDED TO BAG`);
     setCartOpen(true);
   };
   const updateQuantity = (id: string, amount: number) => {
@@ -88,7 +88,7 @@ function App() {
   return (
     <>
       <div className="grain" aria-hidden="true" />
-      <div className="topbar" data-testid="announcement-bar">DROP 001 — 04.10.26 &nbsp; / &nbsp; SHIPPING WORLDWIDE</div>
+      <div className="topbar" data-testid="announcement-bar"><span>DROP 001 / 04.10.26</span><i /> SHIPPING WORLDWIDE — MADE FOR THE UNREAL</div>
       <header className="nav">
         <a className="brand" href="#home" aria-label="NEOTIC SUPPLY home" onClick={() => setMenuOpen(false)}>NEOTIC<small>SUPPLY</small></a>
         <nav className={`navlinks ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
@@ -115,10 +115,10 @@ function App() {
         <section className="hero" id="home" aria-labelledby="hero-title">
           <div className="side-star" aria-hidden="true" />
           <div className="wrap hero-content">
-            <span className="eyebrow">EST. 2025 &nbsp; / &nbsp; URBAN STREETWEAR</span>
-            <h1 className="display" id="hero-title">WEAR<br /><em>THE UNREAL.</em></h1>
-            <p className="hero-sub">No es solo ropa. Es un universo. Character-driven streetwear para los que nunca encajaron en lo normal.</p>
-            <a className="button" href="#shop" data-testid="hero-shop-link">ENTRAR AL UNIVERSO <ArrowDownRight size={16} /></a>
+            <span className="eyebrow">EST. 2025 &nbsp; / &nbsp; CHARACTER-LED STREETWEAR</span>
+            <h1 className="display" id="hero-title">NEOTIC<br /><em>SUPPLY</em></h1>
+            <p className="hero-sub">Urban wear for what’s next. Made for people who’d rather be unmistakable than understood.</p>
+            <a className="button" href="#shop" data-testid="hero-shop-link">ENTER THE UNIVERSE <ArrowDownRight size={16} /></a>
           </div>
           <div className="hero-side">SAME MINDSET. DIFFERENT UNIVERSE.</div>
         </section>
@@ -128,14 +128,14 @@ function App() {
             <div className="shop-intro">
               <div>
                 <span className="kicker">01 / SHOP — DROP 001</span>
-                <h2 className="section-title display" id="shop-title">STUFF THAT<br /><em>FEELS ALIVE.</em></h2>
+                <h2 className="section-title display" id="shop-title">THE DROP<br /><em>001.</em></h2>
               </div>
               <div>
-                <p className="section-note">Ediciones limitadas. Gráficos imposibles. Solo NEOTIC.</p>
+                <p className="section-note">Four new uniforms from another frequency. Limited run. No reruns.</p>
                 {searchOpen && <label className="search-label"><input className="search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="BUSCAR EN EL DROP..." aria-label="Search products" data-testid="product-search" autoFocus /></label>}
               </div>
             </div>
-            {!searchOpen && <div className="section-note" style={{ margin: '-14px 0 26px' }}>Four pieces. One universe. Built to be worn out there.</div>}
+            {!searchOpen && <div className="shop-subline"><span>01—04 / THE FIRST TRANSMISSION</span><span>DESIGNED IN THE NEOTIC DISTRICT</span></div>}
             {searchOpen && query && <div className="mono" style={{ fontSize: 9, color: '#929a94', marginBottom: 14 }} data-testid="search-results-count">{filteredProducts.length} RESULT{filteredProducts.length === 1 ? '' : 'S'} / {products.length}</div>}
             <div className="products" data-testid="product-grid">
               {filteredProducts.length ? filteredProducts.map((product) => (
@@ -172,6 +172,9 @@ function App() {
                     <button className="arrow" aria-label="Next character" data-testid="character-next" onClick={() => setCharacter((character + 1) % characters.length)}><ArrowRight size={17} /></button>
                   </div>
                 </div>
+                <div className="character-select" aria-label="Choose a character">
+                  {characters.map((item, index) => <button key={item.name} aria-label={`View ${item.name}`} aria-pressed={character === index} className={character === index ? 'selected' : ''} onClick={() => setCharacter(index)}>{item.name}<span>0{index + 1}</span></button>)}
+                </div>
               </div>
             </div>
           </div>
@@ -180,9 +183,9 @@ function App() {
         <section className="section world" id="world" aria-labelledby="world-title">
           <div className="wrap">
             <div className="world-copy">
-              <span className="kicker">03 / THE WORLD</span>
-              <h2 className="display" id="world-title">THIS CITY<br />IS <em>ALIVE.</em></h2>
-              <p>Una ciudad, personajes, drops y lugares que puedes descubrir. This isn't just a collection. It's a place to get lost.</p>
+            <span className="kicker">03 / THE WORLD</span>
+              <h2 className="display" id="world-title">NOT MADE<br />FOR <em>HERE.</em></h2>
+              <p>A city with a pulse. Four characters with their own gravity. Follow the signal and find your way in.</p>
               <button className="button" onClick={() => jumpTo('characters')} data-testid="explore-world">EXPLORAR EL UNIVERSO <ArrowDownRight size={16} /></button>
             </div>
             <span className="coordinates">NEOTIC DISTRICT / 001</span><span className="coordinates two">THE DROP ROOM</span><span className="coordinates three">CHARACTER ARCHIVE</span>
@@ -193,7 +196,7 @@ function App() {
           <div className="wrap drop-inner">
             <span className="kicker">04 / NEXT DROP</span>
             <h2 className="display" id="drop-title">DROP <em>001</em></h2>
-            <p className="drop-line">WEAR THE UNREAL</p>
+            <p className="drop-line">THE FIRST TRANSMISSION / LIMITED UNITS</p>
             <div className="countdown" aria-label="Countdown to October 4, 2026">
               {Object.entries(countdown).map(([unit, value]) => <div className="time-unit" key={unit} data-testid={`countdown-${unit}`}><strong>{String(value).padStart(2, '0')}</strong><span>{({ days: 'DÍAS', hours: 'HORAS', minutes: 'MIN', seconds: 'SEG' } as Record<string, string>)[unit]}</span></div>)}
             </div>
@@ -204,9 +207,9 @@ function App() {
 
         <section className="section about" id="about" aria-labelledby="about-title">
           <div className="wrap about-content">
-            <span className="kicker">05 / ABOUT NEOTIC</span>
-            <h2 className="display" id="about-title">DIFFERENT FACES.<br /><em>SAME SOUL.</em></h2>
-            <p>NEOTIC SUPPLY mezcla streetwear, personajes, gráficos y cultura digital para construir un universo propio. Made for people who would rather be unmistakable than understood.</p>
+            <span className="kicker">05 / OUR FREQUENCY</span>
+            <h2 className="display" id="about-title">BE SEEN.<br /><em>NOT DECODED.</em></h2>
+            <p>NEOTIC SUPPLY is an independent streetwear universe built around original characters, strange places, and the people who never needed to fit the frame.</p>
             <a className="button" href="#characters">MEET THE CREW <ArrowDownRight size={16} /></a>
           </div>
         </section>
