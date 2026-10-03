@@ -1,6 +1,6 @@
-# [Project name]
+# NEOTIC SUPPLY
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A character-led streetwear storefront and brand-universe experience for NEOTIC SUPPLY.
 
 ## Run & Operate
 
@@ -22,23 +22,28 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/neotic-supply/` — storefront website and its supplied brand imagery
+- `artifacts/api-server/` — shared API service (not currently needed by the storefront)
+- `artifacts/mockup-sandbox/` — reusable design preview surface
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The storefront is a frontend-only brand experience; it does not connect to payment, inventory, or order services.
+- Keep the provided NEOTIC imagery and bilingual English/Spanish tone as the brand source of truth.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Explore the NEOTIC brand and character universe.
+- Browse featured apparel, search products, and use a local shopping bag.
+- View the Drop 001 campaign countdown.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+_No project-specific preferences recorded._
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The local shopping bag is a storefront interaction only; it does not submit or persist orders.
 
 ## Pointers
 

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEOTIC SUPPLY — Wear The Unreal</title>
+  <meta name="description" content="NEOTIC SUPPLY — Urban streetwear for what's next.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="cursor-glow"></div>
+
+  <header class="nav">
+    <a class="logo" href="#home">NEOTIC <span>SUPPLY</span></a>
+    <button class="menu-btn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <nav class="links">
+      <a href="#shop">SHOP</a>
+      <a href="#characters">CHARACTERS</a>
+      <a href="#world">THE WORLD</a>
+      <a href="#drop">DROPS</a>
+      <a href="#about">ABOUT</a>
+    </nav>
+    <div class="nav-icons"><button id="searchBtn">⌕</button><button id="cartBtn">bag <b id="cartCount">0</b></button></div>
+  </header>
+
+  <main>
+    <section id="home" class="hero section">
+      <div class="hero-bg"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">EST. 2025 / URBAN STREETWEAR</p>
+        <h1>WEAR<br><em>THE UNREAL</em></h1>
+        <p class="hero-sub">No es solo ropa. Es un universo.</p>
+        <a class="btn" href="#shop">ENTRAR AL UNIVERSO <span>→</span></a>
+      </div>
+      <div class="hero-character float">
+        <img src="assets/character-sheet.png" alt="Personaje NEOTIC SUPPLY">
+      </div>
+      <div class="hero-stamp">NEOTIC<br><strong>SUPPLY</strong></div>
+      <div class="scroll">SCROLL ↓</div>
+    </section>
+
+    <section id="shop" class="section shop">
+      <div class="section-head reveal">
+        <div>
+          <span class="kicker">01 / SHOP</span>
+          <h2>STUFF THAT<br><em>FEELS ALIVE.</em></h2>
+        </div>
+        <p>Ediciones limitadas. Gráficos imposibles. Solo NEOTIC.</p>
+      </div>
+      <div class="products">
+        <article class="product reveal" data-product="RICK & MORTY TEE" data-price="$34.99">
+          <div class="product-img img-a"></div>
+          <div class="product-meta"><span>RICK & MORTY TEE</span><strong>$34.99</strong></div>
+          <button class="add">ADD TO BAG</button>
+        </article>
+        <article class="product reveal" data-product="UNREAL TEE" data-price="$32.99">
+          <div class="product-img img-b"></div>
+          <div class="product-meta"><span>UNREAL TEE</span><strong>$32.99</strong></div>
+          <button class="add">ADD TO BAG</button>
+        </article>
+        <article class="product reveal" data-product="CHAOS TEE" data-price="$34.99">
+          <div class="product-img img-c"></div>
+          <div class="product-meta"><span>CHAOS TEE</span><strong>$34.99</strong></div>
+          <button class="add">ADD TO BAG</button>
+        </article>
+        <article class="product reveal" data-product="CORE LOGO TEE" data-price="$29.99">
+          <div class="product-img img-d"></div>
+          <div class="product-meta"><span>CORE LOGO TEE</span><strong>$29.99</strong></div>
+          <button class="add">ADD TO BAG</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="characters" class="section characters">
+      <div class="section-head reveal">
+        <div><span class="kicker">02 / CHARACTERS</span><h2>MEET<br><em>THE CREW.</em></h2></div>
+        <p>Cambia de personaje para explorar diferentes caras del universo NEOTIC.</p>
+      </div>
+      <div class="character-stage">
+        <div class="char-image" id="charImage"></div>
+        <div class="char-info">
+          <span id="charIndex">01 / 04</span>
+          <h3 id="charName">NEOTIC</h3>
+          <p id="charDesc">Disciplina dentro del caos. El personaje que lleva la visión de la marca.</p>
+          <div class="char-controls">
+            <button id="prevChar">←</button><button id="nextChar">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="world" class="section world">
+      <div class="world-art reveal"></div>
+      <div class="world-copy reveal">
+        <span class="kicker">03 / THE WORLD</span>
+        <h2>EXPLORE<br><em>THE NEOTIC WORLD.</em></h2>
+        <p>Una ciudad, personajes, drops y lugares que puedes descubrir mientras recorres la web.</p>
+        <button class="btn" id="exploreBtn">EXPLORAR <span>→</span></button>
+      </div>
+      <div class="world-hotspot one">SHOP</div>
+      <div class="world-hotspot two">DROPS</div>
+      <div class="world-hotspot three">CHARACTERS</div>
+    </section>
+
+    <section id="drop" class="section drop">
+      <div class="drop-bg"></div>
+      <div class="drop-content reveal">
+        <span class="kicker">04 / NEXT DROP</span>
+        <h2>DROP <em>001</em></h2>
+        <p>WEAR THE UNREAL</p>
+        <div class="countdown">
+          <div><strong id="days">00</strong><span>DÍAS</span></div>
+          <div><strong id="hours">00</strong><span>HORAS</span></div>
+          <div><strong id="mins">00</strong><span>MIN</span></div>
+          <div><strong id="secs">00</strong><span>SEG</span></div>
+        </div>
+        <a class="btn" href="#shop">VER DROP <span>→</span></a>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="about-card reveal">
+        <span class="kicker">05 / ABOUT</span>
+        <h2>DIFFERENT FACES.<br><em>SAME SOUL.</em></h2>
+        <p>NEOTIC SUPPLY mezcla streetwear, personajes, gráficos y cultura digital para construir un universo propio.</p>
+        <div class="marquee">NEOTIC SUPPLY — WEAR THE UNREAL — NEOTIC SUPPLY — WEAR THE UNREAL —</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>NEOTIC SUPPLY</strong><span>EST. 2025</span></div>
+    <div class="socials">IG &nbsp; TT &nbsp; YT &nbsp; X</div>
+    <div>© 2026 NEOTIC SUPPLY</div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+- [NEOTIC artwork workflow](neotic-artwork-workflow.md) — crop collage sheets to focused imagery; keep source art outside the served assets.
