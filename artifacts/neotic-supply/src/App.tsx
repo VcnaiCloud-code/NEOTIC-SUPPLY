@@ -11,10 +11,10 @@ const products: Product[] = [
   { id: 'core-white', name: 'CORE LOGO TEE / BONE', price: 29.99, image: 'tee-core-white.webp', tag: 'CORE / 04' },
 ];
 const characters = [
-  { name: 'NEOTIC', index: '01 / 04', description: 'Disciplina dentro del caos. The quiet force behind this strange little universe.', position: '14% 7%' },
-  { name: 'RICK', index: '02 / 04', description: 'El rebelde. Energía impredecible y actitud sin filtros. Never built for the ordinary.', position: '83% 70%' },
-  { name: 'MORTY', index: '03 / 04', description: 'The dreamer. Curioso, extraño y siempre listo para el siguiente drop.', position: '93% 70%' },
-  { name: 'CHAOS', index: '04 / 04', description: 'La energía de la calle. Color, ruido y cero reglas. A little trouble looks good on you.', position: '74% 94%' },
+  { name: 'NEO', index: '01 / 04', title: 'THE CHAOS MIND', quote: '“Ideas too big for this dimension.”', description: "Neo is impulsive, chaotic and always 10 steps ahead. He doesn't follow rules, he rewrites them.", image: 'char-neo.webp' },
+  { name: 'VEX', index: '02 / 04', title: 'THE DREAMER', quote: '“Real world? That’s boring.”', description: "Vex lives in her own frequency. She sees things others can't and turns chaos into art.", image: 'char-vex.webp' },
+  { name: 'RAZE', index: '03 / 04', title: 'THE VISIONARY', quote: '“I don’t see the future... I design it.”', description: 'Raze is calculated, silent and always in control. He moves in silence, but his ideas make noise.', image: 'char-raze.webp' },
+  { name: 'MIKO', index: '04 / 04', title: 'THE EXPLORER', quote: '“New planet, same drip.”', description: 'Miko is curious, fearless and always looking for the next adventure. For them, every place is a new playground.', image: 'char-miko.webp' },
 ];
 const brandRoot = '/brand/';
 
@@ -159,10 +159,11 @@ function App() {
               <p className="section-note">Different faces, same soul. Cambia de personaje para explorar las caras de este universo.</p>
             </div>
             <div className="character-stage" data-testid="character-stage">
-              <div className="character-image" style={{ backgroundPosition: currentCharacter.position }} role="img" aria-label={`${currentCharacter.name} character artwork`} data-testid="character-image" />
+              <div className="character-image" style={{ backgroundImage: `url('${brandRoot}${currentCharacter.image}')` }} role="img" aria-label={`${currentCharacter.name} character artwork`} data-testid="character-image" />
               <div className="character-info">
-                <span className="kicker" data-testid="character-index">{currentCharacter.index} &nbsp; / &nbsp; THE NEOTIC FILES</span>
+                <span className="kicker" data-testid="character-index">{currentCharacter.index} &nbsp; / &nbsp; {currentCharacter.title}</span>
                 <h3 className="display" data-testid="character-name">{currentCharacter.name}</h3>
+                <p className="character-quote" data-testid="character-quote">{currentCharacter.quote}</p>
                 <p data-testid="character-description">{currentCharacter.description}</p>
                 <div className="character-control">
                   <span className="mono" style={{ color: '#929991', fontSize: 9 }}>SWIPE YOUR REALITY</span>
