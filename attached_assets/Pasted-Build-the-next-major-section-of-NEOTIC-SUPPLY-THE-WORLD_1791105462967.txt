@@ -1,0 +1,400 @@
+Build the next major section of NEOTIC SUPPLY: THE WORLD.
+
+IMPORTANT:
+Do not redesign or break anything that already exists.
+
+The following are already approved and working:
+- HOME / HERO
+- HERO cinematic animation and transition
+- SHOP
+- PRODUCT DETAIL pages
+- CART / BAG
+- CHECKOUT DEMO
+- Current visual identity
+- Refined subtle grain/noise treatment
+
+THE WORLD should feel like the natural continuation of the HERO.
+
+CORE CONCEPT:
+
+NEOTIC SUPPLY is not just a clothing store.
+It is a fictional universe.
+
+THE WORLD section should introduce that universe through visual storytelling and atmosphere.
+
+The feeling should be:
+70% premium editorial / fashion campaign
+30% underground futuristic universe
+
+Avoid making it feel like:
+- a video game menu
+- generic cyberpunk
+- a sci-fi website
+- a comic-book website
+- a generic AI-generated landing page
+
+It should feel like a high-end experimental streetwear brand with its own mythology.
+
+-----------------------------------
+SECTION STRUCTURE
+-----------------------------------
+
+1. CINEMATIC ENTRY
+
+The section should emerge naturally from the existing HERO transition.
+
+Do not create a hard cut.
+
+As the HERO transitions out:
+- background depth should continue
+- existing visual language should carry forward
+- typography can briefly overlap during the transition
+- the next section should feel like entering another layer of the NEOTIC universe
+
+Keep this transition subtle and smooth.
+
+-----------------------------------
+2. INTRODUCTION
+-----------------------------------
+
+Create a large editorial section.
+
+Small technical label:
+
+NEOTIC UNIVERSE
+/ SYSTEM 001
+
+Large headline:
+
+THE WORLD
+
+Then a short statement:
+
+"NEOTIC SUPPLY exists somewhere between reality and the unreal."
+
+Follow with:
+
+"A universe built for those who don't fit the system.
+Four minds. Four frequencies. One world."
+
+Typography should be large, confident and highly editorial.
+
+Do not overcrowd the section with text.
+
+-----------------------------------
+3. THE UNIVERSE
+-----------------------------------
+
+Create a visually immersive section explaining the concept.
+
+Use a dark environment with subtle:
+- geometric structures
+- technical markings
+- coordinates
+- abstract symbols
+- fine grid elements
+- restrained cyan accents
+- subtle atmospheric depth
+
+These elements should feel like artifacts from the NEOTIC universe.
+
+IMPORTANT:
+Do not use random sci-fi UI everywhere.
+
+Technical elements should be sparse and intentional.
+
+Create the feeling that the viewer is discovering an existing world.
+
+-----------------------------------
+4. FOUR FREQUENCIES
+-----------------------------------
+
+Introduce the four canonical characters as four different "frequencies" within the universe.
+
+Headline:
+
+FOUR FREQUENCIES.
+
+Then four visual blocks/cards:
+
+001
+NEO
+THE CHAOS MIND
+
+002
+VEX
+THE DREAMER
+
+003
+RAZE
+THE VISIONARY
+
+004
+MIKO
+THE EXPLORER
+
+Use the EXISTING canonical character artwork/assets already present in the project.
+
+Do not redesign the characters.
+
+Do not alter:
+- colors
+- clothing
+- facial features
+- accessories
+- proportions
+- character identity
+
+Each character should feel like part of the same universe while retaining their individuality.
+
+-----------------------------------
+5. CHARACTER INTERACTION
+-----------------------------------
+
+Add subtle interaction when hovering over each character.
+
+Possible effects:
+- slight scale
+- depth/parallax
+- subtle image shift
+- small cyan accent
+- typography movement
+- very subtle glitch
+
+Keep it restrained.
+
+No exaggerated animations.
+
+Each character should feel premium and physical, not like a web-game button.
+
+On mobile, simplify the interaction.
+
+-----------------------------------
+6. VISUAL STORYTELLING
+-----------------------------------
+
+Between sections, use large editorial statements.
+
+Examples:
+
+"REALITY IS OPTIONAL."
+
+"EVERYTHING EXISTS IN FREQUENCIES."
+
+"THE UNREAL IS A PLACE."
+
+Use only a few of these.
+
+They should appear as major visual moments, not constant text.
+
+Use scroll reveal and subtle movement.
+
+-----------------------------------
+7. WORLD MAP / SYSTEM
+-----------------------------------
+
+Create one visually interesting section suggesting that the NEOTIC universe is larger than what the visitor currently sees.
+
+Use an abstract "system" or "map" representation.
+
+It can contain:
+
+NEO — 001
+VEX — 002
+RAZE — 003
+MIKO — 004
+
+with connecting lines / coordinates / subtle geometric relationships.
+
+This should NOT look like a literal geographic map.
+
+Think of it as an abstract network or universe diagram.
+
+Keep it minimal and premium.
+
+-----------------------------------
+8. FINAL STATEMENT
+-----------------------------------
+
+End THE WORLD with a strong editorial statement:
+
+FOUR MINDS.
+ONE UNIVERSE.
+
+Then a smaller line:
+
+WELCOME TO NEOTIC.
+
+Add CTA:
+
+EXPLORE THE CHARACTERS →
+
+This CTA should navigate to the CHARACTERS section/page.
+
+-----------------------------------
+VISUAL DIRECTION
+-----------------------------------
+
+Color palette:
+
+BLACK
+CHARCOAL
+OFF-WHITE
+SILVER
+SUBTLE CYAN / TEAL ACCENT
+
+Keep the existing NEOTIC SUPPLY palette.
+
+Do not introduce bright neon colors.
+
+-----------------------------------
+TYPOGRAPHY
+-----------------------------------
+
+Typography should feel:
+
+- modern
+- condensed where appropriate
+- editorial
+- fashion-oriented
+- technical in small labels
+
+Large typography should dominate the composition.
+
+Use generous spacing.
+
+Avoid excessive paragraphs.
+
+-----------------------------------
+MOTION
+-----------------------------------
+
+Use motion intentionally.
+
+Include:
+- scroll reveal
+- subtle parallax
+- depth movement
+- image scale transitions
+- text reveal
+- subtle opacity transitions
+
+Avoid:
+- constant floating
+- excessive glitch
+- excessive blur
+- excessive grain
+- aggressive animations
+- elements moving continuously without purpose
+
+The user previously requested improved performance and visual sharpness.
+
+Prioritize smooth animation.
+
+Use transform/opacity where possible.
+
+Avoid expensive effects that cause cursor or scroll lag.
+
+-----------------------------------
+GRAIN / TEXTURE
+-----------------------------------
+
+IMPORTANT:
+
+The website recently had too much grain/noise.
+
+Keep the newly improved grain treatment.
+
+Do NOT add a new heavy grain layer.
+
+THE WORLD should remain crisp and high-resolution.
+
+Texture should be subtle and atmospheric.
+
+Character artwork and typography must remain sharp.
+
+-----------------------------------
+RESPONSIVE
+-----------------------------------
+
+Desktop:
+Make the section cinematic and spacious.
+
+Tablet:
+Maintain hierarchy while reducing large decorative elements.
+
+Mobile:
+Recompose the layout rather than simply shrinking desktop.
+
+Character cards should stack naturally.
+
+Typography should remain dramatic but readable.
+
+Reduce expensive parallax/effects on mobile.
+
+-----------------------------------
+NAVIGATION
+-----------------------------------
+
+The existing top navigation already contains:
+
+SHOP
+CHARACTERS
+THE WORLD
+DROPS
+ABOUT
+
+Make sure THE WORLD correctly scrolls/navigates to this new section.
+
+Do not break existing navigation.
+
+-----------------------------------
+IMPORTANT IMPLEMENTATION RULES
+-----------------------------------
+
+Reuse the project's existing:
+- fonts
+- components
+- animation system
+- character assets
+- color variables
+- spacing system
+- responsive utilities
+
+Do not create a completely separate visual system.
+
+Do not replace existing sections.
+
+Do not modify SHOP, PRODUCT DETAIL, CART or CHECKOUT functionality.
+
+Do not add fake products.
+
+Do not add unrelated content.
+
+Do not use references to existing franchises or characters.
+
+Only use:
+NEO
+VEX
+RAZE
+MIKO
+
+The final result should feel like:
+
+"an actual fashion brand has created its own fictional universe."
+
+Not:
+
+"a clothing store with a sci-fi section."
+
+Before finishing, test:
+- desktop
+- mobile
+- navigation
+- scroll transitions
+- character interactions
+- performance
+- accessibility
+- no console errors
+
+Keep the result polished, cinematic, sharp and premium.
