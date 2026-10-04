@@ -1,0 +1,227 @@
+Build the NEOTIC SUPPLY checkout experience.
+
+IMPORTANT:
+This is the first checkout implementation.
+Do NOT integrate Stripe, PayPal, Mercado Pago or any real payment provider yet.
+No real payment should be collected.
+
+The current Shop, Product Detail pages and Shopping Bag are working correctly.
+Do not redesign or break any of them.
+
+The checkout must feel like a natural continuation of the existing NEOTIC SUPPLY experience.
+
+VISUAL DIRECTION:
+- Preserve the existing NEOTIC SUPPLY visual identity.
+- Black / charcoal background.
+- Off-white typography.
+- Teal/cyan accent used only for important interactive elements.
+- Editorial streetwear aesthetic.
+- Futuristic, industrial, underground and premium.
+- Minimal and spacious.
+- Avoid generic Shopify-style checkout visuals.
+- No excessive gradients.
+- No excessive glow effects.
+- No unnecessary animations.
+
+CHECKOUT FLOW:
+
+Shopping Bag
+→ Checkout
+→ Contact Information
+→ Shipping Information
+→ Delivery Method
+→ Order Review
+→ Payment placeholder
+→ Place Order
+→ Order Confirmation
+
+CHECKOUT PAGE LAYOUT:
+
+Desktop:
+Use a two-column layout.
+
+LEFT / MAIN COLUMN:
+CONTACT
+- Email
+- Phone number
+
+SHIPPING
+- First name
+- Last name
+- Country / Region
+- Address
+- Apartment / Suite / Unit (optional)
+- City
+- State / Province
+- Postal code
+
+DELIVERY
+Create a simple delivery method section.
+
+For now create:
+STANDARD SHIPPING
+Estimated delivery
+Shipping cost
+
+Do not connect to a real shipping provider yet.
+
+PAYMENT
+Create a payment section visually consistent with the site.
+
+Show:
+PAYMENT
+"Secure payment will be available soon."
+
+For now this is only a placeholder.
+Do not collect card numbers or sensitive payment information.
+Do not create fake payment processing.
+
+RIGHT / ORDER SUMMARY:
+
+Show:
+- All products currently in the shopping bag
+- Correct product thumbnail
+- Product name
+- Character number
+- Selected size
+- Quantity
+- Individual price
+- Subtotal
+- Shipping
+- Total
+
+The order summary must update automatically if the cart changes.
+
+IMPORTANT CART INTEGRATION:
+Use the existing cart state/system.
+Do not create a second independent cart.
+
+The checkout must receive the exact current cart contents.
+
+Example:
+NEO TEE
+001 / BLACK / SIZE L
+Qty 2
+
+VEX TEE
+002 / WHITE / SIZE M
+Qty 1
+
+etc.
+
+PRICE CALCULATION:
+- Use the existing product prices.
+- Calculate subtotal correctly.
+- Shipping should remain a placeholder value for now.
+- Calculate total correctly.
+- Do not hardcode the current cart contents.
+
+VALIDATION:
+Required fields must be validated.
+
+Show clear inline validation messages for:
+- Missing email
+- Invalid email
+- Missing first name
+- Missing last name
+- Missing address
+- Missing city
+- Missing state/province
+- Missing postal code
+
+Do not allow the user to place the order if required information is missing.
+
+BUTTON:
+Use a strong NEOTIC-style primary button:
+
+PLACE ORDER →
+
+Because real payment is not active yet, clicking PLACE ORDER should NOT charge anything.
+
+Instead, after successful validation, create a mock order confirmation.
+
+ORDER CONFIRMATION PAGE:
+
+Show something like:
+
+ORDER CONFIRMED
+
+THANK YOU FOR ENTERING THE UNIVERSE.
+
+Order number:
+Generate a simple unique order reference such as:
+NEO-2026-XXXX
+
+Show:
+- Purchased products
+- Sizes
+- Quantities
+- Total
+- Shipping information
+- Confirmation message
+
+Also include:
+
+CONTINUE SHOPPING →
+
+IMPORTANT:
+Make it clear that this is a test/demo order because payment processing is not active yet.
+
+Do not claim that a real payment was processed.
+
+NAVIGATION:
+- The user should be able to return to SHOP.
+- The user should be able to return to the BAG.
+- Do not lose the cart unexpectedly during checkout.
+- After the mock order is successfully completed, clear the cart only after the confirmation is created.
+
+RESPONSIVE DESIGN:
+Desktop:
+- Two-column checkout.
+
+Mobile:
+- Single-column layout.
+- Order summary should move below the customer/shipping information or become a clean collapsible section.
+- No horizontal overflow.
+- Inputs must be comfortable to use on mobile.
+
+ANIMATIONS:
+Keep them subtle:
+- Page transition/fade.
+- Small reveal animations for sections.
+- Button hover interaction.
+- No excessive motion.
+
+ACCESSIBILITY:
+- Proper labels for every input.
+- Keyboard navigation.
+- Visible focus states.
+- Clear validation messages.
+
+IMPORTANT CODE REQUIREMENTS:
+- Reuse the existing product data.
+- Reuse the existing cart state.
+- Reuse the existing product images.
+- Do not duplicate product definitions.
+- Do not create a second cart system.
+- Do not break the existing Shop or Product Detail pages.
+- Do not modify unrelated sections.
+- Do not install unnecessary dependencies.
+
+Before finishing:
+Test the complete flow:
+
+1. Add NEO TEE size L to bag.
+2. Open bag.
+3. Click CONTINUE TO CHECKOUT.
+4. Verify NEO TEE / size L appears correctly.
+5. Fill all required customer and shipping information.
+6. Verify subtotal, shipping and total.
+7. Click PLACE ORDER.
+8. Verify the order confirmation page.
+9. Verify the cart is cleared only after successful confirmation.
+10. Return to SHOP and verify the existing products still work.
+11. Check for console errors and broken routes.
+
+Do not integrate real payments yet.
+Do not redesign the existing Shop, Bag or Product Detail pages.

@@ -1,19 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ProductDetail from './components/ProductDetail';
+import Checkout from './components/Checkout';
+import OrderConfirmation from './components/OrderConfirmation';
 import { ArrowDownRight, ArrowLeft, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
-
-type Product = {
-  id: string;
-  name: string;
-  character: string;
-  characterNumber: string;
-  color: 'BLACK' | 'WHITE';
-  tagline: string;
-  availability: string;
-  price: number;
-  image: string;
-};
-type CartLine = { product: Product; quantity: number; size: string };
+import { cartSubtotalCents, createMockOrder, emptyShippingInfo, validateShippingInfo } from './lib/checkout';
+import type { Product, CartLine, ShippingInfo, MockOrder } from './lib/checkout';
 
 const products: Product[] = [
   { id: 'neo-tee', name: 'NEO TEE', character: 'NEO', characterNumber: '001', color: 'BLACK', tagline: 'THE CHAOS MIND', availability: 'AVAILABLE', price: 34.99, image: 'neo-tee-transparent.png' },
@@ -45,13 +36,17 @@ function App() {
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
   const [toast, setToast] = useState('');
   const [now, setNow] = useState(Date.now());
+  const [checkoutStage, setCheckoutStage] = useState<'storefront' | 'checkout' | 'confirmation'>('storefront');
+  const [checkoutCustomer, setCheckoutCustomer] = useState<ShippingInfo>({ ...emptyShippingInfo });
+  const [mockOrder, setMockOrder] = useState<MockOrder | null>(null);
+  const orderSubmitted = useRef(false);
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
     return term ? products.filter((product) => `${product.name} ${product.character} ${product.characterNumber} ${product.tagline} ${product.color}`.toLowerCase().includes(term)) : products;
   }, [query]);
   const itemCount = cart.reduce((total, line) => total + line.quantity, 0);
-  const total = cart.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
+  const total = cartSubtotalCents(cart) / 100;
   const timeLeft = Math.max(0, new Date('2026-10-04T00:00:00').getTime() - now);
   const countdown = {
     days: Math.floor(timeLeft / 86400000),
@@ -148,6 +143,30 @@ function App() {
     setMenuOpen(false);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.getElementById(id)?.scrollIntoView({ behavior });
+  };
+  const openCheckout = () => {
+    if (!cart.length) return;
+    orderSubmitted.current = false;
+    setMockOrder(null);
+    setCartOpen(false);
+    setSelectedProduct(null);
+    setCheckoutStage('checkout');
+  };
+  const placeDemoOrder = () => {
+    if (orderSubmitted.current || !cart.length || Object.keys(validateShippingInfo(checkoutCustomer)).length) return;
+    // Create an independent confirmation snapshot before clearing the live cart.
+    const confirmation = createMockOrder(cart, checkoutCustomer);
+    orderSubmitted.current = true;
+    setMockOrder(confirmation);
+    setCheckoutStage('confirmation');
+    setCart([]);
+    setCheckoutCustomer({ ...emptyShippingInfo });
+  };
+  const returnFromCheckoutToShop = () => {
+    setCheckoutStage('storefront');
+    setCartOpen(false);
+    setMockOrder(null);
+    jumpTo('shop');
   };
   const currentCharacter = characters[character];
 
@@ -309,7 +328,7 @@ function App() {
       </footer>
 
       <div className={`overlay ${cartOpen ? 'open' : ''}`} onClick={() => setCartOpen(false)} aria-hidden="true" />
-      <aside className={`drawer ${cartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-label="Shopping bag" data-testid="cart-drawer">
+      <aside className={`drawer ${cartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-hidden={!cartOpen} inert={!cartOpen} aria-label="Shopping bag" data-testid="cart-drawer">
         <div className="drawer-head"><h2>YOUR BAG <span style={{ color: '#78d2d0' }}>({itemCount})</span></h2><button className="close-button" aria-label="Close bag" data-testid="cart-close" onClick={() => setCartOpen(false)}><X size={18} /></button></div>
         {cart.length ? <>
           <div className="cart-items">{cart.map(({ product, quantity, size }) => <div className="cart-item" key={`${product.id}-${size}`} data-testid={`cart-line-${product.id}-${size.toLowerCase()}`}>
@@ -320,8 +339,8 @@ function App() {
             <button className="remove" aria-label={`Remove ${product.name}, size ${size}`} onClick={() => setCart((current) => current.filter((line) => line.product.id !== product.id || line.size !== size))} data-testid={`remove-${product.id}-${size.toLowerCase()}`}>REMOVE</button>
           </div>)}</div>
           <div className="cart-total"><span>SUBTOTAL</span><strong data-testid="cart-subtotal">{formatPrice(total)}</strong></div>
-          <button className="button" style={{ width: '100%' }} disabled aria-disabled="true" data-testid="checkout-button">CONTINUE TO CHECKOUT <ArrowRight size={16} /></button>
-          <p className="checkout-note">Checkout is not active yet. No payment will be collected.</p>
+          <button className="button" style={{ width: '100%' }} onClick={openCheckout} data-testid="checkout-button">CONTINUE TO CHECKOUT <ArrowRight size={16} /></button>
+          <p className="checkout-note">Demo checkout only. No payment will be collected.</p>
         </> : <div className="cart-empty" data-testid="cart-empty">TU BOLSA ESTÁ VACÍA.<br /><span>Some strange things belong in here.</span><button className="button" onClick={() => { setCartOpen(false); jumpTo('shop'); }}>EXPLORAR EL DROP <ArrowRight size={15} /></button></div>}
       </aside>
       {selectedProduct && <ProductDetail
@@ -333,6 +352,20 @@ function App() {
         onAddToBag={() => addToCart(selectedProduct, selectedSizeFor(selectedProduct))}
         onClose={() => setSelectedProduct(null)}
         onBackToShop={() => { setSelectedProduct(null); jumpTo('shop'); }}
+      />}
+      {checkoutStage === 'checkout' && <Checkout
+        cart={cart}
+        customer={checkoutCustomer}
+        onCustomerChange={setCheckoutCustomer}
+        imageRoot={brandRoot}
+        onBackToBag={() => { setCheckoutStage('storefront'); setCartOpen(true); }}
+        onBackToShop={returnFromCheckoutToShop}
+        onPlaceOrder={placeDemoOrder}
+      />}
+      {checkoutStage === 'confirmation' && mockOrder && <OrderConfirmation
+        order={mockOrder}
+        imageRoot={brandRoot}
+        onContinueShopping={returnFromCheckoutToShop}
       />}
       <div className={`toast ${toast ? 'show' : ''}`} role="status" aria-live="polite" data-testid="toast">{toast}</div>
     </>

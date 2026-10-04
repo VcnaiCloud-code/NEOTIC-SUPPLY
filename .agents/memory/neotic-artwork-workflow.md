@@ -17,11 +17,11 @@ The current NEO TEE product-detail design is approved. Finalization and function
 
 **How to apply:** Limit finalization changes to demonstrated functional defects; do not visually restyle the product-detail experience without a new request.
 
-Cart QA must preserve the current dark drawer design, typography, spacing, cyan accent, and animations. Keep checkout inactive and do not add payment providers unless the user requests activation.
+Cart QA must preserve the current dark drawer design, typography, spacing, cyan accent, and animations. Demo checkout is permitted, but real payment processing must remain inactive; do not add payment or shipping providers unless the user explicitly requests them.
 
-**Why for cart QA:** The user explicitly prohibited a cart redesign and payment integration during final shopping-bag verification.
+**Why for cart QA:** The user explicitly prohibited a cart redesign and payment integration, then requested a first checkout implementation limited to test/demo orders.
 
-**How to apply:** Fix demonstrated cart behavior issues without restyling the drawer, and keep the message "Checkout is not active yet. No payment will be collected."
+**How to apply:** Fix demonstrated cart behavior issues without restyling the drawer. Demo orders must clearly state no real payment or fulfillment occurred, and must never request card details.
 
 The official SHOP collection is NEO TEE (001, BLACK), VEX TEE (002, WHITE), RAZE TEE (003, WHITE), and MIKO TEE (004, WHITE). Use the user's finished shirt images as product artwork, not generated replacements, generic tees, collages, or character cutouts composited onto shirts.
 
