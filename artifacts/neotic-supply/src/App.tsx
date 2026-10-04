@@ -5,10 +5,10 @@ type Product = { id: string; name: string; price: number; image: string; tag: st
 type CartLine = { product: Product; quantity: number };
 
 const products: Product[] = [
-  { id: 'crew-tee', name: 'AFTER HOURS / CREW TEE', price: 34.99, image: 'product-neo.webp', tag: 'DROP 001 / 01' },
-  { id: 'neo-tee', name: 'NEO / PORTRAIT TEE', price: 32.99, image: 'product-vex.webp', tag: 'DROP 001 / 02' },
-  { id: 'core-black', name: 'CORE / BACK PRINT TEE', price: 29.99, image: 'product-miko.webp', tag: 'CORE / 03' },
-  { id: 'neo-back', name: 'NEO / 001 BACK PRINT', price: 29.99, image: 'product-core.webp', tag: 'CORE / 04' },
+  { id: 'neo-vex-tee', name: 'NEO / VEX CREW TEE', price: 34.99, image: 'tee-neo-vex.webp', tag: 'DROP 001 / 01' },
+  { id: 'core-black', name: 'CORE LOGO TEE / BLACK', price: 29.99, image: 'tee-core-black.webp', tag: 'CORE / 02' },
+  { id: 'miko-tee', name: 'MIKO / GRAPHIC TEE', price: 32.99, image: 'tee-miko.webp', tag: 'DROP 001 / 03' },
+  { id: 'core-white', name: 'CORE LOGO TEE / BONE', price: 29.99, image: 'tee-core-white.webp', tag: 'CORE / 04' },
 ];
 const characters = [
   { name: 'NEO', index: '01 / 04', title: 'THE CHAOS MIND', quote: '“Ideas too big for this dimension.”', description: "Neo is impulsive, chaotic and always 10 steps ahead. He doesn't follow rules, he rewrites them.", image: 'char-neo.webp' },
@@ -66,6 +66,51 @@ function App() {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const targets = document.querySelectorAll<HTMLElement>('[data-reveal]:not(.is-visible)');
+    if (!targets.length) return;
+
+    document.documentElement.classList.add('motion-ready');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, [filteredProducts]);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const targets = document.querySelectorAll<HTMLElement>('[data-parallax]');
+    if (!targets.length) return;
+
+    const distance = window.matchMedia('(pointer: coarse)').matches ? 5 : 12;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const viewportHeight = window.innerHeight;
+      targets.forEach((target) => {
+        const bounds = target.getBoundingClientRect();
+        if (bounds.bottom < 0 || bounds.top > viewportHeight) return;
+        const progress = (viewportHeight - bounds.top) / (viewportHeight + bounds.height) - 0.5;
+        const offset = Math.max(-distance, Math.min(distance, progress * distance * 2));
+        target.style.setProperty('--parallax-y', `${offset.toFixed(1)}px`);
+      });
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const addToCart = (product: Product) => {
     setCart((current) => {
@@ -73,7 +118,7 @@ function App() {
       if (existing) return current.map((line) => line.product.id === product.id ? { ...line, quantity: line.quantity + 1 } : line);
       return [...current, { product, quantity: 1 }];
     });
-    setToast(`${product.name} — ADDED TO BAG`);
+    setToast(`${product.name} — AÑADIDO A LA BOLSA`);
     setCartOpen(true);
   };
   const updateQuantity = (id: string, amount: number) => {
@@ -81,14 +126,15 @@ function App() {
   };
   const jumpTo = (id: string) => {
     setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    document.getElementById(id)?.scrollIntoView({ behavior });
   };
   const currentCharacter = characters[character];
 
   return (
     <>
       <div className="grain" aria-hidden="true" />
-      <div className="topbar" data-testid="announcement-bar"><span>DROP 001 / 04.10.26</span><i /> SHIPPING WORLDWIDE — MADE FOR THE UNREAL</div>
+      <div className="topbar" data-testid="announcement-bar">DROP 001 — 04.10.26 &nbsp; / &nbsp; SHIPPING WORLDWIDE</div>
       <header className="nav">
         <a className="brand" href="#home" aria-label="NEOTIC SUPPLY home" onClick={() => setMenuOpen(false)}>NEOTIC<small>SUPPLY</small></a>
         <nav className={`navlinks ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
@@ -113,33 +159,36 @@ function App() {
 
       <main>
         <section className="hero" id="home" aria-labelledby="hero-title">
+          <div className="hero-crew" aria-hidden="true" data-parallax>
+            {characters.map((item) => <img className={`hero-figure hero-figure-${item.name.toLowerCase()}`} key={item.name} src={`${brandRoot}${item.image}`} alt="" />)}
+          </div>
           <div className="side-star" aria-hidden="true" />
           <div className="wrap hero-content">
-            <span className="eyebrow">EST. 2025 &nbsp; / &nbsp; CHARACTER-LED STREETWEAR</span>
-            <h1 className="display" id="hero-title">NEOTIC<br /><em>SUPPLY</em></h1>
-            <p className="hero-sub">Urban wear for what’s next. Made for people who’d rather be unmistakable than understood.</p>
-            <a className="button" href="#shop" data-testid="hero-shop-link">ENTER THE UNIVERSE <ArrowDownRight size={16} /></a>
+            <span className="eyebrow">EST. 2025 &nbsp; / &nbsp; URBAN STREETWEAR</span>
+            <h1 className="display" id="hero-title">WEAR<br /><em>THE UNREAL.</em></h1>
+            <p className="hero-sub">No es solo ropa. Es un universo. Character-driven streetwear para los que nunca encajaron en lo normal.</p>
+            <a className="button" href="#shop" data-testid="hero-shop-link">ENTRAR AL UNIVERSO <ArrowDownRight size={16} /></a>
           </div>
           <div className="hero-side">SAME MINDSET. DIFFERENT UNIVERSE.</div>
         </section>
 
         <section className="section" id="shop" aria-labelledby="shop-title">
           <div className="wrap">
-            <div className="shop-intro">
+            <div className="shop-intro" data-reveal>
               <div>
                 <span className="kicker">01 / SHOP — DROP 001</span>
-                <h2 className="section-title display" id="shop-title">THE DROP<br /><em>001.</em></h2>
+                <h2 className="section-title display" id="shop-title">STUFF THAT<br /><em>FEELS ALIVE.</em></h2>
               </div>
               <div>
-                <p className="section-note">Four new uniforms from another frequency. Limited run. No reruns.</p>
+                <p className="section-note">Ediciones limitadas. Gráficos imposibles. Solo NEOTIC.</p>
                 {searchOpen && <label className="search-label"><input className="search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="BUSCAR EN EL DROP..." aria-label="Search products" data-testid="product-search" autoFocus /></label>}
               </div>
             </div>
-            {!searchOpen && <div className="shop-subline"><span>01—04 / THE FIRST TRANSMISSION</span><span>DESIGNED IN THE NEOTIC DISTRICT</span></div>}
+            {!searchOpen && <div className="section-note" style={{ margin: '-14px 0 26px' }}>Four pieces. One universe. Built to be worn out there.</div>}
             {searchOpen && query && <div className="mono" style={{ fontSize: 9, color: '#929a94', marginBottom: 14 }} data-testid="search-results-count">{filteredProducts.length} RESULT{filteredProducts.length === 1 ? '' : 'S'} / {products.length}</div>}
             <div className="products" data-testid="product-grid">
               {filteredProducts.length ? filteredProducts.map((product) => (
-                <article className="product" key={product.id} data-testid={`product-${product.id}`}>
+                <article className="product" key={product.id} data-testid={`product-${product.id}`} data-reveal>
                   <div className="product-visual">
                     <span className="product-no">{product.tag}</span>
                     <div className="product-img" style={{ backgroundImage: `url('${brandRoot}${product.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} role="img" aria-label={`${product.name} graphic tee`} />
@@ -154,13 +203,17 @@ function App() {
 
         <section className="section character-section" id="characters" aria-labelledby="characters-title">
           <div className="wrap">
-            <div className="section-heading">
+            <div className="section-heading" data-reveal>
               <div><span className="kicker">02 / CHARACTERS</span><h2 className="section-title display" id="characters-title">MEET<br /><em>THE CREW.</em></h2></div>
               <p className="section-note">Different faces, same soul. Cambia de personaje para explorar las caras de este universo.</p>
             </div>
-            <div className="character-stage" data-testid="character-stage">
-              <div className="character-image" style={{ backgroundImage: `url('${brandRoot}${currentCharacter.image}')` }} role="img" aria-label={`${currentCharacter.name} character artwork`} data-testid="character-image" />
-              <div className="character-info">
+            <div className="character-stage" data-testid="character-stage" data-reveal>
+              <div className="character-image">
+                <div className="character-portrait">
+                  <img className="character-art" key={currentCharacter.name} src={`${brandRoot}${currentCharacter.image}`} alt={`${currentCharacter.name} full-body character artwork`} data-testid="character-image" />
+                </div>
+              </div>
+              <div className="character-info" key={currentCharacter.name}>
                 <span className="kicker" data-testid="character-index">{currentCharacter.index} &nbsp; / &nbsp; {currentCharacter.title}</span>
                 <h3 className="display" data-testid="character-name">{currentCharacter.name}</h3>
                 <p className="character-quote" data-testid="character-quote">{currentCharacter.quote}</p>
@@ -172,31 +225,28 @@ function App() {
                     <button className="arrow" aria-label="Next character" data-testid="character-next" onClick={() => setCharacter((character + 1) % characters.length)}><ArrowRight size={17} /></button>
                   </div>
                 </div>
-                <div className="character-select" aria-label="Choose a character">
-                  {characters.map((item, index) => <button key={item.name} aria-label={`View ${item.name}`} aria-pressed={character === index} className={character === index ? 'selected' : ''} onClick={() => setCharacter(index)}>{item.name}<span>0{index + 1}</span></button>)}
-                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section world" id="world" aria-labelledby="world-title">
+        <section className="section world" id="world" aria-labelledby="world-title" data-parallax>
           <div className="wrap">
-            <div className="world-copy">
+            <div className="world-copy" data-reveal>
             <span className="kicker">03 / THE WORLD</span>
-              <h2 className="display" id="world-title">NOT MADE<br />FOR <em>HERE.</em></h2>
-              <p>A city with a pulse. Four characters with their own gravity. Follow the signal and find your way in.</p>
+              <h2 className="display" id="world-title">THIS CITY<br />IS <em>ALIVE.</em></h2>
+              <p>Una ciudad, personajes, drops y lugares que puedes descubrir. This isn't just a collection. It's a place to get lost.</p>
               <button className="button" onClick={() => jumpTo('characters')} data-testid="explore-world">EXPLORAR EL UNIVERSO <ArrowDownRight size={16} /></button>
             </div>
             <span className="coordinates">NEOTIC DISTRICT / 001</span><span className="coordinates two">THE DROP ROOM</span><span className="coordinates three">CHARACTER ARCHIVE</span>
           </div>
         </section>
 
-        <section className="section drop-section" id="drop" aria-labelledby="drop-title">
-          <div className="wrap drop-inner">
+        <section className="section drop-section" id="drop" aria-labelledby="drop-title" data-parallax>
+          <div className="wrap drop-inner" data-reveal>
             <span className="kicker">04 / NEXT DROP</span>
             <h2 className="display" id="drop-title">DROP <em>001</em></h2>
-            <p className="drop-line">THE FIRST TRANSMISSION / LIMITED UNITS</p>
+            <p className="drop-line">WEAR THE UNREAL</p>
             <div className="countdown" aria-label="Countdown to October 4, 2026">
               {Object.entries(countdown).map(([unit, value]) => <div className="time-unit" key={unit} data-testid={`countdown-${unit}`}><strong>{String(value).padStart(2, '0')}</strong><span>{({ days: 'DÍAS', hours: 'HORAS', minutes: 'MIN', seconds: 'SEG' } as Record<string, string>)[unit]}</span></div>)}
             </div>
@@ -206,10 +256,10 @@ function App() {
         </section>
 
         <section className="section about" id="about" aria-labelledby="about-title">
-          <div className="wrap about-content">
-            <span className="kicker">05 / OUR FREQUENCY</span>
-            <h2 className="display" id="about-title">BE SEEN.<br /><em>NOT DECODED.</em></h2>
-            <p>NEOTIC SUPPLY is an independent streetwear universe built around original characters, strange places, and the people who never needed to fit the frame.</p>
+          <div className="wrap about-content" data-reveal>
+            <span className="kicker">05 / ABOUT NEOTIC</span>
+            <h2 className="display" id="about-title">DIFFERENT FACES.<br /><em>SAME SOUL.</em></h2>
+            <p>NEOTIC SUPPLY mezcla streetwear, personajes, gráficos y cultura digital para construir un universo propio. Made for people who would rather be unmistakable than understood.</p>
             <a className="button" href="#characters">MEET THE CREW <ArrowDownRight size={16} /></a>
           </div>
         </section>

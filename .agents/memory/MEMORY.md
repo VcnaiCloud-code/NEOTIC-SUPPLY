@@ -1,1 +1,1 @@
-- [NEOTIC artwork workflow](neotic-artwork-workflow.md) — crop collage sheets to focused imagery; keep source art outside the served assets.
+- [NEOTIC artwork workflow](neotic-artwork-workflow.md) — use focused artwork crops; only NEO, VEX, RAZE, and MIKO may appear.
