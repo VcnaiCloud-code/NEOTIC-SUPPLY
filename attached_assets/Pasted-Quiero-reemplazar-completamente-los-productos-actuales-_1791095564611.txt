@@ -1,0 +1,110 @@
+Quiero reemplazar completamente los productos actuales de la sección SHOP usando LAS 4 IMÁGENES DE CAMISETAS QUE ACABO DE ADJUNTAR A ESTE MENSAJE.
+
+IMPORTANTE:
+
+Las cuatro imágenes adjuntas son los productos OFICIALES de NEOTIC SUPPLY.
+
+NO quiero agregar productos nuevos junto a los actuales.
+
+QUIERO QUE REEMPLACES los productos actuales de SHOP por estos cuatro.
+
+Identifica las imágenes adjuntas de esta manera:
+
+1. NEO TEE
+- personaje: NEO
+- ID: 001
+- color: BLACK
+- nombre: NEO TEE
+- tagline: THE CHAOS MIND
+
+2. VEX TEE
+- personaje: VEX
+- ID: 002
+- color: WHITE
+- nombre: VEX TEE
+- tagline: THE DREAMER
+
+3. RAZE TEE
+- personaje: RAZE
+- ID: 003
+- color: WHITE
+- nombre: RAZE TEE
+- tagline: THE VISIONARY
+
+4. MIKO TEE
+- personaje: MIKO
+- ID: 004
+- color: WHITE
+- nombre: MIKO TEE
+- tagline: THE EXPLORER
+
+USA LAS IMÁGENES ADJUNTAS COMO IMÁGENES REALES DE LOS PRODUCTOS.
+
+NO generes imágenes nuevas.
+NO reemplaces las imágenes por placeholders.
+NO uses imágenes genéricas.
+NO hagas un collage.
+NO mantengas los productos anteriores.
+
+### SHOP
+
+La sección SHOP debe mostrar SOLAMENTE:
+
+NEO TEE
+VEX TEE
+RAZE TEE
+MIKO TEE
+
+Elimina de la interfaz cualquier producto anterior que ya no pertenezca a esta colección.
+
+Mantén el diseño actual de NEOTIC SUPPLY, pero haz que los productos se vean más premium y editoriales.
+
+Cada producto debe tener:
+
+- imagen grande
+- nombre
+- número de personaje
+- tagline
+- precio
+- disponibilidad
+- selector de talla
+- ADD TO BAG
+
+### PRODUCT DETAIL
+
+Si ya existe una página, modal o drawer para los productos, actualízalo para estos cuatro productos.
+
+Al hacer click en cada camiseta debe aparecer la información correspondiente a ESA camiseta y no información de los productos antiguos.
+
+### MUY IMPORTANTE
+
+No rompas el resto de la página.
+
+Conserva:
+
+- NEOTIC SUPPLY
+- WEAR THE UNREAL
+- NEO
+- VEX
+- RAZE
+- MIKO
+- HERO
+- CHARACTERS
+- THE WORLD
+- DROPS
+- ABOUT
+- navegación
+- carrito
+
+Solo modifica la parte necesaria para sustituir los productos actuales por estas cuatro camisetas.
+
+Antes de terminar:
+
+1. Comprueba que las cuatro imágenes adjuntas están siendo utilizadas.
+2. Comprueba que aparecen las cuatro camisetas.
+3. Comprueba que no aparecen los productos antiguos.
+4. Comprueba que cada camiseta tiene el nombre y personaje correcto.
+5. Comprueba que ADD TO BAG funciona.
+6. Comprueba que el diseño sigue siendo responsive en desktop y móvil.
+
+Haz los cambios directamente en el proyecto.
