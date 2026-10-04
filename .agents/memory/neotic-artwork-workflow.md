@@ -3,10 +3,14 @@ name: NEOTIC artwork workflow
 description: Keep storefront art focused and preserve NEOTIC's original-character and layout constraints.
 ---
 
-Treat supplied NEOTIC boards as source sheets, not ready-to-use page backgrounds. Extract focused hero, product, environment, and character assets, then use optimized WebP files in the storefront. Keep source PNGs outside `public/` so full-resolution originals are not shipped to visitors.
+Treat supplied NEOTIC collage boards as source sheets, not ready-to-use page backgrounds. Extract focused environment and character assets, then use optimized WebP files in the storefront. Keep collage source PNGs outside `public/` so full-resolution boards are not shipped to visitors. Finished official shirt images are distinct from these reference boards.
 
 Preserve the existing storefront layout, branding, typography, sections, and product structure unless the user explicitly asks for a redesign. The only approved characters are NEO, VEX, RAZE, and MIKO; do not use or reference Rick & Morty or other existing characters.
 
+The official SHOP collection is NEO TEE (001, BLACK), VEX TEE (002, WHITE), RAZE TEE (003, WHITE), and MIKO TEE (004, WHITE). Use the user's finished shirt images as product artwork, not generated replacements, generic tees, collages, or character cutouts composited onto shirts.
+
 **Why:** The user explicitly set the character and no-redesign constraints. The boards also contain embedded navigation, copy, and full interface mockups; using them as backgrounds can obscure live content.
 
-**How to apply:** For each visual section, crop the focal subject to the target aspect ratio, preview it at desktop and mobile sizes, and keep optimized render assets in `public/brand`. Keep supplied source PNGs outside `public/`.
+**Why for SHOP:** The user identified the four supplied shirt images as NEOTIC SUPPLY's official products and requested replacement, not additions alongside the older products.
+
+**How to apply:** For artwork extracted from reference boards, crop the focal subject to the target aspect ratio, preview it at desktop and mobile sizes, and keep optimized render assets in `public/brand`. Keep collage source PNGs outside `public/`. Preserve the supplied finished shirt designs in SHOP.
