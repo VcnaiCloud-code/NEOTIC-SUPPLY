@@ -1,1 +1,2 @@
 - [NEOTIC artwork workflow](neotic-artwork-workflow.md) — use focused artwork crops; only NEO, VEX, RAZE, and MIKO may appear.
+- [Browser motion verification](browser-motion-verification.md) — desktop viewport size does not guarantee native fine-pointer/hover support in automated tests.

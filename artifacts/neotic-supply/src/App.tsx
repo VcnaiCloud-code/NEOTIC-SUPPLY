@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
 import OrderConfirmation from './components/OrderConfirmation';
+import Hero from './components/Hero';
 import { ArrowDownRight, ArrowLeft, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { cartSubtotalCents, createMockOrder, emptyShippingInfo, validateShippingInfo } from './lib/checkout';
 import type { Product, CartLine, ShippingInfo, MockOrder } from './lib/checkout';
@@ -197,19 +198,7 @@ function App() {
       </header>
 
       <main>
-        <section className="hero" id="home" aria-labelledby="hero-title">
-          <div className="hero-crew" aria-hidden="true" data-parallax>
-            {characters.map((item) => <img className={`hero-figure hero-figure-${item.name.toLowerCase()}`} key={item.name} src={`${brandRoot}${item.image}`} alt="" />)}
-          </div>
-          <div className="side-star" aria-hidden="true" />
-          <div className="wrap hero-content">
-            <span className="eyebrow">EST. 2025 &nbsp; / &nbsp; URBAN STREETWEAR</span>
-            <h1 className="display" id="hero-title">WEAR<br /><em>THE UNREAL.</em></h1>
-            <p className="hero-sub">No es solo ropa. Es un universo. Character-driven streetwear para los que nunca encajaron en lo normal.</p>
-            <a className="button" href="#shop" data-testid="hero-shop-link">ENTRAR AL UNIVERSO <ArrowDownRight size={16} /></a>
-          </div>
-          <div className="hero-side">SAME MINDSET. DIFFERENT UNIVERSE.</div>
-        </section>
+        <Hero characters={characters} imageRoot={brandRoot} active={!cartOpen && !selectedProduct && !menuOpen && checkoutStage === 'storefront'} />
 
         <section className="section" id="shop" aria-labelledby="shop-title">
           <div className="wrap">
