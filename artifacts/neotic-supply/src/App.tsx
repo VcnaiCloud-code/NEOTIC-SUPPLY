@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import ProductDetail from './components/ProductDetail';
 import { ArrowDownRight, ArrowLeft, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 
 type Product = {
@@ -137,7 +138,7 @@ function App() {
     setCartOpen(true);
   };
   const updateQuantity = (id: string, size: string, amount: number) => {
-    setCart((current) => current.map((line) => line.product.id === id && line.size === size ? { ...line, quantity: line.quantity + amount } : line).filter((line) => line.quantity > 0));
+    setCart((current) => current.map((line) => line.product.id === id && line.size === size ? { ...line, quantity: Math.max(1, line.quantity + amount) } : line));
   };
   const chooseSize = (product: Product, size: string) => {
     setSelectedSizes((current) => ({ ...current, [product.id]: size }));
@@ -319,38 +320,20 @@ function App() {
             <button className="remove" aria-label={`Remove ${product.name}, size ${size}`} onClick={() => setCart((current) => current.filter((line) => line.product.id !== product.id || line.size !== size))} data-testid={`remove-${product.id}-${size.toLowerCase()}`}>REMOVE</button>
           </div>)}</div>
           <div className="cart-total"><span>SUBTOTAL</span><strong data-testid="cart-subtotal">{formatPrice(total)}</strong></div>
-          <button className="button" style={{ width: '100%' }} onClick={() => { setCartOpen(false); setToast('CHECKOUT NO DISPONIBLE — DROP 001 SOON'); }} data-testid="checkout-button">CONTINUE TO CHECKOUT <ArrowRight size={16} /></button>
+          <button className="button" style={{ width: '100%' }} disabled aria-disabled="true" data-testid="checkout-button">CONTINUE TO CHECKOUT <ArrowRight size={16} /></button>
           <p className="checkout-note">Checkout is not active yet. No payment will be collected.</p>
         </> : <div className="cart-empty" data-testid="cart-empty">TU BOLSA ESTÁ VACÍA.<br /><span>Some strange things belong in here.</span><button className="button" onClick={() => { setCartOpen(false); jumpTo('shop'); }}>EXPLORAR EL DROP <ArrowRight size={15} /></button></div>}
       </aside>
-      {selectedProduct && <>
-        <div className="product-detail-backdrop" aria-hidden="true" onClick={() => setSelectedProduct(null)} data-testid="product-detail-backdrop" />
-        <aside className="product-detail-panel" role="dialog" aria-modal="true" aria-labelledby="product-detail-title" data-testid={`product-detail-${selectedProduct.id}`}>
-          <div className="detail-toolbar">
-            <span>NEOTIC SUPPLY / CHARACTER {selectedProduct.characterNumber}</span>
-            <button className="close-button detail-close" aria-label="Close product details" onClick={() => setSelectedProduct(null)} data-testid="product-detail-close"><X size={18} /></button>
-          </div>
-          <div className="detail-content">
-            <div className="detail-photo-wrap">
-              <img className="detail-photo" src={`${brandRoot}${selectedProduct.image}`} alt={`${selectedProduct.name}, official ${selectedProduct.color.toLowerCase()} NEOTIC SUPPLY tee`} />
-            </div>
-            <div className="detail-copy">
-              <span className="kicker">{selectedProduct.character} / {selectedProduct.characterNumber}</span>
-              <h2 className="display" id="product-detail-title">{selectedProduct.name}</h2>
-              <p className="detail-tagline">{selectedProduct.tagline}</p>
-              <p className="detail-color">COLOR / {selectedProduct.color}</p>
-              <div className="detail-price-line"><strong>{formatPrice(selectedProduct.price)}</strong><span className="product-availability"><span aria-hidden="true">●</span>{selectedProduct.availability}</span></div>
-              <div className="size-select-card detail-size-select">
-                <div className="size-select-heading"><span>SELECT SIZE</span><span>SIZE {selectedSizeFor(selectedProduct)}</span></div>
-                <div className="size-options detail-size-options" role="group" aria-label={`Select size for ${selectedProduct.name}`}>
-                  {shirtSizes.map((size) => <button type="button" className={`size-option ${selectedSizeFor(selectedProduct) === size ? 'selected' : ''}`} aria-pressed={selectedSizeFor(selectedProduct) === size} key={size} onClick={() => chooseSize(selectedProduct, size)} data-testid={`detail-size-${selectedProduct.id}-${size.toLowerCase()}`}>{size}</button>)}
-                </div>
-              </div>
-              <button className="button detail-add-button" onClick={() => addToCart(selectedProduct, selectedSizeFor(selectedProduct))} data-testid={`detail-add-${selectedProduct.id}`}>ADD TO BAG <ArrowRight size={16} /></button>
-            </div>
-          </div>
-        </aside>
-      </>}
+      {selectedProduct && <ProductDetail
+        product={selectedProduct}
+        imageSrc={`${brandRoot}${selectedProduct.image}`}
+        selectedSize={selectedSizeFor(selectedProduct)}
+        sizes={shirtSizes}
+        onSelectSize={(size) => chooseSize(selectedProduct, size)}
+        onAddToBag={() => addToCart(selectedProduct, selectedSizeFor(selectedProduct))}
+        onClose={() => setSelectedProduct(null)}
+        onBackToShop={() => { setSelectedProduct(null); jumpTo('shop'); }}
+      />}
       <div className={`toast ${toast ? 'show' : ''}`} role="status" aria-live="polite" data-testid="toast">{toast}</div>
     </>
   );

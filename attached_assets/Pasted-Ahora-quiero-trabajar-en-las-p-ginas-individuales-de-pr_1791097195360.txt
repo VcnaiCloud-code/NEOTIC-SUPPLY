@@ -1,0 +1,118 @@
+Ahora quiero trabajar en las páginas individuales de producto de NEOTIC SUPPLY.
+
+NO cambies el diseño general de la página HOME.
+NO cambies la sección SHOP que acabamos de terminar.
+NO cambies las imágenes de las cuatro camisetas.
+
+Quiero mejorar la experiencia cuando el usuario haga click en "VIEW DETAILS".
+
+Crea una experiencia de PRODUCT DETAIL premium para los cuatro productos:
+
+001 — NEO TEE
+THE CHAOS MIND
+
+002 — VEX TEE
+THE DREAMER
+
+003 — RAZE TEE
+THE VISIONARY
+
+004 — MIKO TEE
+THE EXPLORER
+
+Cada producto debe utilizar SU PROPIA imagen actual.
+
+### PRODUCT DETAIL
+
+La página debe sentirse como una marca de streetwear premium/editorial, no como un ecommerce genérico.
+
+Layout desktop:
+
+IZQUIERDA:
+- imagen grande de la camiseta
+- mucho espacio negativo
+- fondo oscuro
+- imagen protagonista
+
+DERECHA:
+- NEOTIC SUPPLY
+- nombre del producto
+- character ID
+- tagline
+- precio
+- disponibilidad
+- selector de talla
+- ADD TO BAG
+- descripción
+- detalles de la prenda
+
+Ejemplo:
+
+NEO TEE
+
+001 / THE CHAOS MIND
+
+$34.99
+
+AVAILABLE
+
+SIZE
+XS / S / M / L / XL / XXL
+
+ADD TO BAG
+
+DESCRIPTION
+NEO — THE CHAOS MIND.
+A character-driven graphic tee from DROP 001.
+
+DETAILS
+- Oversized fit
+- Premium heavyweight cotton
+- Character graphic
+- NEOTIC SUPPLY branding
+- DROP 001
+
+Haz textos equivalentes para VEX, RAZE y MIKO.
+
+### INTERACCIONES
+
+Añade:
+
+- transición suave al abrir el producto
+- hover sutil sobre la imagen
+- selector de talla interactivo
+- botón ADD TO BAG claramente visible
+- navegación para volver a SHOP
+- responsive para móvil
+
+En móvil:
+- imagen primero
+- información debajo
+- botón ADD TO BAG grande y fácil de tocar
+- selector de tallas horizontal o adaptable
+
+### IMPORTANTE
+
+El botón ADD TO BAG debe utilizar el mismo sistema de carrito que ya existe.
+
+Cuando se agregue un producto:
+
+- debe añadirse al carrito
+- debe actualizarse el contador del carrito
+- debe conservarse la talla seleccionada
+- debe conservarse el producto correcto
+
+No crees otro sistema de carrito.
+
+Utiliza el sistema existente.
+
+Antes de terminar, prueba los cuatro productos:
+
+NEO TEE
+VEX TEE
+RAZE TEE
+MIKO TEE
+
+y verifica que cada uno muestre su información y su imagen correcta.
+
+Haz los cambios directamente en el proyecto.
