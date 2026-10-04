@@ -27,15 +27,18 @@
 .neotic-hero .nh-grain { position:absolute; inset:0; opacity:1; pointer-events:none; mix-blend-mode:overlay; background-image:var(--neotic-print-texture); }
 
 /* ---------- group poster ---------- */
-.neotic-hero .nh-stage { position:absolute; inset:clamp(180px,16vw,238px) 24px 56px; z-index:2; }
+.neotic-hero .nh-stage { position:absolute; inset:0; z-index:2; }
 .neotic-hero .nh-poster { position:absolute; inset:0; overflow:hidden; opacity:0; }
 .neotic-hero.is-in .nh-poster { animation:nh-poster 1.6s cubic-bezier(.22,.7,.2,1) forwards; }
-.neotic-hero .nh-img { display:block; width:100%; height:100%; object-fit:contain; object-position:50% 50%; user-select:none; -webkit-user-drag:none; }
+.neotic-hero .nh-img { display:block; width:100%; height:100%; object-fit:cover; object-position:50% 50%; user-select:none; -webkit-user-drag:none; animation:nh-image-entry 1.6s cubic-bezier(.22,.7,.2,1) both,nh-ambient 36s 1.6s ease-in-out infinite alternate; }
 @keyframes nh-poster { from { opacity:0; } to { opacity:1; } }
+@keyframes nh-image-entry { from { transform:scale(1.015); } to { transform:scale(1); } }
+@keyframes nh-ambient { from { transform:scale(1); } to { transform:scale(1.02); } }
+.neotic-hero.is-paused .nh-img, .neotic-hero[inert] .nh-img { animation-play-state:paused; }
 
 .neotic-hero .nh-shade { position:absolute; inset:0; z-index:3; pointer-events:none;
-  bottom:auto; height:clamp(170px,16vw,220px);
-  background:linear-gradient(180deg,rgba(10,12,12,.7),transparent);
+  bottom:auto; height:clamp(230px,38vh,360px);
+  background:linear-gradient(180deg,rgba(10,12,12,.66),rgba(10,12,12,.28) 52%,transparent);
 }
 
 /* ---------- copy ---------- */
@@ -72,6 +75,7 @@
 /* ---------- tablet ---------- */
 @media (max-width:1024px) {
   .neotic-hero .nh-stage { inset:clamp(140px,16vw,180px) 18px 56px; }
+  .neotic-hero .nh-img { object-fit:contain; }
   .neotic-hero .nh-title { font-size:clamp(36px,7vw,72px); }
 }
 
@@ -86,8 +90,8 @@
   .neotic-hero .nh-copy { position:relative; padding:24px 22px 0; gap:18px; order:1; }
   .neotic-hero .nh-title { font-size:clamp(40px,13.4vw,70px); white-space:normal; line-height:.9; }
   .neotic-hero .nh-title em { display:block; }
-  .neotic-hero .nh-stage { position:relative; inset:auto; order:2; flex:0 0 auto; aspect-ratio:928/1152; margin-top:10px; }
-  .neotic-hero .nh-img { object-position:50% 50%; }
+  .neotic-hero .nh-stage { position:relative; inset:auto; order:2; flex:0 0 auto; aspect-ratio:3870/2160; margin:14px 18px 0; }
+  .neotic-hero .nh-img { object-fit:contain; object-position:50% 50%; }
   .neotic-hero .nh-cta { position:absolute; left:22px; right:22px; top:auto; bottom:62px; justify-content:space-between; background:rgba(10,12,12,.8); padding:17px 18px; }
   .neotic-hero .nh-tag, .neotic-hero .nh-cross-b, .neotic-hero .nh-rule { display:none; }
   .neotic-hero .nh-scroll { bottom:12px; }
@@ -97,7 +101,7 @@
 
 /* ---------- reduced motion (dynamic) ---------- */
 @media (prefers-reduced-motion:reduce) {
-  .neotic-hero .nh-img { will-change:auto; }
+  .neotic-hero .nh-img { will-change:auto; animation:none !important; transform:none !important; }
   .nh-scroll-scene { padding-bottom:0; margin-bottom:0; }
   .nh-scroll-runway { display:none; }
   .nh-scroll-scene .neotic-hero { position:relative; top:auto; opacity:1 !important; }

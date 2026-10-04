@@ -1,0 +1,235 @@
+Quiero actualizar ÚNICAMENTE el HERO de NEOTIC SUPPLY usando el nuevo póster grupal que acabo de subir.
+
+IMPORTANTE:
+El nuevo póster muestra a NEO, VEX, RAZE y MIKO juntos como grupo. Esta imagen será el KEY VISUAL principal del HERO.
+
+NO rediseñes el HERO desde cero.
+NO cambies el resto del sitio.
+NO modifiques SHOP, CHARACTERS, THE WORLD, DROPS, ABOUT, PRODUCT DETAIL, CART ni CHECKOUT.
+
+OBJETIVO:
+
+Transformar el HERO actual para que el nuevo póster grupal sea el elemento visual principal y haga sentir que NEO, VEX, RAZE y MIKO son un grupo real dentro del NEOTIC UNIVERSE.
+
+La dirección debe sentirse como una campaña editorial premium de streetwear/fashion, no como una tienda online convencional.
+
+ESTRUCTURA VISUAL:
+
+NEOTIC SUPPLY
+WEAR THE UNREAL
+
+[NUEVO GROUP KEY VISUAL]
+
+ENTER THE UNIVERSE
+
+Usa el nuevo póster como una imagen HERO de pantalla completa.
+
+La imagen debe ocupar prácticamente todo el viewport sin sentirse aplastada ni deformada.
+
+Mantén:
+- aspect ratio correcto
+- object-fit: cover cuando corresponda
+- excelente calidad visual
+- posicionamiento responsive
+- composición original del póster
+- rostros y personajes completamente visibles cuando sea posible
+
+No recortes de forma agresiva a los personajes.
+
+TIPOGRAFÍA:
+
+Mantén la identidad tipográfica actual de NEOTIC SUPPLY.
+
+WEAR THE UNREAL debe continuar siendo uno de los elementos visuales principales.
+
+No pongas demasiado texto sobre los personajes.
+
+Utiliza contraste, sombras o un gradiente muy sutil detrás de la tipografía solamente cuando sea necesario para legibilidad.
+
+No agregues texto dentro de la imagen.
+
+ANIMACIÓN CINEMATOGRÁFICA:
+
+Quiero animaciones muy sutiles y premium.
+
+1. HERO ENTRY
+
+Cuando se carga la página:
+
+- el key visual aparece suavemente
+- opacity 0 → 1
+- scale ligeramente mayor → scale normal
+- duración aproximada 1.2–1.8 segundos
+- easing cinematográfico
+- sin flash
+- sin movimientos bruscos
+
+La animación debe sentirse como una campaña de moda cinematográfica.
+
+2. TYPOGRAPHY REVEAL
+
+Después de comenzar a aparecer el key visual:
+
+- NEOTIC SUPPLY aparece suavemente
+- WEAR THE UNREAL aparece con un pequeño delay
+- CTA ENTER THE UNIVERSE aparece al final
+
+No hagas animaciones exageradas.
+
+Nada de rebotes.
+Nada de zoom agresivo.
+Nada de efectos de videojuego.
+
+3. AMBIENT MOTION
+
+Agregar un movimiento ambiental extremadamente lento al key visual:
+
+- scale muy sutil
+- aproximadamente 1.00 → 1.02
+- duración larga
+- movimiento casi imperceptible
+
+Debe dar la sensación de que la imagen está viva.
+
+NO usar mouse parallax.
+
+NO mover la imagen según la posición del mouse.
+
+NO agregar React state que se actualice en cada mousemove.
+
+NO volver a introducir el problema de lag que eliminamos anteriormente.
+
+4. SCROLL TRANSITION
+
+Cuando el usuario comienza a hacer scroll:
+
+El HERO debe sentirse como si estuviéramos entrando al NEOTIC UNIVERSE.
+
+Crear una transición cinematográfica muy ligera:
+
+- el key visual se desplaza/escala suavemente
+- WEAR THE UNREAL puede disminuir ligeramente en escala/opacidad
+- el HERO comienza a desaparecer
+- THE WORLD comienza a aparecer
+
+La transición debe ser fluida y basada en transform/opacity.
+
+Evitar blur pesado.
+
+Evitar filtros costosos.
+
+Evitar múltiples elementos moviéndose simultáneamente.
+
+PERFORMANCE:
+
+Esto es MUY importante.
+
+El HERO debe seguir siendo rápido y fluido.
+
+NO utilizar:
+- mousemove listeners pesados
+- React state por frame
+- filtros blur grandes
+- backdrop-filter innecesario
+- múltiples box-shadows enormes
+- animaciones constantes de muchos elementos
+- partículas
+- canvas
+- WebGL
+- efectos de glitch permanentes
+
+Usar preferentemente:
+- transform
+- opacity
+- translate3d
+- requestAnimationFrame solamente cuando sea necesario
+- IntersectionObserver
+- CSS animations/transitions
+- will-change únicamente donde aporte beneficio real
+
+La imagen debe cargarse de manera optimizada.
+
+Si el archivo es demasiado pesado, utiliza una versión optimizada para web sin destruir la calidad visual.
+
+RESPONSIVE:
+
+Desktop:
+- HERO cinematográfico y amplio
+- mantener la composición completa del grupo
+
+Tablet:
+- adaptar el crop cuidadosamente
+- mantener visibles los cuatro personajes
+
+Mobile:
+- crear un crop específico si es necesario
+- NO simplemente comprimir la imagen desktop
+- priorizar que el grupo siga siendo reconocible
+- mantener NEO, VEX, RAZE y MIKO visualmente presentes
+- mantener legibilidad de WEAR THE UNREAL y CTA
+
+IMPORTANTE SOBRE EL DISEÑO:
+
+Los cuatro personajes deben sentirse como un grupo.
+
+No volver a separar NEO, VEX, RAZE y MIKO en cuatro capas independientes.
+
+El nuevo póster es UNA pieza visual.
+
+Las imágenes individuales de los personajes deben seguir existiendo para THE CHARACTERS y otras secciones.
+
+TEXTURE / GRAIN:
+
+No aumentar el grain.
+
+El sitio ya tiene una textura sutil y está funcionando bien.
+
+Mantenerla muy discreta.
+
+No aplicar grain fuerte sobre el nuevo póster.
+
+No reducir la nitidez de los personajes.
+
+CURSOR:
+
+No agregar un cursor personalizado pesado.
+
+No reintroducir mouse interactions.
+
+El HERO debe sentirse premium por composición, fotografía, tipografía, escala y movimiento sutil; no por cantidad de efectos.
+
+ACCESIBILIDAD:
+
+Respetar prefers-reduced-motion.
+
+Si el usuario tiene reduced motion activado:
+- eliminar scale animations
+- eliminar scroll animations
+- mantener solamente fades mínimos o ningún movimiento.
+
+IMPORTANTE:
+
+Antes de terminar, revisa que:
+- no haya errores en consola
+- no haya layout shifts importantes
+- el HERO no cause lag al hacer scroll
+- el CTA siga funcionando
+- la navegación siga funcionando
+- THE WORLD siga entrando correctamente después del HERO
+- el diseño actual del resto del sitio permanezca intacto.
+
+NO agregues nuevas secciones.
+NO cambies productos.
+NO cambies precios.
+NO cambies personajes.
+NO cambies textos de otras secciones.
+NO cambies la estructura del sitio fuera del HERO.
+
+Quiero que el resultado se sienta como:
+
+NEOTIC SUPPLY
+THE FOUR NEOTICS
+ONE UNIVERSE
+WEAR THE UNREAL
+
+Una campaña de streetwear premium, cinematográfica, oscura y futurista.
