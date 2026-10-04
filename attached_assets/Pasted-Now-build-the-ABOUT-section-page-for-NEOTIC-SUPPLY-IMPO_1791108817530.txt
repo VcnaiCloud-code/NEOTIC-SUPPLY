@@ -1,0 +1,357 @@
+Now build the ABOUT section/page for NEOTIC SUPPLY.
+
+IMPORTANT:
+Do not modify or break any approved existing sections.
+
+Already approved:
+- HOME / HERO
+- HERO cinematic animation
+- THE WORLD
+- CHARACTERS
+- DROPS
+- SHOP
+- PRODUCT DETAIL
+- CART / BAG
+- CHECKOUT DEMO
+- Existing navigation
+- Existing visual system
+- Refined grain/noise treatment
+
+Only build/refine ABOUT.
+
+========================================
+CORE CONCEPT
+========================================
+
+ABOUT should explain what NEOTIC SUPPLY is without becoming a traditional corporate "About Us" page.
+
+NEOTIC SUPPLY is a fictional streetwear universe built around:
+
+WEAR THE UNREAL
+
+The brand exists between fashion, imagination, identity and an alternate reality.
+
+The section should feel:
+- personal
+- confident
+- minimal
+- editorial
+- slightly mysterious
+
+It should NOT feel like:
+- a corporate company page
+- a generic startup
+- a long manifesto
+- a Wikipedia page
+- a generic fashion template
+
+========================================
+1. INTRO
+========================================
+
+Create a strong opening.
+
+Small technical label:
+
+NEOTIC SUPPLY
+/ EST. 2025
+
+Large headline:
+
+ABOUT
+
+Then:
+
+WEAR THE UNREAL.
+
+Keep this visually powerful and minimal.
+
+========================================
+2. BRAND STATEMENT
+========================================
+
+Create a large editorial statement:
+
+"NEOTIC SUPPLY IS A STREETWEAR UNIVERSE BUILT FOR THOSE WHO REFUSE TO FIT INTO ONE REALITY."
+
+Then a shorter paragraph:
+
+"Part clothing. Part identity. Part fiction.
+NEOTIC exists somewhere between what is real and what could be."
+
+Keep the copy concise.
+
+Do not add unnecessary paragraphs.
+
+========================================
+3. WHY NEOTIC EXISTS
+========================================
+
+Create a section with the heading:
+
+WHY NEOTIC?
+
+Use this concept:
+
+"Because clothing doesn't have to describe who you are.
+It can describe who you're becoming."
+
+Then a short supporting statement:
+
+"NEOTIC is built around characters, worlds and ideas that turn the unreal into something you can wear."
+
+This should connect the philosophy to the actual clothing.
+
+========================================
+4. THE PRINCIPLE
+========================================
+
+Create a large typographic moment:
+
+DON'T FIT THE SYSTEM.
+
+Then:
+
+CREATE YOUR OWN FREQUENCY.
+
+This should be visually dominant.
+
+Use typography and composition rather than lots of decorative effects.
+
+========================================
+5. THE UNIVERSE CONNECTION
+========================================
+
+Create a concise section connecting the brand to the universe already established.
+
+Use:
+
+ONE BRAND.
+FOUR MINDS.
+INFINITE POSSIBILITIES.
+
+Then reference:
+
+NEO — CHAOS
+VEX — DREAM
+RAZE — VISION
+MIKO — EXPLORATION
+
+These should link back to CHARACTERS.
+
+Do not repeat the entire character presentations.
+
+========================================
+6. THE CLOTHING
+========================================
+
+Explain the relationship between the fictional universe and the physical products.
+
+Heading:
+
+FROM THE UNREAL
+TO THE PHYSICAL.
+
+Supporting text:
+
+"Every piece is a fragment of the NEOTIC universe.
+The characters, symbols and ideas are designed to exist beyond the screen."
+
+Then a CTA:
+
+EXPLORE THE SHOP →
+
+Link to the existing SHOP.
+
+========================================
+7. BRAND DETAILS
+========================================
+
+Create a minimal technical block:
+
+NEOTIC SUPPLY
+EST. 2025
+
+WEAR THE UNREAL
+
+UNIVERSE
+NEOTIC
+
+SYSTEM
+001—∞
+
+Keep it visually restrained.
+
+Do not invent fake company information.
+
+Do not invent a physical address.
+
+Do not invent founders.
+
+Do not invent manufacturing claims.
+
+Do not invent sustainability claims.
+
+Do not invent limited-edition claims.
+
+Only use information that is already established in the project.
+
+========================================
+8. FINAL STATEMENT
+========================================
+
+End with a powerful editorial section:
+
+WEAR
+WHAT
+DOESN'T
+EXIST.
+
+Then:
+
+YET.
+
+This should be a strong visual ending.
+
+Below it:
+
+ENTER THE UNIVERSE →
+
+Link back to HOME / HERO.
+
+========================================
+9. VISUAL DIRECTION
+========================================
+
+Keep the approved NEOTIC visual identity:
+
+BLACK
+CHARCOAL
+OFF-WHITE
+SILVER
+SUBTLE CYAN / TEAL
+
+ABOUT should be slightly calmer than THE WORLD.
+
+Think:
+
+80% premium editorial
+20% fictional universe
+
+Use generous negative space.
+
+Large typography.
+
+Clean composition.
+
+Do not overload the page with technical graphics.
+
+========================================
+10. MOTION
+========================================
+
+Use restrained cinematic motion:
+
+- scroll reveal
+- typography reveal
+- subtle image/graphic movement
+- opacity transitions
+- slight parallax where appropriate
+
+Do not add constant floating animation.
+
+Do not add heavy glitch.
+
+Do not add additional grain.
+
+Do not use expensive effects that could cause performance issues.
+
+Support prefers-reduced-motion.
+
+========================================
+11. IMAGE / GRAPHIC DIRECTION
+========================================
+
+You may reuse existing NEOTIC character artwork and visual assets where appropriate.
+
+Do not generate new character designs.
+
+Do not alter the canonical characters.
+
+If no additional image is necessary, prioritize typography and composition rather than adding random imagery.
+
+========================================
+12. GRAIN / SHARPNESS
+========================================
+
+The site's grain treatment has already been refined.
+
+Do NOT add another grain/noise layer.
+
+Keep:
+- typography crisp
+- logos crisp
+- character artwork sharp
+- graphics sharp
+
+========================================
+13. RESPONSIVE
+========================================
+
+Desktop:
+Strong editorial layouts with generous whitespace.
+
+Tablet:
+Preserve the hierarchy while reducing oversized elements.
+
+Mobile:
+Recompose sections naturally rather than simply shrinking desktop.
+
+Large statements must remain readable.
+
+Reduce parallax and expensive effects on mobile.
+
+========================================
+14. NAVIGATION
+========================================
+
+The existing navigation is:
+
+SHOP
+CHARACTERS
+THE WORLD
+DROPS
+ABOUT
+
+Make sure ABOUT correctly navigates to this page/section.
+
+Do not break any existing navigation.
+
+========================================
+15. FINAL QUALITY
+========================================
+
+Test:
+
+- desktop
+- tablet
+- mobile
+- navigation
+- all internal links
+- scroll behavior
+- accessibility
+- reduced motion
+- performance
+- console errors
+
+Do not modify SHOP, PRODUCT DETAIL, CART or CHECKOUT.
+
+Do not redesign THE WORLD, CHARACTERS or DROPS.
+
+Only build/refine ABOUT.
+
+The final result should make the visitor understand:
+
+NEOTIC SUPPLY is not simply selling clothes.
+
+It is building a world — and the clothes are physical pieces of that world.

@@ -6,6 +6,7 @@ import OrderConfirmation from './components/OrderConfirmation';
 import Hero from './components/Hero';
 import World from './components/World';
 import CharacterArchive from './components/CharacterArchive';
+import About from './components/About';
 import { ArrowDownRight, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { cartSubtotalCents, createMockOrder, emptyShippingInfo, validateShippingInfo } from './lib/checkout';
 import type { Product, CartLine, ShippingInfo, MockOrder } from './lib/checkout';
@@ -285,14 +286,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section about" id="about" aria-labelledby="about-title">
-          <div className="wrap about-content" data-reveal>
-            <span className="kicker">05 / ABOUT NEOTIC</span>
-            <h2 className="display" id="about-title">DIFFERENT FACES.<br /><em>SAME SOUL.</em></h2>
-            <p>NEOTIC SUPPLY mezcla streetwear, personajes, gráficos y cultura digital para construir un universo propio. Made for people who would rather be unmistakable than understood.</p>
-            <a className="button" href="#characters">MEET THE CREW <ArrowDownRight size={16} /></a>
-          </div>
-        </section>
+        <About />
         <div className="manifesto" aria-label="Wear the unreal"><span>NEOTIC SUPPLY — WEAR THE UNREAL — SAME MINDSET, DIFFERENT UNIVERSE — REAL PEOPLE WEAR NEOTIC — </span></div>
       </main>
 

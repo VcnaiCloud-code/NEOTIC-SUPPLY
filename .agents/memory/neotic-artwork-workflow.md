@@ -7,6 +7,12 @@ Treat supplied NEOTIC collage boards as source sheets, not ready-to-use page bac
 
 Preserve the existing storefront layout, branding, typography, sections, and product structure unless the user explicitly asks for a redesign. The only approved characters are NEO, VEX, RAZE, and MIKO; do not use or reference Rick & Morty or other existing characters.
 
+The user has approved HOME/HERO and its cinematic animation, THE WORLD, CHARACTERS, DROPS, SHOP, PRODUCT DETAIL, CART/BAG, CHECKOUT DEMO, navigation, visual system, and refined grain/noise treatment.
+
+**Why:** The user explicitly listed these areas as already approved in the ABOUT brief.
+
+**How to apply:** Keep new section work isolated. Preserve approved areas and behavior unless the user explicitly requests a change to them.
+
 When improving product details, preserve HOME, the completed SHOP section, and the approved shirt images unless the user explicitly requests changes to them.
 
 **Why for product details:** The user repeatedly separated product-detail improvements from the storefront and explicitly prohibited changes to HOME, SHOP, and shirt images.
