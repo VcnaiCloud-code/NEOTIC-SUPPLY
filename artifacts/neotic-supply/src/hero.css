@@ -27,16 +27,15 @@
 .neotic-hero .nh-grain { position:absolute; inset:0; opacity:1; pointer-events:none; mix-blend-mode:overlay; background-image:var(--neotic-print-texture); }
 
 /* ---------- group poster ---------- */
-.neotic-hero .nh-stage { position:absolute; inset:0; z-index:2; }
+.neotic-hero .nh-stage { position:absolute; inset:clamp(180px,16vw,238px) 24px 56px; z-index:2; }
 .neotic-hero .nh-poster { position:absolute; inset:0; overflow:hidden; opacity:0; }
 .neotic-hero.is-in .nh-poster { animation:nh-poster 1.6s cubic-bezier(.22,.7,.2,1) forwards; }
-.neotic-hero .nh-img { display:block; width:100%; height:100%; object-fit:cover; object-position:50% 30%; user-select:none; -webkit-user-drag:none; transform-origin:50% 35%; animation:nh-ambient 32s ease-in-out infinite alternate; will-change:transform; }
-.neotic-hero.is-paused .nh-img, .neotic-hero[inert] .nh-img { animation-play-state:paused; will-change:auto; }
-@keyframes nh-poster { from { opacity:0; transform:scale(1.05); } to { opacity:1; transform:none; } }
-@keyframes nh-ambient { from { transform:scale(1); } to { transform:scale(1.02); } }
+.neotic-hero .nh-img { display:block; width:100%; height:100%; object-fit:contain; object-position:50% 50%; user-select:none; -webkit-user-drag:none; }
+@keyframes nh-poster { from { opacity:0; } to { opacity:1; } }
 
 .neotic-hero .nh-shade { position:absolute; inset:0; z-index:3; pointer-events:none;
-  background:linear-gradient(0deg,#0b0d0d 0%,rgba(11,13,13,.55) 9%,transparent 28%), linear-gradient(180deg,rgba(10,12,12,.7) 0%,transparent 26%);
+  bottom:auto; height:clamp(170px,16vw,220px);
+  background:linear-gradient(180deg,rgba(10,12,12,.7),transparent);
 }
 
 /* ---------- copy ---------- */
@@ -72,7 +71,7 @@
 
 /* ---------- tablet ---------- */
 @media (max-width:1024px) {
-  .neotic-hero .nh-img { object-position:50% 32%; }
+  .neotic-hero .nh-stage { inset:clamp(140px,16vw,180px) 18px 56px; }
   .neotic-hero .nh-title { font-size:clamp(36px,7vw,72px); }
 }
 
@@ -93,7 +92,7 @@
   .neotic-hero .nh-tag, .neotic-hero .nh-cross-b, .neotic-hero .nh-rule { display:none; }
   .neotic-hero .nh-scroll { bottom:12px; }
   .neotic-hero .nh-scroll i { height:18px; }
-  .neotic-hero .nh-shade { background:linear-gradient(0deg,#0b0d0d 0%,transparent 14%); }
+  .neotic-hero .nh-shade { height:170px; }
 }
 
 /* ---------- reduced motion (dynamic) ---------- */

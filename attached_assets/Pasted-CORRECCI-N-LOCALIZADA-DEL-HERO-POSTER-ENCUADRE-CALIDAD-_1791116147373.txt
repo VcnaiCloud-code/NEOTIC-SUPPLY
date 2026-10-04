@@ -1,0 +1,162 @@
+CORRECCIÓN LOCALIZADA DEL HERO — POSTER / ENCUADRE / CALIDAD
+
+El nuevo group poster que acabas de integrar en el HERO NO está funcionando correctamente.
+
+Problemas actuales:
+1. La imagen se ve de baja calidad.
+2. Está demasiado recortada.
+3. Los personajes quedan parcialmente fuera de pantalla.
+4. La composición original del poster ya no se aprecia correctamente.
+
+Quiero corregir ÚNICAMENTE la implementación visual del poster en HERO.
+
+NO hagas una auditoría completa.
+NO cambies otras secciones.
+NO cambies el artwork.
+NO generes otra imagen.
+NO edites el poster.
+NO reemplaces los personajes.
+NO cambies la identidad visual.
+
+==================================================
+1. USAR EL ARCHIVO ORIGINAL
+==================================================
+
+Localiza el archivo original del group poster que acabo de subir.
+
+Utiliza exactamente ese archivo y su resolución/calidad original.
+
+NO utilices una versión thumbnail.
+NO utilices una versión comprimida innecesariamente.
+NO conviertas la imagen a una resolución inferior.
+NO apliques filtros que reduzcan nitidez.
+
+Si existe más de una copia del archivo, identifica cuál tiene mayor resolución y utiliza esa versión.
+
+==================================================
+2. CORREGIR EL ENCUADRE
+==================================================
+
+El problema principal parece ser el comportamiento de object-fit / background-size.
+
+NO fuerces la imagen a llenar el viewport sacrificando el encuadre de los personajes.
+
+El objetivo es:
+
+- que NEO, VEX, RAZE y MIKO sean claramente visibles;
+- que sus caras/cabezas no queden cortadas;
+- que el grupo completo sea reconocible;
+- que se conserve la composición original del poster;
+- que el artwork tenga suficiente presencia visual;
+- que el texto del HERO siga teniendo su jerarquía actual.
+
+Prueba primero una implementación que preserve el artwork completo, usando una composición tipo:
+
+object-fit: contain
+
+o una solución equivalente que mantenga la relación de aspecto original.
+
+IMPORTANTE:
+No quiero simplemente hacer zoom out de toda la página.
+
+El poster debe ocupar visualmente el HERO, pero sin cortar a los personajes.
+
+==================================================
+3. DESKTOP
+==================================================
+
+En desktop, prioriza que el grupo completo sea visible.
+
+No recortes:
+- cabezas
+- caras
+- cuerpos
+- elementos importantes del poster
+
+El poster debe sentirse como una KEY VISUAL de campaña de moda, no como una imagen de fondo recortada aleatoriamente.
+
+==================================================
+4. TABLET / MOBILE
+==================================================
+
+En tablet y móvil, adapta el encuadre de forma independiente.
+
+NO uses exactamente el mismo crop de desktop.
+
+Si el formato del poster requiere una adaptación responsive, utiliza una estrategia específica para cada breakpoint.
+
+Prioridad:
+
+1. personajes visibles
+2. composición legible
+3. calidad de imagen
+4. integración con la tipografía del HERO
+
+==================================================
+5. CALIDAD
+==================================================
+
+No aplicar:
+- blur
+- filtros de reducción de calidad
+- overlays que oculten los personajes
+- transformaciones que produzcan pixelación
+- escalado innecesario
+- compresión agresiva
+
+Utilizar transformaciones GPU-friendly únicamente cuando sean necesarias.
+
+Si el poster ya tiene suficiente resolución, NO crear una copia procesada de menor resolución.
+
+==================================================
+6. NO ALTERAR EL HERO
+==================================================
+
+Mantener exactamente:
+
+- NEOTIC SUPPLY
+- WEAR THE UNREAL
+- ENTER THE UNIVERSE
+- tipografía
+- jerarquía
+- estética
+- fondo
+- transición cinematográfica
+- ausencia de mouse parallax
+- performance optimizada
+- reduced motion
+
+Solo corregir:
+POSTER + ENCUADRE + CALIDAD.
+
+==================================================
+7. VERIFICACIÓN
+==================================================
+
+Después del cambio verifica visualmente:
+
+1440px
+1280px
+1024px
+768px
+430px
+390px
+375px
+
+En cada tamaño confirma:
+
+- los cuatro personajes son reconocibles;
+- no hay cabezas/caras cortadas;
+- el poster no está pixelado;
+- no existe overflow horizontal;
+- el texto del HERO sigue siendo legible;
+- el CTA sigue visible;
+- no aparecen deformaciones.
+
+IMPORTANTE:
+NO des por terminado el cambio simplemente porque la imagen llena el HERO.
+
+Debe verse correctamente encuadrada.
+
+Cuando termines, detente.
+No hagas ninguna otra modificación en el proyecto.

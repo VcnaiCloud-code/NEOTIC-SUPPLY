@@ -27,7 +27,13 @@ The requested group-poster HERO uses one supplied key visual containing NEO, VEX
 
 **Why for HERO motion:** The user reported stutter and prioritized responsiveness. In the subsequent localized HERO request, they explicitly requested a single group poster, restrained entry and one extremely slow ambient scale, while prohibiting mouse interactions and changes to other sections.
 
-**How to apply:** Keep the initial cinematic reveal and simple shared transform/opacity handoff. Returns show the settled composition without replaying the entrance. A single subtle poster zoom is permitted, paused offscreen and disabled with reduced motion; no cursor effects, separate character motion or new grain. Preserve other sections and their order.
+**How to apply:** Keep the initial cinematic reveal and simple shared transform/opacity handoff. Returns show the settled composition without replaying the entrance. No cursor effects, separate character motion or new grain. Preserve other sections and their order.
+
+For the HERO group poster, use the highest-resolution original uploaded file, unprocessed and without thumbnail selection. Preserve the entire composition with contain-style fitting and space clear of the typography; do not force full-bleed cover crops, obscuring overlays or image zoom.
+
+**Why:** The user rejected the compressed/cropped implementation because the original composition and bodies were missing and image quality looked poor. They explicitly requested the original file and complete artwork over filling the viewport.
+
+**How to apply:** Compare original uploads when duplicates exist; use the full-resolution original unchanged. Fit the poster independently at desktop, tablet and mobile sizes without editing the artwork or changing other sections.
 
 Performance work may serve responsive derivatives, but the original approved transparent artwork remains canonical and must not be overwritten.
 
