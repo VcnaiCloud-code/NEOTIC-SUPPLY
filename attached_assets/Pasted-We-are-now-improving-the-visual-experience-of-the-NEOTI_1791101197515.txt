@@ -1,0 +1,273 @@
+We are now improving the visual experience of the NEOTIC SUPPLY HOME / HERO.
+
+IMPORTANT:
+Do NOT modify the existing Shop, Product Detail, Shopping Bag, Checkout or Order Confirmation functionality.
+Do NOT change product data, prices, cart logic or checkout logic.
+This task is ONLY for the HOME / HERO and its visual motion system.
+
+The current NEOTIC SUPPLY brand identity must remain intact.
+
+BRAND:
+NEOTIC SUPPLY
+WEAR THE UNREAL
+EST. 2025
+
+CHARACTERS:
+NEO — 001 / THE CHAOS MIND
+VEX — 002 / THE DREAMER
+RAZE — 003 / THE VISIONARY
+MIKO — 004 / THE EXPLORER
+
+VISUAL DIRECTION:
+- Premium underground streetwear.
+- Futuristic / industrial / cyberpunk influence.
+- Editorial fashion campaign feeling.
+- Black, charcoal, off-white and silver.
+- Cyan/teal used selectively.
+- Subtle grain / texture.
+- Subtle glitch only when appropriate.
+- No cheesy cyberpunk effects.
+- No excessive neon.
+- No excessive particle effects.
+- No generic template animations.
+- The result should feel like a real premium fashion brand website.
+
+HERO STRUCTURE:
+
+The hero should occupy approximately the full viewport height.
+
+Keep:
+- NEOTIC SUPPLY logo
+- WEAR THE UNREAL
+- ENTER THE UNIVERSE CTA
+- Four characters: NEO, VEX, RAZE and MIKO
+- Existing navigation
+
+Create a strong visual hierarchy:
+1. Brand/logo
+2. Characters
+3. WEAR THE UNREAL
+4. ENTER THE UNIVERSE
+
+Do not overcrowd the composition.
+
+CHARACTER MOTION:
+
+Give each character a slightly different motion personality.
+
+NEO:
+- Slight vertical movement.
+- Very subtle horizontal drift.
+- Slightly more unpredictable than the others.
+- Tiny scale/depth variation.
+
+VEX:
+- Slow, smooth floating movement.
+- Slight lateral drift.
+- Softer motion than NEO.
+
+RAZE:
+- Very subtle depth movement.
+- Almost static compared with the others.
+- Slight parallax response to mouse movement.
+
+MIKO:
+- Smooth floating movement.
+- Slight vertical movement.
+- Slightly more playful but still premium.
+
+IMPORTANT:
+These movements must be extremely subtle.
+The characters should never look like they are bouncing.
+They should feel like they are suspended in space.
+
+MOUSE PARALLAX:
+
+Create a layered mouse-parallax system.
+
+When the mouse moves:
+- Background moves very slightly.
+- Characters move at different depth levels.
+- Logo moves minimally.
+- Decorative elements move slightly more.
+- Foreground elements move slightly less or more depending on depth.
+
+Use smooth interpolation / easing.
+Never snap directly to the mouse position.
+
+The effect should feel like cinematic camera movement rather than a website effect.
+
+SCROLL PARALLAX:
+
+As the user scrolls away from the hero:
+- Characters should slowly move at different speeds.
+- Hero content should gradually transition out.
+- The next section should begin appearing underneath.
+- Use opacity and transform transitions.
+- Avoid sudden disappearance.
+
+The transition should feel like entering another environment.
+
+HERO INTRO ANIMATION:
+
+On initial page load:
+
+1. Background appears first.
+2. Very subtle grain/texture becomes visible.
+3. Logo fades/slides into position.
+4. Characters appear sequentially with slight movement.
+5. WEAR THE UNREAL appears.
+6. ENTER THE UNIVERSE appears last.
+
+Use staggered timing.
+
+Keep the total intro animation short enough that the user can interact with the site immediately.
+
+Do NOT create a long loading animation.
+
+TYPOGRAPHY ANIMATION:
+
+WEAR THE UNREAL should have a subtle entrance.
+
+The typography can use:
+- slight vertical movement
+- opacity
+- small tracking adjustment
+
+Do not animate every letter individually unless it can be done very subtly.
+
+CTA:
+
+ENTER THE UNIVERSE should have a premium hover interaction.
+
+On hover:
+- subtle background/accent transition
+- slight arrow movement
+- small tracking change
+- very subtle scale change
+
+Do not use a generic glowing button.
+
+CUSTOM CURSOR:
+
+If the existing custom cursor is already implemented, refine it rather than replacing it.
+
+The cursor should:
+- remain minimal
+- react subtly when hovering interactive elements
+- never become distracting
+
+If no custom cursor currently exists, create a minimal one.
+
+SCROLL INDICATOR:
+
+Add a very subtle scroll indicator near the bottom of the hero.
+
+For example:
+SCROLL
+↓
+or a minimal animated line.
+
+Keep it understated.
+
+BACKGROUND:
+
+Improve the hero background with subtle depth.
+
+Use:
+- near-black base
+- extremely subtle gradients
+- subtle grain/noise
+- very faint geometric/technical elements if appropriate
+
+Do not use a busy background.
+
+GLITCH:
+
+Use glitch extremely sparingly.
+
+Possible uses:
+- tiny logo distortion during initial entrance
+- very short transition when entering another section
+- occasional micro distortion on hover
+
+The glitch should feel like part of the NEOTIC visual language, not like an effect applied everywhere.
+
+SECTION TRANSITION:
+
+The transition from HERO to the next section is important.
+
+Do not simply end the hero and show the next section.
+
+Create a smooth visual transition where:
+- hero characters slowly shift/fade
+- hero typography moves slightly
+- background layers transition
+- next section content begins to reveal
+
+The result should feel cinematic.
+
+PERFORMANCE:
+
+This is extremely important.
+
+Use transform and opacity animations where possible.
+Prefer CSS transitions/keyframes and efficient requestAnimationFrame logic for mouse movement.
+Do not create expensive continuous animations.
+Do not add unnecessary libraries.
+
+Respect prefers-reduced-motion.
+
+On mobile:
+- significantly reduce parallax intensity
+- reduce continuous movement
+- preserve the cinematic feeling
+- avoid performance-heavy effects
+- keep touch interaction natural
+
+RESPONSIVE:
+
+Desktop:
+- Full cinematic composition.
+
+Tablet:
+- Reduce character separation and parallax intensity.
+
+Mobile:
+- Recompose the four characters so they remain clearly visible.
+- Do not simply shrink the desktop layout.
+- Keep logo and CTA readable.
+- Reduce motion.
+- Ensure no horizontal overflow.
+
+IMPORTANT CHARACTER ASSETS:
+
+Use the exact existing NEOTIC character assets already in the project.
+Do not generate replacement characters.
+Do not change their designs.
+Do not introduce any third-party characters.
+Do not reference Rick & Morty or any existing franchise.
+
+IMPORTANT:
+Do not redesign the entire website.
+Do not change the Shop layout.
+Do not change the product detail pages.
+Do not change the Bag.
+Do not change Checkout.
+Do not change product images.
+Do not change prices.
+
+Only improve the HOME / HERO visual experience and its animation system.
+
+Before finishing:
+- Test desktop.
+- Test mobile.
+- Test mouse movement.
+- Test scrolling.
+- Test hover interactions.
+- Check that the CTA still navigates correctly.
+- Check that navigation still works.
+- Check for console errors.
+- Verify that Shop, Product Detail, Bag and Checkout remain functional.
+
+The final result should feel like a premium fashion campaign opening, not a generic animated website.
