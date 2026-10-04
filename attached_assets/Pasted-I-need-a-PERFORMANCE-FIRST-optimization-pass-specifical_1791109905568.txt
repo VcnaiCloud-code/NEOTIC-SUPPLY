@@ -1,0 +1,330 @@
+I need a PERFORMANCE-FIRST optimization pass specifically for the HOME / HERO experience.
+
+IMPORTANT:
+Do NOT redesign the HERO.
+Do NOT replace the current visual composition.
+Do NOT remove the cinematic identity.
+
+The current HERO looks good visually, but it has noticeable lag/stuttering:
+- during HERO → next section transition
+- when returning to HERO
+- when the characters appear
+- during mouse movement
+
+The priority is now SMOOTHNESS and RESPONSIVENESS.
+
+========================================
+1. REMOVE MOUSE PARALLAX
+========================================
+
+Completely disable the mouse/cursor-based parallax interaction in the HERO.
+
+Do not track mouse movement for:
+- characters
+- background
+- typography
+- decorative elements
+
+Remove unnecessary mousemove listeners and any React state updates caused by mouse movement.
+
+The HERO should remain visually identical without mouse interaction.
+
+Do NOT replace it with another cursor effect.
+
+The cursor should simply behave normally.
+
+========================================
+2. KEEP THE HERO VISUAL DESIGN
+========================================
+
+Do not redesign the HERO.
+
+Keep:
+- NEOTIC SUPPLY logo
+- four characters
+- WEAR THE UNREAL
+- ENTER THE UNIVERSE
+- existing background
+- existing typography
+- existing visual composition
+- existing color palette
+
+Only remove/optimize performance-heavy behavior.
+
+========================================
+3. OPTIMIZE HERO → NEXT SECTION
+========================================
+
+The current transition from HERO to the next section is lagging.
+
+Simplify the transition.
+
+Use primarily:
+
+transform
+opacity
+
+Avoid animating expensive properties such as:
+- filter
+- blur
+- backdrop-filter
+- box-shadow
+- background-position
+- width
+- height
+- top
+- left
+
+The transition should feel cinematic but extremely smooth.
+
+Suggested behavior:
+
+HERO:
+normal state
+
+↓
+
+during scroll:
+- very subtle scale
+- subtle opacity change
+- characters maintain visual presence slightly longer
+- typography transitions smoothly
+
+↓
+
+next section:
+emerges naturally underneath
+
+Do not animate every element independently.
+
+Use a small number of GPU-friendly transforms.
+
+========================================
+4. DO NOT REPLAY HEAVY HERO INTRO EVERY TIME
+========================================
+
+This is very important.
+
+When the user returns to the HERO after scrolling through the site, do NOT replay the full entrance animation for all four characters.
+
+The heavy cinematic intro should happen only on the initial HOME load.
+
+When returning to the HERO:
+- characters should already be visually composed
+- avoid staggered entrance animations
+- avoid re-running multiple image animations
+- avoid recreating expensive animation state
+
+The return to HERO should feel immediate and stable.
+
+========================================
+5. CHARACTER IMAGES
+========================================
+
+Audit the four character images used in HERO.
+
+Do not reduce their visual quality unnecessarily.
+
+Instead:
+- ensure they are not being decoded repeatedly
+- avoid recreating image elements unnecessarily
+- use stable image references
+- prevent unnecessary React re-renders
+- use appropriate image dimensions
+- avoid applying expensive CSS filters to the images
+
+If the source images are dramatically larger than their displayed size, create/use appropriately sized optimized versions while preserving visual quality.
+
+Use modern image formats where practical, such as WebP/AVIF, if the current project setup supports them.
+
+Do NOT visibly degrade the artwork.
+
+========================================
+6. CSS PERFORMANCE
+========================================
+
+Audit the HERO for expensive effects.
+
+Pay special attention to:
+- backdrop-filter
+- filter: blur()
+- large box shadows
+- excessive drop-shadow
+- animated gradients
+- large pseudo-elements
+- blend modes
+- masks
+- huge fixed overlays
+
+Keep the visual result as close as possible to the current design.
+
+If an effect is visually minor but expensive, reduce or remove it.
+
+========================================
+7. SCROLL PERFORMANCE
+========================================
+
+Audit all scroll listeners used by HERO.
+
+Avoid React state updates on every scroll frame.
+
+Prefer:
+- passive scroll listeners
+- requestAnimationFrame where appropriate
+- refs instead of React state for continuous animation values
+- IntersectionObserver for section visibility
+- CSS transforms for visual movement
+
+Do not create continuous animation loops unless absolutely necessary.
+
+========================================
+8. ANIMATION STRATEGY
+========================================
+
+The HERO should use a small number of meaningful animations.
+
+Keep:
+- initial cinematic reveal
+- subtle HERO → next section transition
+
+Remove:
+- unnecessary continuous animation
+- redundant parallax
+- continuous floating
+- repeated entrance animations
+- unnecessary mouse tracking
+
+The goal is not "more animation".
+
+The goal is:
+
+PREMIUM + CINEMATIC + SMOOTH.
+
+========================================
+9. GRAIN
+========================================
+
+Keep the recently improved subtle grain treatment.
+
+Do not add new grain.
+
+If the grain implementation is continuously animating or causing unnecessary repainting, make it static.
+
+A static subtle texture is preferred over animated noise.
+
+========================================
+10. GPU / COMPOSITING
+========================================
+
+Use GPU-friendly transforms where appropriate:
+
+transform: translate3d(...)
+transform: scale(...)
+
+Use will-change ONLY on elements that actually animate, and remove it when possible.
+
+Do not apply will-change globally to large numbers of elements.
+
+Avoid forcing every HERO element into its own compositing layer.
+
+========================================
+11. MOBILE
+========================================
+
+On mobile:
+
+- no mouse interaction
+- minimal parallax
+- simplify HERO transition
+- reduce expensive visual effects
+- prioritize instant touch/scroll response
+
+The HERO should feel extremely smooth on mobile.
+
+========================================
+12. REDUCED MOTION
+========================================
+
+Respect:
+
+prefers-reduced-motion
+
+When enabled:
+- disable cinematic movement
+- disable parallax
+- disable non-essential transitions
+- keep the page visually complete and usable
+
+========================================
+13. PERFORMANCE AUDIT
+========================================
+
+Before finishing, inspect the actual implementation and identify what is causing the HERO stutter.
+
+Do not blindly add more optimization code.
+
+Look for:
+- React re-renders
+- mousemove listeners
+- scroll listeners
+- repeated animation initialization
+- large image decoding
+- expensive CSS filters
+- layout thrashing
+- unnecessary DOM updates
+- animation loops
+- duplicated effects
+
+Fix the underlying causes.
+
+========================================
+14. IMPORTANT TEST
+========================================
+
+Test this exact sequence:
+
+1. Open HOME.
+2. Let HERO finish loading.
+3. Move the mouse around.
+4. Scroll from HERO into the next section.
+5. Scroll back to HERO.
+6. Scroll away again.
+7. Return to HERO again.
+8. Repeat several times.
+
+The HERO should remain smooth and should NOT progressively become slower.
+
+Also test:
+- Chrome desktop
+- mobile viewport
+- normal scrolling
+- fast scrolling
+- navigation back to HOME
+
+========================================
+FINAL GOAL
+========================================
+
+The current HERO visual design is approved.
+
+Do NOT redesign it.
+
+The target is:
+
+CURRENT DESIGN
++
+NO MOUSE PARALLAX
++
+SIMPLER SCROLL TRANSITION
++
+NO REPLAYED HEAVY INTRO
++
+OPTIMIZED CHARACTER IMAGES
++
+NO EXPENSIVE CONTINUOUS EFFECTS
+=
+SMOOTH PREMIUM HERO
+
+Preserve the visual identity exactly as much as possible.
+
+After implementation, do not change any other section.

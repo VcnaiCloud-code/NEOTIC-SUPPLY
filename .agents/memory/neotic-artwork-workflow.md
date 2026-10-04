@@ -23,11 +23,11 @@ The current NEO TEE product-detail design is approved. Finalization and function
 
 **How to apply:** Limit finalization changes to demonstrated functional defects; do not visually restyle the product-detail experience without a new request.
 
-Hero scroll-transition refinements must preserve the existing hero composition, characters, images, typography, logo, colors, CTA, and mouse-parallax behavior exactly.
+HERO performance refinements must preserve the approved composition, four characters, typography, logo, colors, CTA, background, and subtle static grain. Mouse/cursor parallax and continuous floating are no longer wanted.
 
-**Why for hero transitions:** The user explicitly limited the transition request to scrolling and prohibited redesigning the current hero or changing any other section.
+**Why for HERO motion:** The user reported stutter during pointer movement, character appearances, section handoffs, and returns, and explicitly prioritized responsiveness over additional motion while keeping the visual design approved.
 
-**How to apply:** Keep scroll interpolation and transition effects separate from the existing mouse-parallax channel. Do not change shopping functionality or restyle the next section to achieve the transition.
+**How to apply:** Keep only the initial cinematic reveal and a simple shared transform/opacity handoff. Returns must show the settled composition immediately, never replay or resume heavy entrances. Do not add replacement cursor effects, continuous loops, or new grain. Preserve other sections unless separately requested.
 
 Performance work may serve responsive derivatives, but the original approved transparent artwork remains canonical and must not be overwritten.
 

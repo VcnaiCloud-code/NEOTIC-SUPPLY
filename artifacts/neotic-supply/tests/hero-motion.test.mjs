@@ -4,9 +4,10 @@ import vm from 'node:vm';
 import ts from 'typescript';
 
 // Controller unit test, not a browser/FPS test. Media and DOM are explicit mocks.
-// Exercise actual component effects without relaxing production pointer gates.
+// Exercise the actual controller: no mouse work and no self-scheduling RAF.
 let reads = 0, writes = 0, time = 0, nextFrame = 0;
 const frames = new Map(), effects = [], refs = [], cleanups = [];
+const timers = new Map();
 class Element {
   constructor(parent = null) {
     this.parent = parent;
@@ -18,6 +19,7 @@ class Element {
     this.classList = {
       add: key => this.classes.add(key),
       remove: key => this.classes.delete(key),
+      contains: key => this.classes.has(key),
       toggle: (key, on) => on ? this.classes.add(key) : this.classes.delete(key),
     };
   }
@@ -50,13 +52,15 @@ const context = {
   getComputedStyle: () => { reads++; return { top: '76px' }; },
   requestAnimationFrame: callback => { frames.set(++nextFrame, callback); return nextFrame; },
   cancelAnimationFrame: id => frames.delete(id),
+   setTimeout: callback => { timers.set(++nextFrame, callback); return nextFrame; },
+   clearTimeout: id => timers.delete(id),
   IntersectionObserver: class { constructor(cb) { intersect = cb; } observe() {} disconnect() {} },
   ResizeObserver: class { constructor(cb) { resized = cb; } observe() {} disconnect() {} },
   require: path => {
     if (path === 'react') return {
       memo: component => component,
       useRef: value => {
-        const ref = { current: [scene, root, cursor][refs.length] ?? value };
+        const ref = { current: [scene, root][refs.length] ?? value };
         refs.push(ref);
         return ref;
       },
@@ -65,6 +69,7 @@ const context = {
     if (path === 'react/jsx-runtime') return { jsx: () => null, jsxs: () => null };
     if (path === 'lucide-react') return {};
     if (path.endsWith('.css')) return {};
+     if (path.includes('hero-images')) return { heroImage: () => ({}) };
     throw new Error(`Unexpected import: ${path}`);
   },
 };
@@ -86,65 +91,93 @@ const settle = () => {
   for (let i = 0; i < 180 && frames.size; i++) step();
   assert.equal(frames.size, 0, 'RAF sleeps once inputs settle');
 };
-const move = (x, y, target = root, type = 'mouse') =>
-  window.listeners.get('pointermove')({ clientX: x, clientY: y, target, pointerType: type });
-settle();
-const warmReads = reads, warmWrites = writes;
-for (let i = 0; i < 1000; i++) move(200 + i, 500);
-assert.equal(reads, warmReads, 'pointer events never measure layout');
-assert.equal(writes, warmWrites, 'pointer events never write styles');
-assert.equal(frames.size, 1, '1000 inputs are coalesced into one pending frame');
 step();
-assert.equal(cursor.style.transform, 'translate3d(1199.0px,500.0px,0)', 'cursor has no easing trail');
-settle();
-assert.equal(reads, warmReads, 'parallax frames do not repeatedly measure layout');
-
-// Continuous horizontal and vertical input samples against the real controller.
-for (let i = 0; i < 240; i++) {
-  const x = 720 + Math.sin(i / 12) * 500;
-  const y = 450 + Math.cos(i / 15) * 300;
-  move(x, y);
-  step();
-  assert.equal(cursor.style.transform, `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`);
-  assert.ok(Math.abs(Number(root.properties.get('--mx'))) <= 1);
+assert.equal(frames.size, 0, 'initial frame does not start a RAF loop');
+assert(root.classes.has('is-in'), 'initial load keeps cinematic entrance');
+for (const callback of [...timers.values()]) callback();
+assert.equal(timers.size, 0);
+assert(root.classes.has('is-ready'));
+assert(!root.classes.has('is-in'), 'intro fill layers are released permanently');
+assert(!window.listeners.has('pointermove') && !window.listeners.has('mousemove'));
+assert.equal(root.listeners.size, 0, 'no cursor/CTA tracking');
+assert.equal(media.size, 2, 'no fine-pointer subscription');
+const warmReads = reads, warmWrites = writes;
+for (let i = 0; i < 1000; i++) {
+  window.listeners.get('pointermove')?.({ clientX: i, clientY: 500 });
 }
-settle();
-assert.equal(reads, warmReads, 'continuous XY input keeps cached geometry');
-window.scrollY = 200;
+assert.equal(reads, warmReads);
+assert.equal(writes, warmWrites);
+assert.equal(frames.size, 0, 'mouse motion causes no Hero frames or writes');
+for (let cycle = 0; cycle < 50; cycle++) {
+  for (let i = 0; i < 100; i++) {
+    window.scrollY = 900 * i / 99;
+    window.listeners.get('scroll')();
+  }
+  assert.equal(frames.size, 1, 'scroll samples coalesce');
+  step();
+  assert.equal(frames.size, 0, 'no post-scroll easing tail');
+  assert.equal(root.properties.get('opacity'), '0.0000');
+  assert(root.attrs.has('inert'), 'faded Hero cannot intercept Shop');
+  window.scrollY = 0;
+  window.listeners.get('scroll')();
+  step();
+  assert.equal(root.properties.get('opacity'), '1.0000');
+  assert.equal(root.properties.get('transform'), 'none');
+  assert(!root.attrs.has('inert'));
+  assert(root.classes.has('is-ready') && !root.classes.has('is-in'));
+  assert.equal(timers.size, 0, 'returns do not recreate intro state');
+  assert.equal(reads, warmReads, 'scroll-only frames never measure geometry');
+  assert.equal(window.listeners.size, 2, 'listener count never grows');
+}
+const mobile = media.get('(max-width: 680px)');
+mobile.matches = true;
+mobile.listeners.get('change')();
+step();
+window.scrollY = 400;
 window.listeners.get('scroll')();
-settle();
-assert.ok(Math.abs(Number(root.properties.get('--sp')) - 166 / 784.8) < 0.001);
-assert.equal(reads, warmReads, 'scroll-only frames use cached document geometry');
-move(840, 677, cta);
-settle();
-assert.equal(reads, warmReads + 1, 'CTA bounds are read once on entry, before writes');
-assert.equal(cta.properties.get('--ax'), '2.0px');
-root.listeners.get('pointerleave')();
-settle();
-assert.equal(cta.properties.get('--ax'), '0.0px');
-assert.ok(!root.classes.has('has-cursor'));
-const beforeTouch = writes;
-move(300, 400, root, 'touch');
-assert.equal(frames.size, 0, 'touch does not start mouse animation');
-assert.equal(writes, beforeTouch);
-window.scrollY = 900;
-window.listeners.get('scroll')();
-settle();
-assert.ok(root.attrs.has('inert'), 'faded hero does not intercept SHOP');
+step();
+assert.equal(root.properties.get('transform'), 'none', 'mobile has no scale/parallax');
 const reduce = media.get('(prefers-reduced-motion: reduce)');
 reduce.matches = true;
 reduce.listeners.get('change')();
 settle();
-assert.equal(root.properties.get('--sp'), '0.0000');
+assert.equal(root.properties.get('opacity'), '1.0000');
+assert.equal(root.properties.get('transform'), 'none');
 assert.ok(!root.attrs.has('inert'), 'reduced motion restores accessibility');
 resized();
 settle();
-assert.ok(reads > warmReads + 1, 'layout changes invalidate cached geometry');
+assert.ok(reads > warmReads, 'layout changes invalidate cached geometry');
 intersect([{ isIntersecting: false }]);
-move(700, 400);
+window.listeners.get('scroll')();
 assert.equal(frames.size, 0, 'offscreen hero does not schedule animation');
+reduce.matches = false;
+reduce.listeners.get('change')();
+intersect([{ isIntersecting: true }]);
+window.scrollY = 900;
+window.listeners.get('scroll')();
+step();
+assert(root.attrs.has('inert'));
+intersect([{ isIntersecting: false }]);
+reduce.matches = true;
+reduce.listeners.get('change')();
+assert(!root.attrs.has('inert'), 'reduced motion restores focus even while offscreen');
+assert.equal(frames.size, 0);
 cleanups.forEach(cleanup => cleanup?.());
 assert.equal(window.listeners.size, 0);
 assert.equal(document.listeners.size, 0);
 assert.equal(frames.size, 0);
-console.log('PASS: input batching, latest-frame cursor, continuous XY controller, cached scroll/geometry, CTA, touch, reduced motion, offscreen pause, cleanup.');
+assert.equal(timers.size, 0);
+assert(!/pointermove|mousemove|useState|\.decode\(/.test(source));
+const artContext = { exports: {} };
+vm.runInNewContext(compile(fs.readFileSync(new URL('../src/lib/hero-images.ts', import.meta.url), 'utf8')), artContext);
+for (const name of ['neo', 'vex', 'raze', 'miko']) {
+  const image = artContext.exports.heroImage('/brand/', `char-${name}.webp`);
+  assert.equal(image.src, `/brand/char-${name}.webp`);
+  assert.equal(image.height, 2200);
+  assert(image.sizes.includes('svh') && image.sizes.includes('min('));
+  for (const candidate of image.srcSet.split(', ')) {
+    const url = candidate.split(' ')[0];
+    assert(fs.existsSync(new URL(`../public${url}`, import.meta.url)), url);
+  }
+}
+console.log('PASS: no pointer tracking; one frame per scroll batch; no idle/easing loop; 50 repeated returns without intro replay or listener growth; cached geometry; mobile; reduced motion; offscreen cancellation; cleanup.');
