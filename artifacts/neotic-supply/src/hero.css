@@ -37,8 +37,8 @@
 .neotic-hero.is-paused .nh-img, .neotic-hero[inert] .nh-img { animation-play-state:paused; }
 
 .neotic-hero .nh-shade { position:absolute; inset:0; z-index:3; pointer-events:none;
-  bottom:auto; height:clamp(230px,38vh,360px);
-  background:linear-gradient(180deg,rgba(10,12,12,.66),rgba(10,12,12,.28) 52%,transparent);
+  bottom:auto; height:clamp(210px,30vh,300px);
+  background:linear-gradient(180deg,rgba(10,12,12,.45),rgba(10,12,12,.18) 52%,transparent);
 }
 
 /* ---------- copy ---------- */

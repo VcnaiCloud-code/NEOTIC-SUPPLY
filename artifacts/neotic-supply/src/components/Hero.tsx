@@ -166,7 +166,7 @@ function Hero({ imageRoot, active }: HeroProps) {
 
       <div className="nh-stage">
         <div className="nh-poster" data-testid="hero-poster">
-          <img className="nh-img" src={`${imageRoot}hero/group-key-visual-original.jpg`} width={928} height={1152} alt="NEO, VEX, RAZE and MIKO" loading="eager" fetchPriority="high" decoding="async" draggable={false} />
+          <img className="nh-img" src={`${imageRoot}hero/group-key-visual-original.jpg`} width={3870} height={2160} alt="NEO, VEX, RAZE and MIKO" loading="eager" fetchPriority="high" decoding="async" draggable={false} />
         </div>
       </div>
 

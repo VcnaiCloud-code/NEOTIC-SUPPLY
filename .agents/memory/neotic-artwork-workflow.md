@@ -29,11 +29,11 @@ The requested group-poster HERO uses one supplied key visual containing NEO, VEX
 
 **How to apply:** Keep the initial cinematic reveal and simple shared transform/opacity handoff. Returns show the settled composition without replaying the entrance. No cursor effects, separate character motion or new grain. Preserve other sections and their order.
 
-For the HERO group poster, use the highest-resolution original uploaded file, unprocessed and without thumbnail selection. Preserve the entire composition with contain-style fitting and space clear of the typography; do not force full-bleed cover crops, obscuring overlays or image zoom.
+For the HERO group poster, use the highest-resolution original uploaded file, unprocessed and without thumbnail selection. Let desktop use full-bleed cover where the viewport ratio permits without aggressive cropping; use full-composition fitting on tablet and mobile. Keep typography legible with only a subtle gradient behind it. A slow 1.00–1.02 ambient scale is permitted; no cursor effects or heavy motion.
 
-**Why:** The user rejected the compressed/cropped implementation because the original composition and bodies were missing and image quality looked poor. They explicitly requested the original file and complete artwork over filling the viewport.
+**Why:** The user rejected compressed artwork and aggressive crops, then explicitly requested the newer landscape group poster as a cinematic full-screen HERO image with restrained ambient motion.
 
-**How to apply:** Compare original uploads when duplicates exist; use the full-resolution original unchanged. Fit the poster independently at desktop, tablet and mobile sizes without editing the artwork or changing other sections.
+**How to apply:** Compare original uploads when duplicates exist; keep the highest-resolution source unchanged. Choose responsive fitting per viewport so the group stays recognizable without editing the artwork or changing other sections.
 
 Performance work may serve responsive derivatives, but the original approved transparent artwork remains canonical and must not be overwritten.
 
