@@ -1,0 +1,587 @@
+Now build the CHARACTERS section/page for NEOTIC SUPPLY.
+
+IMPORTANT:
+Do not modify or break the existing:
+- HOME / HERO
+- HERO animations
+- THE WORLD
+- SHOP
+- PRODUCT DETAIL
+- CART / BAG
+- CHECKOUT
+
+THE WORLD is now approved.
+
+CHARACTERS should be the next major storytelling experience.
+
+CORE IDEA:
+
+THE WORLD introduced the four characters as "frequencies".
+
+CHARACTERS should now make the visitor actually meet them.
+
+Do NOT simply repeat the four character cards from THE WORLD.
+
+This should feel like an editorial character archive / fashion campaign.
+
+The four canonical characters are:
+
+001 — NEO
+THE CHAOS MIND
+
+002 — VEX
+THE DREAMER
+
+003 — RAZE
+THE VISIONARY
+
+004 — MIKO
+THE EXPLORER
+
+
+========================================
+1. PAGE / SECTION INTRO
+========================================
+
+Start with a strong editorial introduction.
+
+Small technical label:
+
+NEOTIC UNIVERSE
+/ SUBJECTS 001—004
+
+Large headline:
+
+THE CHARACTERS
+
+Under it, a short statement:
+
+"Four minds moving through the same unreal."
+
+Keep this minimal.
+
+Do not add a large paragraph.
+
+
+========================================
+2. CHARACTER PRESENTATION SYSTEM
+========================================
+
+Create four large character chapters.
+
+Each character should occupy a substantial amount of vertical space.
+
+The composition should feel closer to a fashion editorial spread than a conventional website card grid.
+
+Each chapter should contain:
+
+- character number
+- character name
+- title
+- large character artwork
+- short personality description
+- one distinctive phrase
+- subtle technical information
+- visual details / symbols
+- CTA or navigation to the next character
+
+
+========================================
+3. NEO — 001
+========================================
+
+Name:
+
+NEO
+
+Number:
+
+001
+
+Title:
+
+THE CHAOS MIND
+
+Personality:
+
+Impulsive. Chaotic. Always one step ahead.
+He doesn't follow rules. He rewrites them.
+
+Use the existing canonical NEO artwork.
+
+Do not redesign or alter the character.
+
+Visual direction for NEO:
+
+- strongest contrast
+- sharper composition
+- slightly more aggressive movement
+- angular graphic elements
+- subtle distortion/glitch
+- technical markings
+- cyan accent used sparingly
+
+Distinctive statement:
+
+"RULES ARE JUST SUGGESTIONS."
+
+Keep it visually integrated, not like a quote card.
+
+NEO should feel like the most unpredictable character.
+
+
+========================================
+4. VEX — 002
+========================================
+
+Name:
+
+VEX
+
+Number:
+
+002
+
+Title:
+
+THE DREAMER
+
+Personality:
+
+She lives in her own frequency.
+She sees things others can't.
+She turns chaos into art.
+
+Use the existing canonical VEX artwork.
+
+Do not redesign or alter the character.
+
+Visual direction:
+
+- softer movement
+- slightly dreamlike atmosphere
+- subtle gradients
+- restrained purple influence from the character itself
+- floating graphic elements
+- slower transitions
+- less aggressive than NEO
+
+Distinctive statement:
+
+"SHE SEES WHAT OTHERS MISS."
+
+Keep it elegant and minimal.
+
+
+========================================
+5. RAZE — 003
+========================================
+
+Name:
+
+RAZE
+
+Number:
+
+003
+
+Title:
+
+THE VISIONARY
+
+Personality:
+
+Calculated. Silent. Always in motion.
+His ideas make noise.
+
+Use the existing canonical RAZE artwork.
+
+Do not redesign or alter the character.
+
+Visual direction:
+
+- darker composition
+- strong negative space
+- minimal movement
+- geometric elements
+- subtle technical lines
+- restrained gold/metallic details inspired by the character
+
+Distinctive statement:
+
+"THE IDEA COMES FIRST."
+
+
+========================================
+6. MIKO — 004
+========================================
+
+Name:
+
+MIKO
+
+Number:
+
+004
+
+Title:
+
+THE EXPLORER
+
+Personality:
+
+Curious. Fearless.
+Always looking for the next adventure.
+
+Use the existing canonical MIKO artwork.
+
+Do not redesign or alter the character.
+
+Visual direction:
+
+- slightly more playful composition
+- larger sense of space
+- subtle orbital / exploration graphics
+- movement suggesting discovery
+- clean white/grey visual accents
+
+Distinctive statement:
+
+"THERE'S ALWAYS SOMETHING BEYOND."
+
+
+========================================
+7. IMPORTANT CHARACTER ASSET RULE
+========================================
+
+Use the existing character artwork already present in the project.
+
+Do NOT generate replacement characters.
+
+Do NOT create new character designs.
+
+Do NOT change:
+- faces
+- colors
+- clothes
+- accessories
+- proportions
+- grills
+- hair
+- helmets
+- masks
+- character identity
+
+The existing canonical artwork is the source of truth.
+
+
+========================================
+8. CHARACTER ANIMATION
+========================================
+
+For now, do NOT attempt complex rigging.
+
+Use subtle cinematic motion only:
+
+- slow image movement
+- slight scale
+- subtle parallax
+- opacity transitions
+- controlled floating elements
+- gentle image reveal
+
+Each character should have a different motion personality:
+
+NEO:
+slightly sharper / more energetic
+
+VEX:
+slow / fluid
+
+RAZE:
+minimal / controlled
+
+MIKO:
+curious / subtle directional movement
+
+IMPORTANT:
+Do not make the characters constantly bob or float.
+
+Motion should happen primarily during scroll and transition moments.
+
+Avoid expensive animation that can cause cursor or scroll lag.
+
+
+========================================
+9. OPTIONAL 2D CHARACTER ANIMATION PREPARATION
+========================================
+
+Structure the character components in a way that could support future layered 2D animation.
+
+For example:
+
+Character
+  ├── artwork
+  ├── background
+  ├── graphic elements
+  └── metadata
+
+Do NOT attempt to separate the existing artwork into fake layers.
+
+We will only explore real layered animation later if suitable assets are available.
+
+
+========================================
+10. TRANSITIONS
+========================================
+
+Create cinematic transitions between characters.
+
+Example:
+
+NEO fades / moves away
+
+↓
+
+VEX enters
+
+↓
+
+VEX fades / transitions
+
+↓
+
+RAZE enters
+
+↓
+
+RAZE transitions
+
+↓
+
+MIKO enters
+
+The transition should feel like changing frequencies.
+
+Use:
+
+- opacity
+- transform
+- scale
+- clipping/masking where appropriate
+
+Avoid excessive blur.
+
+
+========================================
+11. CHARACTER NAVIGATION
+========================================
+
+Add a subtle character index/navigation system.
+
+Example:
+
+01 NEO
+02 VEX
+03 RAZE
+04 MIKO
+
+The active character should be visually indicated.
+
+Clicking an item should smoothly scroll to that character.
+
+On mobile, keep this simple.
+
+
+========================================
+12. PRODUCT CONNECTION
+========================================
+
+Each character should have a subtle connection to their corresponding product.
+
+For example:
+
+NEO
+001 / THE CHAOS MIND
+
+VIEW NEO TEE →
+
+VEX
+002 / THE DREAMER
+
+VIEW VEX TEE →
+
+RAZE
+003 / THE VISIONARY
+
+VIEW RAZE TEE →
+
+MIKO
+004 / THE EXPLORER
+
+VIEW MIKO TEE →
+
+These buttons must connect to the EXISTING product detail pages.
+
+Do not create duplicate products.
+
+
+========================================
+13. VISUAL STYLE
+========================================
+
+Keep the approved NEOTIC SUPPLY visual language:
+
+BLACK
+CHARCOAL
+OFF-WHITE
+SILVER
+SUBTLE CYAN / TEAL
+
+Premium editorial streetwear.
+
+Experimental but controlled.
+
+The page should feel:
+
+70% high-end fashion editorial
+30% underground fictional universe
+
+Avoid generic cyberpunk UI.
+
+Avoid excessive neon.
+
+Avoid excessive borders.
+
+Avoid excessive technical labels.
+
+Technical details should support the world, not dominate it.
+
+
+========================================
+14. GRAIN / IMAGE QUALITY
+========================================
+
+IMPORTANT:
+
+Do NOT add additional grain.
+
+The website's grain treatment has already been refined.
+
+Keep character artwork crisp and sharp.
+
+Do not place heavy texture over the characters.
+
+Do not blur the artwork unnecessarily.
+
+The characters should feel high-resolution and premium.
+
+
+========================================
+15. TYPOGRAPHY
+========================================
+
+Use large editorial typography.
+
+Character names should be visually dominant.
+
+Use smaller monospace/technical typography for:
+
+001
+THE CHAOS MIND
+SYSTEM DATA
+COORDINATES
+etc.
+
+Maintain consistency with THE WORLD.
+
+
+========================================
+16. RESPONSIVE DESIGN
+========================================
+
+Desktop:
+Large editorial compositions with significant negative space.
+
+Tablet:
+Preserve character hierarchy while reducing oversized elements.
+
+Mobile:
+Recompose the layouts instead of simply shrinking them.
+
+Character artwork should remain the visual focus.
+
+Navigation should remain usable.
+
+Reduce parallax and expensive effects on mobile.
+
+
+========================================
+17. ACCESSIBILITY / PERFORMANCE
+========================================
+
+Maintain:
+- keyboard navigation
+- visible focus states
+- semantic headings
+- alt text for character artwork
+- reduced-motion support
+
+Use transform and opacity for animation where possible.
+
+Do not introduce:
+- requestAnimationFrame loops running continuously
+- excessive filters
+- heavy backdrop-filter
+- unnecessary React state updates on scroll/mouse movement
+
+
+========================================
+18. FINAL SECTION
+========================================
+
+After MIKO, create a final editorial moment:
+
+FOUR CHARACTERS.
+FOUR FREQUENCIES.
+ONE UNIVERSE.
+
+Then:
+
+EXPLORE THE DROP →
+
+This should lead naturally toward the DROPS section.
+
+Keep the ending minimal and cinematic.
+
+
+========================================
+FINAL REQUIREMENT
+========================================
+
+The CHARACTERS experience should feel like an important part of the NEOTIC mythology.
+
+Do not make it feel like:
+
+"Here are four characters."
+
+Make it feel like:
+
+"These are four entities that exist inside the NEOTIC universe."
+
+Preserve everything already built.
+
+Test:
+- desktop
+- mobile
+- navigation
+- character index
+- product links
+- scroll transitions
+- reduced motion
+- performance
+- console errors
+
+Do not proceed to redesign other sections.
+
+Only build/refine CHARACTERS.

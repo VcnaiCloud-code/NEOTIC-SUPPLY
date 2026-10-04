@@ -4,7 +4,9 @@ import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
 import OrderConfirmation from './components/OrderConfirmation';
 import Hero from './components/Hero';
-import { ArrowDownRight, ArrowLeft, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
+import World from './components/World';
+import CharacterArchive from './components/CharacterArchive';
+import { ArrowDownRight, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { cartSubtotalCents, createMockOrder, emptyShippingInfo, validateShippingInfo } from './lib/checkout';
 import type { Product, CartLine, ShippingInfo, MockOrder } from './lib/checkout';
 
@@ -33,7 +35,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [character, setCharacter] = useState(0);
+  const [characterRequest, setCharacterRequest] = useState<{ index: number; sequence: number } | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
   const [toast, setToast] = useState('');
@@ -176,7 +178,6 @@ function App() {
     setMockOrder(null);
     jumpTo('shop');
   };
-  const currentCharacter = characters[character];
 
   return (
     <>
@@ -251,46 +252,25 @@ function App() {
           </div>
         </section>
 
-        <section className="section character-section" id="characters" aria-labelledby="characters-title">
-          <div className="wrap">
-            <div className="section-heading" data-reveal>
-              <div><span className="kicker">02 / CHARACTERS</span><h2 className="section-title display" id="characters-title">MEET<br /><em>THE CREW.</em></h2></div>
-              <p className="section-note">Different faces, same soul. Cambia de personaje para explorar las caras de este universo.</p>
-            </div>
-            <div className="character-stage" data-testid="character-stage" data-reveal>
-              <div className="character-image">
-                <div className="character-portrait">
-                  <img className="character-art" key={currentCharacter.name} src={`${brandRoot}${currentCharacter.image}`} alt={`${currentCharacter.name} full-body character artwork`} data-testid="character-image" />
-                </div>
-              </div>
-              <div className="character-info" key={currentCharacter.name}>
-                <span className="kicker" data-testid="character-index">{currentCharacter.index} &nbsp; / &nbsp; {currentCharacter.title}</span>
-                <h3 className="display" data-testid="character-name">{currentCharacter.name}</h3>
-                <p className="character-quote" data-testid="character-quote">{currentCharacter.quote}</p>
-                <p data-testid="character-description">{currentCharacter.description}</p>
-                <div className="character-control">
-                  <span className="mono" style={{ color: '#929991', fontSize: 9 }}>SWIPE YOUR REALITY</span>
-                  <div className="arrow-group">
-                    <button className="arrow" aria-label="Previous character" data-testid="character-prev" onClick={() => setCharacter((character - 1 + characters.length) % characters.length)}><ArrowLeft size={17} /></button>
-                    <button className="arrow" aria-label="Next character" data-testid="character-next" onClick={() => setCharacter((character + 1) % characters.length)}><ArrowRight size={17} /></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CharacterArchive
+          characters={characters}
+          imageRoot={brandRoot}
+          active={!cartOpen && !selectedProduct && !menuOpen && checkoutStage === 'storefront'}
+          navigationRequest={characterRequest}
+          onOpenProduct={(name) => {
+            const product = products.find((item) => item.character === name);
+            if (!product) throw new Error(`Missing canonical product for ${name}`);
+            setCartOpen(false);
+            setSelectedProduct(product);
+          }}
+        />
 
-        <section className="section world" id="world" aria-labelledby="world-title" data-parallax>
-          <div className="wrap">
-            <div className="world-copy" data-reveal>
-            <span className="kicker">03 / THE WORLD</span>
-              <h2 className="display" id="world-title">THIS CITY<br />IS <em>ALIVE.</em></h2>
-              <p>Una ciudad, personajes, drops y lugares que puedes descubrir. This isn't just a collection. It's a place to get lost.</p>
-              <button className="button" onClick={() => jumpTo('characters')} data-testid="explore-world">EXPLORAR EL UNIVERSO <ArrowDownRight size={16} /></button>
-            </div>
-            <span className="coordinates">NEOTIC DISTRICT / 001</span><span className="coordinates two">THE DROP ROOM</span><span className="coordinates three">CHARACTER ARCHIVE</span>
-          </div>
-        </section>
+        <World
+          characters={characters}
+          imageRoot={brandRoot}
+          active={!cartOpen && !selectedProduct && !menuOpen && checkoutStage === 'storefront'}
+          onExploreCharacter={(index) => setCharacterRequest((request) => ({ index, sequence: (request?.sequence ?? 0) + 1 }))}
+        />
 
         <section className="section drop-section" id="drop" aria-labelledby="drop-title" data-parallax>
           <div className="wrap drop-inner" data-reveal>

@@ -1,2 +1,3 @@
 - [NEOTIC visual constraints](neotic-artwork-workflow.md) — approved artwork, four allowed characters, and a clean editorial finish with background-only texture.
-- [Browser motion verification](browser-motion-verification.md) — desktop viewport size does not guarantee native fine-pointer/hover support in automated tests.
+- [NEOTIC World direction](neotic-world-direction.md) — editorial mythology; expand in place after CHARACTERS, preserving the approved HERO → SHOP transition.
+- [Browser motion verification](browser-motion-verification.md) — verify native pointer capabilities and visible artwork; viewport size, loaded images, and positive bounds are insufficient.
