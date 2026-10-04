@@ -23,11 +23,11 @@ The current NEO TEE product-detail design is approved. Finalization and function
 
 **How to apply:** Limit finalization changes to demonstrated functional defects; do not visually restyle the product-detail experience without a new request.
 
-HERO performance refinements must preserve the approved composition, four characters, typography, logo, colors, CTA, background, and subtle static grain. Mouse/cursor parallax and continuous floating are no longer wanted.
+The requested group-poster HERO uses one supplied key visual containing NEO, VEX, RAZE and MIKO together, never four independent character layers. Preserve individual character artwork elsewhere and the current typography, logo and CTA.
 
-**Why for HERO motion:** The user reported stutter during pointer movement, character appearances, section handoffs, and returns, and explicitly prioritized responsiveness over additional motion while keeping the visual design approved.
+**Why for HERO motion:** The user reported stutter and prioritized responsiveness. In the subsequent localized HERO request, they explicitly requested a single group poster, restrained entry and one extremely slow ambient scale, while prohibiting mouse interactions and changes to other sections.
 
-**How to apply:** Keep only the initial cinematic reveal and a simple shared transform/opacity handoff. Returns must show the settled composition immediately, never replay or resume heavy entrances. Do not add replacement cursor effects, continuous loops, or new grain. Preserve other sections unless separately requested.
+**How to apply:** Keep the initial cinematic reveal and simple shared transform/opacity handoff. Returns show the settled composition without replaying the entrance. A single subtle poster zoom is permitted, paused offscreen and disabled with reduced motion; no cursor effects, separate character motion or new grain. Preserve other sections and their order.
 
 Performance work may serve responsive derivatives, but the original approved transparent artwork remains canonical and must not be overwritten.
 

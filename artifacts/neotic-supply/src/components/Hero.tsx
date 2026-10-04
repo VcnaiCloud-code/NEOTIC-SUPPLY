@@ -1,6 +1,5 @@
 import { memo, useEffect, useRef } from 'react';
 import { ArrowDownRight } from 'lucide-react';
-import { heroImage } from '../lib/hero-images';
 import '../hero.css';
 
 type HeroProps = {
@@ -11,7 +10,7 @@ type HeroProps = {
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
-function Hero({ characters, imageRoot, active }: HeroProps) {
+function Hero({ imageRoot, active }: HeroProps) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLElement>(null);
   const activeRef = useRef(active);
@@ -154,8 +153,6 @@ function Hero({ characters, imageRoot, active }: HeroProps) {
       <div className="nh-bg" data-testid="hero-background" aria-hidden="true">
         <div className="nh-layer nh-l-bg">
           <div className="nh-glow" />
-          <div className="nh-grid" />
-          <div className="nh-ring" />
         </div>
         <div className="nh-layer nh-l-logo"><span className="nh-ghost">NEOTIC</span></div>
         <div className="nh-layer nh-l-deco">
@@ -165,22 +162,12 @@ function Hero({ characters, imageRoot, active }: HeroProps) {
           <span className="nh-tag nh-tag-b">DROP 001 — 04.10.26</span>
           <span className="nh-rule" />
         </div>
-        <div className="nh-grain" />
       </div>
 
       <div className="nh-stage">
-        {characters.map((c, i) => {
-          const key = c.name.toLowerCase();
-          const image = heroImage(imageRoot, c.image);
-          return (
-            <div className={`nh-char nh-char-${key}`} key={c.name} data-testid={`hero-character-${key}`} style={{ ['--i' as string]: i }}>
-              <div className="nh-in">
-                <img className="nh-img" {...image} alt={c.name} loading="eager" fetchPriority="high" decoding="async" draggable={false} />
-                <span className="nh-name">{String(i + 1).padStart(3, '0')} / {c.name}</span>
-              </div>
-            </div>
-          );
-        })}
+        <div className="nh-poster" data-testid="hero-poster">
+          <img className="nh-img" src={`${imageRoot}hero/group-key-visual.webp`} srcSet={`${imageRoot}hero/group-key-visual-480.webp 480w, ${imageRoot}hero/group-key-visual.webp 928w`} sizes="(max-width: 680px) 100vw, (max-width: 1024px) 100vw, 100vw" width={928} height={1152} alt="NEO, VEX, RAZE and MIKO" loading="eager" fetchPriority="high" decoding="async" draggable={false} />
+        </div>
       </div>
 
       <div className="nh-shade" aria-hidden="true" />
