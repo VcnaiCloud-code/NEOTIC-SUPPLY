@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { productImageSources, productThumbnail } from './lib/product-images';
 import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
 import OrderConfirmation from './components/OrderConfirmation';
@@ -57,7 +58,13 @@ function App() {
   };
 
   useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    const deadline = new Date('2026-10-04T00:00:00').getTime();
+    if (Date.now() >= deadline) return;
+    const timer = window.setInterval(() => {
+      const time = Date.now();
+      setNow(time);
+      if (time >= deadline) window.clearInterval(timer);
+    }, 1000);
     return () => window.clearInterval(timer);
   }, []);
   useEffect(() => {
@@ -173,7 +180,6 @@ function App() {
 
   return (
     <>
-      <div className="grain" aria-hidden="true" />
       <div className="topbar" data-testid="announcement-bar">DROP 001 — 04.10.26 &nbsp; / &nbsp; SHIPPING WORLDWIDE</div>
       <header className="nav">
         <a className="brand" href="#home" aria-label="NEOTIC SUPPLY home" onClick={() => setMenuOpen(false)}>NEOTIC<small>SUPPLY</small></a>
@@ -220,7 +226,7 @@ function App() {
                   <button className="product-preview" type="button" aria-label={`View details for ${product.name}`} onClick={() => { setCartOpen(false); setSelectedProduct(product); }} data-testid={`product-detail-open-${product.id}`}>
                     <div className="product-visual">
                       <span className="product-no">{product.character} / {product.characterNumber}</span>
-                      <img className="product-img" src={`${brandRoot}${product.image}`} alt={`${product.name}, official ${product.color.toLowerCase()} NEOTIC SUPPLY shirt`} loading="lazy" decoding="async" />
+                      <img className="product-img" src={`${brandRoot}${product.image}`} srcSet={productImageSources(`${brandRoot}${product.image}`)} sizes="(max-width:900px) 46vw, 24vw" alt={`${product.name}, official ${product.color.toLowerCase()} NEOTIC SUPPLY shirt`} loading="lazy" decoding="async" />
                       <span className="product-view">VIEW DETAILS <ArrowRight size={13} /></span>
                     </div>
                   </button>
@@ -321,7 +327,7 @@ function App() {
         <div className="drawer-head"><h2>YOUR BAG <span style={{ color: '#78d2d0' }}>({itemCount})</span></h2><button className="close-button" aria-label="Close bag" data-testid="cart-close" onClick={() => setCartOpen(false)}><X size={18} /></button></div>
         {cart.length ? <>
           <div className="cart-items">{cart.map(({ product, quantity, size }) => <div className="cart-item" key={`${product.id}-${size}`} data-testid={`cart-line-${product.id}-${size.toLowerCase()}`}>
-            <div className="cart-thumb" style={{ backgroundImage: `url('${brandRoot}${product.image}')`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
+            <div className="cart-thumb" style={{ backgroundImage: `url('${productThumbnail(`${brandRoot}${product.image}`)}')`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
             <div><div className="cart-item-name">{product.name}</div><div className="cart-item-size">{product.characterNumber} / {product.color} / SIZE {size}</div><div className="cart-item-price">{formatPrice(product.price)}</div><div className="quantity">
               <button aria-label={`Remove one ${product.name}, size ${size}`} onClick={() => updateQuantity(product.id, size, -1)} data-testid={`quantity-minus-${product.id}-${size.toLowerCase()}`}>−</button><span>{quantity}</span><button aria-label={`Add one ${product.name}, size ${size}`} onClick={() => updateQuantity(product.id, size, 1)} data-testid={`quantity-plus-${product.id}-${size.toLowerCase()}`}>＋</button>
             </div></div>

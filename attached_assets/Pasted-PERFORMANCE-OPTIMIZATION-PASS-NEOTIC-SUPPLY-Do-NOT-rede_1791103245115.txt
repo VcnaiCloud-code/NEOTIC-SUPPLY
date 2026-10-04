@@ -1,0 +1,60 @@
+PERFORMANCE OPTIMIZATION PASS — NEOTIC SUPPLY
+
+Do NOT redesign the website.
+Do NOT remove the current visual style or animations.
+
+Audit the current site for performance issues, especially the HERO.
+
+The HERO currently has mouse-parallax and scroll-based animation, but cursor movement sometimes feels slightly laggy or stutters.
+
+Optimize the implementation so it feels smooth and responsive.
+
+Focus on:
+
+1. Mouse parallax
+- Do NOT update React/component state on every mousemove.
+- Use requestAnimationFrame for animation updates.
+- Store mouse coordinates efficiently using refs or equivalent.
+- Batch visual updates into animation frames.
+- Avoid unnecessary component re-renders.
+- Use CSS transform: translate3d() where appropriate.
+- Use will-change only on elements that actually animate.
+
+2. Scroll animations
+- Use requestAnimationFrame or an efficient scroll observer approach.
+- Avoid expensive calculations on every scroll event.
+- Avoid layout thrashing.
+- Prefer transform and opacity over changing layout properties.
+
+3. Images
+- Check that large character/product images are not being unnecessarily loaded at excessive resolution.
+- Preserve visual quality while reducing unnecessary image processing.
+- Do not replace the current artwork.
+
+4. Effects
+- Audit expensive filters, blur, backdrop-filter, shadows and overlays.
+- Keep the visual effects, but reduce their performance cost where possible.
+- Do not remove the grain/texture aesthetic unless absolutely necessary.
+
+5. DOM/rendering
+- Avoid unnecessary re-renders.
+- Ensure static HERO elements are not being recalculated unnecessarily.
+- Keep animations GPU-friendly where appropriate.
+
+6. Mobile
+- Reduce or disable mouse-based effects on touch devices.
+- Keep mobile animations lightweight.
+
+IMPORTANT:
+The final result must look visually the same.
+This is a PERFORMANCE optimization, not a redesign.
+
+Target:
+- Smooth mouse movement
+- No visible stuttering
+- No noticeable cursor lag
+- Smooth scrolling
+- Stable frame rate
+- Keep the NEOTIC visual identity intact.
+
+After optimization, test the HERO by moving the mouse continuously from left to right and up and down while the page is rendering normally.

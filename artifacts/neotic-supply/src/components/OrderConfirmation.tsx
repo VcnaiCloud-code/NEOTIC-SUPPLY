@@ -1,3 +1,4 @@
+import { productImageSources } from '../lib/product-images';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import '../checkout.css';
@@ -60,7 +61,7 @@ export default function OrderConfirmation({ order, imageRoot, onContinueShopping
               <ul className="ck-lines">
                 {order.lines.map(({ product, quantity, size }) => (
                   <li className="ck-line" key={`${product.id}-${size}`} data-testid={`confirmation-line-${product.id}-${size.toLowerCase()}`}>
-                    <img className="ck-thumb" src={`${imageRoot}${product.image}`} alt={`${product.name}, ${product.color.toLowerCase()}`} />
+                    <img className="ck-thumb" src={`${imageRoot}${product.image}`} srcSet={productImageSources(`${imageRoot}${product.image}`)} sizes="64px" decoding="async" alt={`${product.name}, ${product.color.toLowerCase()}`} />
                     <div>
                       <div className="ck-line-name">{product.name}</div>
                       <div className="ck-line-meta">{product.characterNumber} / {product.color}<br />SIZE {size} / QTY {quantity}</div>

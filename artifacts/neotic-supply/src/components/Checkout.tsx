@@ -1,3 +1,4 @@
+import { productImageSources } from '../lib/product-images';
 import { useMemo, useRef, useState, type FormEvent } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import '../checkout.css';
@@ -139,7 +140,7 @@ export default function Checkout({ cart, customer, onCustomerChange, imageRoot, 
                 <ul className="ck-lines" data-testid="checkout-lines">
                   {cart.map(({ product, quantity, size }) => (
                     <li className="ck-line" key={`${product.id}-${size}`} data-testid={`checkout-line-${product.id}-${size.toLowerCase()}`}>
-                      <img className="ck-thumb" src={`${imageRoot}${product.image}`} alt={`${product.name}, ${product.color.toLowerCase()}`} />
+                      <img className="ck-thumb" src={`${imageRoot}${product.image}`} srcSet={productImageSources(`${imageRoot}${product.image}`)} sizes="64px" decoding="async" alt={`${product.name}, ${product.color.toLowerCase()}`} />
                       <div>
                         <div className="ck-line-name">{product.name}</div>
                         <div className="ck-line-meta">{product.characterNumber} / {product.color}<br />SIZE {size} / QTY {quantity}<br />{formatMoneyCents(Math.round(product.price * 100))} EACH</div>

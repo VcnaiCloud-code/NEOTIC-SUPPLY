@@ -1,9 +1,18 @@
 .neotic-hero { --mx:0; --my:0; --sp:0; --k:1; position:relative; isolation:isolate; overflow:hidden; min-height:max(640px, calc(100svh - 110px)); background:#0a0c0c; border-bottom:1px solid #303635; color:#ecebe4; }
+.nh-scroll-scene { --nh-runway:clamp(140px,24svh,260px); position:relative; z-index:1; margin-bottom:calc(var(--nh-runway)*-1); }
+/* Real in-flow height, rather than parent padding, gives sticky its travel range. */
+.nh-scroll-runway { height:var(--nh-runway); pointer-events:none; }
+.nh-scroll-scene .neotic-hero { position:sticky; top:76px; opacity:var(--nh-scene-opacity,1); }
+.neotic-hero .nh-stage { scale:calc(1 - var(--sp)*.025); transform-origin:50% 55%; opacity:var(--nh-character-opacity,1); }
+.neotic-hero .nh-copy { scale:calc(1 - var(--sp)*.015); transform-origin:50% 0; }
+.neotic-hero .nh-cta { scale:calc(1 - var(--sp)*.015); }
+.neotic-hero .nh-bg { scale:calc(1 - var(--sp)*.02); }
+.neotic-hero .nh-layer { opacity:var(--nh-backdrop-opacity,1); }
 .neotic-hero *, .neotic-hero *::before, .neotic-hero *::after { box-sizing:border-box; }
 .neotic-hero.has-cursor, .neotic-hero.has-cursor a { cursor:none; }
 
 /* ---------- background ---------- */
-.neotic-hero .nh-bg { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; opacity:0; }
+.neotic-hero .nh-bg { position:absolute; inset:0; z-index:0; overflow:hidden; contain:paint; pointer-events:none; opacity:0; }
 .neotic-hero.is-in .nh-bg { animation:nh-fade .7s ease-out forwards; }
 .neotic-hero .nh-layer { position:absolute; inset:-3%; will-change:transform; }
 .neotic-hero .nh-l-bg { transform:translate3d(calc(var(--mx)*-6px*var(--k)), calc(var(--my)*-4px*var(--k) + var(--sp)*40px), 0); }
@@ -23,8 +32,7 @@
 .neotic-hero .nh-tag-a { right:5.4%; bottom:12%; }
 .neotic-hero .nh-tag-b { left:4%; top:46%; writing-mode:vertical-rl; transform:rotate(180deg); }
 .neotic-hero .nh-rule { position:absolute; left:50%; top:19%; width:1px; height:11%; background:linear-gradient(#76d2cf55,transparent); }
-.neotic-hero .nh-grain { position:absolute; inset:0; opacity:0; mix-blend-mode:overlay; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.neotic-hero.is-in .nh-grain { animation:nh-grain 1s .35s ease-out forwards; }
+.neotic-hero .nh-grain { position:absolute; inset:0; opacity:1; pointer-events:none; mix-blend-mode:overlay; background-image:var(--neotic-print-texture); }
 
 /* ---------- characters ---------- */
 .neotic-hero .nh-stage { position:absolute; inset:0; z-index:2; }
@@ -32,7 +40,7 @@
   transform:translate3d(calc(var(--mx)*var(--d)*1px*var(--k)), calc(var(--my)*var(--d)*.6px*var(--k) - var(--sp)*var(--sv)*1px), 0); }
 .neotic-hero .nh-in { position:relative; width:100%; height:100%; opacity:0; display:flex; justify-content:center; align-items:flex-end; }
 .neotic-hero.is-in .nh-in { animation:nh-char .9s calc(.55s + var(--i)*.14s) cubic-bezier(.2,.8,.2,1) forwards; }
-.neotic-hero .nh-img { display:block; height:100%; width:auto; max-width:100%; object-fit:contain; object-position:bottom; filter:saturate(.9) contrast(1.03); user-select:none; -webkit-user-drag:none; }
+.neotic-hero .nh-img { display:block; height:100%; width:auto; max-width:100%; object-fit:contain; object-position:bottom; user-select:none; -webkit-user-drag:none; }
 .neotic-hero .nh-name { position:absolute; left:50%; bottom:3.5%; transform:translateX(-50%); font:8px var(--app-font-mono,monospace); letter-spacing:.18em; color:#c7ccc6; white-space:nowrap; opacity:.8; }
 .neotic-hero .nh-char-neo { left:2%; --d:20; --sv:90; height:78%; }
 .neotic-hero .nh-char-vex { left:26%; --d:28; --sv:55; height:72%; }
@@ -77,7 +85,6 @@
 
 /* ---------- keyframes ---------- */
 @keyframes nh-fade { to { opacity:1; } }
-@keyframes nh-grain { to { opacity:.055; } }
 @keyframes nh-char { from { opacity:0; transform:translate3d(0,26px,0) scale(.985); } to { opacity:1; transform:none; } }
 @keyframes nh-brand { from { opacity:0; transform:translate3d(-14px,0,0); } to { opacity:1; transform:none; } }
 @keyframes nh-title { from { opacity:0; transform:translate3d(0,16px,0); letter-spacing:-.02em; } to { opacity:1; transform:none; letter-spacing:-.065em; } }
@@ -101,6 +108,7 @@
 /* pause everything when inactive / offscreen */
 .neotic-hero.is-paused *, .neotic-hero.is-paused *::before { animation-play-state:paused !important; }
 .neotic-hero.is-paused .nh-cursor { display:none; }
+.neotic-hero.is-paused .nh-layer, .neotic-hero.is-paused .nh-char, .neotic-hero.is-paused .nh-cursor { will-change:auto; }
 
 /* ---------- tablet ---------- */
 @media (max-width:1024px) {
@@ -112,7 +120,14 @@
 }
 
 /* ---------- mobile: recomposed 2x2 ---------- */
+@media (max-width:720px) {
+  .nh-scroll-scene .neotic-hero { top:66px; }
+}
 @media (max-width:680px) {
+  .neotic-hero .nh-grain { display:none; }
+  .neotic-hero .nh-char, .neotic-hero .nh-cursor { will-change:auto; }
+  .nh-scroll-scene { --nh-runway:clamp(80px,14svh,130px); }
+  .nh-scroll-scene .neotic-hero { top:66px; }
   .neotic-hero { --k:0; display:flex; flex-direction:column; min-height:max(700px, calc(100svh - 100px)); padding-bottom:78px; }
   .neotic-hero .nh-copy { position:relative; padding:24px 22px 0; gap:18px; order:1; }
   .neotic-hero .nh-title { font-size:clamp(40px,13.4vw,70px); white-space:normal; line-height:.9; }
@@ -133,9 +148,14 @@
 
 /* ---------- reduced motion (dynamic) ---------- */
 @media (prefers-reduced-motion:reduce) {
+  .neotic-hero .nh-layer, .neotic-hero .nh-char, .neotic-hero .nh-cursor { will-change:auto; }
+  .nh-scroll-scene { padding-bottom:0; margin-bottom:0; }
+  .nh-scroll-runway { display:none; }
+  .nh-scroll-scene .neotic-hero { position:relative; top:auto; opacity:1; }
+  .neotic-hero .nh-stage, .neotic-hero .nh-copy, .neotic-hero .nh-cta, .neotic-hero .nh-bg { scale:none !important; opacity:1 !important; }
+  .neotic-hero .nh-layer { opacity:1; }
   .neotic-hero *, .neotic-hero *::before, .neotic-hero *::after { animation:none !important; transition-duration:.01ms !important; }
   .neotic-hero .nh-bg, .neotic-hero .nh-in, .neotic-hero .nh-i { opacity:1; }
-  .neotic-hero .nh-grain { opacity:.05; }
   .neotic-hero { --k:0; }
   .neotic-hero .nh-layer, .neotic-hero .nh-char, .neotic-hero .nh-copy, .neotic-hero .nh-cta, .neotic-hero .nh-cta-arrow { transform:none !important; }
   .neotic-hero .nh-copy { opacity:1; }

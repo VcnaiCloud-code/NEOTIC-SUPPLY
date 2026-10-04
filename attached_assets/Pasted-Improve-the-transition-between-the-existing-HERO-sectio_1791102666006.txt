@@ -1,0 +1,50 @@
+Improve the transition between the existing HERO section and the next section.
+
+IMPORTANT:
+Do NOT redesign the HERO.
+Do NOT change the characters, images, typography, logo, colors, CTA, or overall composition.
+Keep the current mouse-parallax exactly as it is.
+
+Focus ONLY on the scroll transition.
+
+When the user starts scrolling down from the HERO:
+
+1. The HERO should remain pinned/visible briefly and transition smoothly instead of immediately disappearing.
+
+2. Add a subtle cinematic scale effect:
+- The HERO content can very slightly scale down as the user scrolls.
+- Keep the effect subtle and premium.
+- Do not make it feel like zooming out aggressively.
+
+3. Add a subtle opacity/depth transition:
+- Background and technical graphics should gradually fade into the next section.
+- Characters should remain visible slightly longer than the background.
+- The transition should feel layered.
+
+4. The "WEAR THE UNREAL" typography should move slightly upward and fade naturally as the user leaves the HERO.
+
+5. Add a very subtle blur/depth effect during the transition if performance allows.
+- Keep it extremely subtle.
+- Do not make the text or characters unreadable.
+
+6. The next section should begin appearing underneath the HERO rather than simply cutting to it.
+
+7. Add smooth scroll-based interpolation so there are no sudden jumps.
+
+8. Keep the existing navigation/header behavior.
+
+9. Do NOT add excessive animations, flashing, strong glitch effects, or exaggerated zooms.
+
+10. Respect prefers-reduced-motion and reduce/disable the effects for users who request reduced motion.
+
+11. On mobile, keep the transition lightweight and performant.
+
+The desired feeling:
+
+The user enters the NEOTIC HERO.
+They begin scrolling.
+The HERO feels like a cinematic scene moving away from the camera.
+The next section gradually emerges underneath it.
+The transition should feel like entering another layer of the NEOTIC UNIVERSE.
+
+Do not modify any other sections or functionality.

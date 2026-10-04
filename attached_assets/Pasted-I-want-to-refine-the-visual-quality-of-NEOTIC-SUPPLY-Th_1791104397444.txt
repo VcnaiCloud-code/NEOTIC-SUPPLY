@@ -1,0 +1,79 @@
+I want to refine the visual quality of NEOTIC SUPPLY.
+
+The current site has too much grain/noise texture, and it is reducing the perceived sharpness and premium quality of the visuals.
+
+Please audit the entire website and significantly reduce the grain/noise effect.
+
+GOAL:
+Make the website feel sharper, cleaner, more premium and editorial, while keeping the dark cinematic NEOTIC SUPPLY identity.
+
+CHANGES:
+
+1. GLOBAL GRAIN REDUCTION
+- Reduce the intensity/opacity of any global grain, noise, film grain or texture overlay by approximately 70–80%.
+- If there are multiple grain/noise layers, consolidate or remove unnecessary ones.
+- Do not allow grain to visibly cover product images, character artwork, logos, typography or UI elements.
+
+2. BACKGROUND ONLY
+- If grain is kept, restrict it primarily to dark background surfaces.
+- Keep it extremely subtle and static or nearly imperceptible.
+- It should feel like a premium print/editorial texture, NOT digital noise.
+
+3. PRESERVE IMAGE SHARPNESS
+- Product images and character artwork should remain crisp and clean.
+- Do not apply unnecessary blur, filters, opacity layers or noise over the character/product images.
+- Preserve the original image quality.
+
+4. TYPOGRAPHY
+- Keep all typography perfectly sharp.
+- No grain/noise overlays should reduce text clarity.
+- Logo and major headlines should look clean and high-resolution.
+
+5. CINEMATIC LOOK WITHOUT NOISE
+Instead of relying on grain to create atmosphere, use:
+- subtle contrast
+- controlled shadows
+- dark gradients
+- depth
+- restrained glow
+- subtle lighting
+- composition
+
+Do NOT compensate by adding more blur or glow.
+
+6. HERO
+The HERO should feel especially crisp.
+Characters, NEOTIC SUPPLY logo and "WEAR THE UNREAL" should have strong visual definition.
+Keep the cinematic atmosphere, but remove the hazy/noisy feeling.
+
+7. SHOP / PRODUCT PAGES
+Product photography must remain clean and sharp.
+No visible grain over the shirts or product artwork.
+
+8. MOBILE
+Reduce or disable unnecessary grain/noise effects on mobile for better performance and clarity.
+
+IMPORTANT:
+Do not redesign the website.
+Do not change the existing color palette.
+Do not remove the cinematic aesthetic.
+Do not remove the subtle texture completely if it contributes to the identity.
+
+The desired balance is:
+90% clean / sharp editorial
+10% subtle cinematic texture
+
+The website should feel like a premium fashion campaign, not a VHS filter.
+
+After implementing this, check all major sections:
+HOME / HERO
+SHOP
+PRODUCT DETAIL
+CART
+CHECKOUT
+CHARACTERS
+THE WORLD
+DROPS
+ABOUT
+
+Keep everything else working exactly as it currently does.

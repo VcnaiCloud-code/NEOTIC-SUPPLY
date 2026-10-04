@@ -96,7 +96,6 @@ body { margin: 0; background: #0b0d0d; color: #e9e8e1; font-family: var(--app-fo
 button, a, input { font: inherit; }
 button { color: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #76d2cf; outline-offset: 4px; }
-.grain { position: fixed; inset: 0; z-index: 20; pointer-events: none; opacity: .045; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .mono { font-family: var(--app-font-mono); }
 .display { font-family: 'Archivo Black', sans-serif; font-weight: 400; letter-spacing: -.065em; line-height: .88; }
 .wrap { width: min(1440px, 100%); margin: 0 auto; padding-inline: clamp(22px, 6.3vw, 104px); }
@@ -382,7 +381,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 }
 html { scroll-padding-top: 82px; }
 body { background:#0d0f12; color:#f0eee8; }
-.grain { opacity:.035; }
 .topbar { height:30px; background:#b3e9dc; color:#111818; gap:12px; font-size:8px; letter-spacing:.19em; }
 .topbar i { display:block; width:4px; height:4px; border-radius:50%; background:#313a37; }
 .nav { height:72px; padding-inline:clamp(20px,5vw,74px); background:rgba(12,14,17,.9); border-color:#ffffff1c; }
@@ -557,9 +555,6 @@ html.motion-ready .products [data-reveal]:nth-child(3) { transition-delay:140ms;
 html.motion-ready .products [data-reveal]:nth-child(4) { transition-delay:210ms; }
 html.motion-ready .product[data-reveal].is-visible:hover { transform:translateY(-5px); }
 .product:focus-within { border-color:#6ebebb; }
-@media (min-width:681px) {
-  .grain { animation:grain-flicker 6s steps(4,end) infinite; }
-}
 @media (max-width:900px) {
   .hero-figure-neo { left:39%; }
   .hero-figure-vex { left:53%; }
@@ -584,7 +579,6 @@ html.motion-ready .product[data-reveal].is-visible:hover { transform:translateY(
   100% { opacity:1; clip-path:inset(0); transform:none; filter:drop-shadow(0 12px 24px rgba(0,0,0,.4)); }
 }
 @keyframes character-copy-in { from { opacity:0; transform:translate3d(10px,0,0); } to { opacity:1; transform:none; } }
-@keyframes grain-flicker { 0%,100% { opacity:.045; } 48% { opacity:.032; } 73% { opacity:.052; } }
 @media(prefers-reduced-motion:reduce) {
   html.motion-ready [data-reveal] { opacity:1!important; transform:none!important; transition:none!important; }
   .hero-figure,.character-portrait,.character-art,.character-info { animation:none!important; }
@@ -656,4 +650,14 @@ html.motion-ready .product[data-reveal].is-visible:hover { transform:translateY(
 }
 @media(prefers-reduced-motion:reduce) {
   .product-detail-backdrop,.product-detail-panel { animation:none; }
+}
+
+/* One shared, static print texture at 1% alpha (previously ~3.5–5.5%).
+   Painted only into backgrounds, never in front of artwork, text or controls. */
+:root {
+  --neotic-print-texture:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.01'/%3E%3C/svg%3E");
+}
+body { background-image:var(--neotic-print-texture); }
+@media (max-width:680px) {
+  body { background-image:none; }
 }

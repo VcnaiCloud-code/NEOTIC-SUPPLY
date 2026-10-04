@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { productImageSources } from '../lib/product-images';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import '../product-detail.css';
 
@@ -62,7 +63,7 @@ export default function ProductDetail({ product, imageSrc, selectedSize, sizes, 
           <div className="pd-stage">
             <span className="pd-ghost" aria-hidden="true">{product.character}</span>
             <span className="pd-index" aria-hidden="true">{product.characterNumber} / 004</span>
-            <img className="pd-img" src={imageSrc} alt={`${product.name}, official ${product.color.toLowerCase()} NEOTIC SUPPLY tee`} />
+            <img className="pd-img" src={imageSrc} srcSet={productImageSources(imageSrc)} sizes="(max-width:900px) 90vw, 640px" decoding="async" alt={`${product.name}, official ${product.color.toLowerCase()} NEOTIC SUPPLY tee`} />
           </div>
           <div className="pd-info">
             <span className="pd-brand">NEOTIC SUPPLY</span>

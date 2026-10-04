@@ -17,6 +17,24 @@ The current NEO TEE product-detail design is approved. Finalization and function
 
 **How to apply:** Limit finalization changes to demonstrated functional defects; do not visually restyle the product-detail experience without a new request.
 
+Hero scroll-transition refinements must preserve the existing hero composition, characters, images, typography, logo, colors, CTA, and mouse-parallax behavior exactly.
+
+**Why for hero transitions:** The user explicitly limited the transition request to scrolling and prohibited redesigning the current hero or changing any other section.
+
+**How to apply:** Keep scroll interpolation and transition effects separate from the existing mouse-parallax channel. Do not change shopping functionality or restyle the next section to achieve the transition.
+
+Performance work may serve responsive derivatives, but the original approved transparent artwork remains canonical and must not be overwritten.
+
+**Why for image optimization:** The user requested smaller images without replacing the artwork or changing the visual identity. Lossless full-resolution copies preserve visible pixels; responsive sizes reduce thumbnail decoding work.
+
+**How to apply:** Generate new derivatives from the original artwork, preserve alpha, and verify full-resolution visual pixel equality. Keep original image data and URLs available rather than changing the product catalog to a new design.
+
+The desired finish is “90% clean / sharp editorial, 10% subtle cinematic texture,” like a premium fashion campaign rather than a VHS filter.
+
+**Why for the visual finish:** The user said excessive grain was reducing perceived sharpness and premium quality throughout the site.
+
+**How to apply:** Keep any remaining texture static and background-only, never over artwork, typography, logos, or controls. Disable unnecessary mobile noise; preserve the palette and existing cinematic lighting rather than compensating with extra blur or glow.
+
 Cart QA must preserve the current dark drawer design, typography, spacing, cyan accent, and animations. Demo checkout is permitted, but real payment processing must remain inactive; do not add payment or shipping providers unless the user explicitly requests them.
 
 **Why for cart QA:** The user explicitly prohibited a cart redesign and payment integration, then requested a first checkout implementation limited to test/demo orders.
