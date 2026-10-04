@@ -8,7 +8,7 @@ import type { RefObject } from 'react';
  *   transform is subtracted from the cached value), the scroll rAF only writes, and it
  *   stops when idle / offscreen / inactive / hidden / mobile / reduced motion.
  */
-export function useCharacterArchive(rootRef: RefObject<HTMLElement | null>, active: boolean, navigationRequest: { index: number; sequence: number } | null, ids: string[]) {
+export function useCharacterArchive(rootRef: RefObject<HTMLElement | null>, active: boolean) {
   const activeRef = useRef(active);
   const wakeRef = useRef<() => void>(() => {});
   activeRef.current = active;
@@ -174,16 +174,4 @@ export function useCharacterArchive(rootRef: RefObject<HTMLElement | null>, acti
     wakeRef.current();
   }, [active, rootRef]);
 
-  // World card -> chapter: one rAF scroll per request, never on mount.
-  useEffect(() => {
-    if (!navigationRequest) return;
-    const id = ids[navigationRequest.index];
-    if (!id) return;
-    const raf = requestAnimationFrame(() => {
-      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-      document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
-    });
-    return () => cancelAnimationFrame(raf);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigationRequest]);
 }

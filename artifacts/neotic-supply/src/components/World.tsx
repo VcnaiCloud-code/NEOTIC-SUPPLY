@@ -6,7 +6,6 @@ type WorldProps = {
   characters: Array<{ name: string; image: string }>;
   imageRoot: string;
   active: boolean;
-  onExploreCharacter?: (index: number) => void;
 };
 
 const META: Record<string, { no: string; title: string; note: string; coord: string }> = {
@@ -16,7 +15,7 @@ const META: Record<string, { no: string; title: string; note: string; coord: str
   MIKO: { no: '004', title: 'THE EXPLORER', note: 'Every place is a new playground.', coord: '07.5S / 139.1E' },
 };
 
-function World({ characters, imageRoot, active, onExploreCharacter }: WorldProps) {
+function World({ characters, imageRoot, active }: WorldProps) {
   const rootRef = useRef<HTMLElement>(null);
   const activeRef = useRef(active);
   const wakeRef = useRef<() => void>(() => {});
@@ -212,7 +211,7 @@ function World({ characters, imageRoot, active, onExploreCharacter }: WorldProps
               const m = META[c.name];
               return (
                 <li className={`nw-card nw-card-${i + 1}`} key={c.name} data-nw-reveal style={{ ['--i' as string]: i }}>
-                  <a href="#characters" className="nw-card-link" onClick={() => onExploreCharacter?.(order.indexOf(c.name))} data-testid={`world-frequency-${c.name.toLowerCase()}`} aria-label={`${m.no} ${c.name} ${m.title} — view in characters`}>
+                  <a href={`#character-${c.name.toLowerCase()}`} className="nw-card-link" data-testid={`world-frequency-${c.name.toLowerCase()}`} aria-label={`${m.no} ${c.name} ${m.title} — view in characters`}>
                     <span className="nw-card-top"><span>{m.no}</span><span>{m.coord}</span></span>
                     <span className="nw-card-art">
                       <span className="nw-card-ring" aria-hidden="true" />

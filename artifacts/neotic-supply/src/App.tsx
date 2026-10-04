@@ -7,6 +7,8 @@ import Hero from './components/Hero';
 import World from './components/World';
 import CharacterArchive from './components/CharacterArchive';
 import About from './components/About';
+import { useOverlay } from './components/useOverlay';
+import { loadBag, saveBag } from './lib/cart-storage';
 import { ArrowDownRight, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { cartSubtotalCents, createMockOrder, emptyShippingInfo, validateShippingInfo } from './lib/checkout';
 import type { Product, CartLine, ShippingInfo, MockOrder } from './lib/checkout';
@@ -25,18 +27,18 @@ const characters = [
   { name: 'MIKO', index: '04 / 04', title: 'THE EXPLORER', quote: '“New planet, same drip.”', description: 'Miko is curious, fearless and always looking for the next adventure. For them, every place is a new playground.', image: 'char-miko.webp' },
 ];
 const brandRoot = '/brand/';
+const dropDeadline = Date.parse('2026-10-04T00:00:00Z');
 
 function formatPrice(value: number) {
   return `$${value.toFixed(2)}`;
 }
 
 function App() {
-  const [cart, setCart] = useState<CartLine[]>([]);
+  const [cart, setCart] = useState<CartLine[]>(() => loadBag(products, shirtSizes));
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [characterRequest, setCharacterRequest] = useState<{ index: number; sequence: number } | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
   const [toast, setToast] = useState('');
@@ -45,6 +47,44 @@ function App() {
   const [checkoutCustomer, setCheckoutCustomer] = useState<ShippingInfo>({ ...emptyShippingInfo });
   const [mockOrder, setMockOrder] = useState<MockOrder | null>(null);
   const orderSubmitted = useRef(false);
+  const cartRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const menuOpenRef = useRef(menuOpen);
+  menuOpenRef.current = menuOpen;
+  useOverlay(cartRef, () => setCartOpen(false), '[data-testid="cart-close"]', cartOpen);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    headerRef.current?.querySelector<HTMLElement>('.navlinks a')?.focus({ preventScroll: true });
+    const mobile = window.matchMedia('(max-width:680px)');
+    const onResize = () => { if (!mobile.matches) setMenuOpen(false); };
+    mobile.addEventListener('change', onResize);
+    return () => mobile.removeEventListener('change', onResize);
+  }, [menuOpen]);
+  useEffect(() => { saveBag(cart); }, [cart]);
+  useEffect(() => {
+    // React mounts after the browser's first fragment lookup. Restore genuine
+    // in-page links once DOM targets exist, without changing native history.
+    const frame = requestAnimationFrame(() => {
+      const id = window.location.hash.slice(1);
+      if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
+    const onHistory = () => {
+      setMenuOpen(false);
+      setSearchOpen(false);
+      setCartOpen(false);
+      setSelectedProduct(null);
+      setCheckoutStage('storefront');
+    };
+    window.addEventListener('popstate', onHistory);
+    window.addEventListener('hashchange', onHistory);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('popstate', onHistory);
+      window.removeEventListener('hashchange', onHistory);
+    };
+  }, []);
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -52,7 +92,7 @@ function App() {
   }, [query]);
   const itemCount = cart.reduce((total, line) => total + line.quantity, 0);
   const total = cartSubtotalCents(cart) / 100;
-  const timeLeft = Math.max(0, new Date('2026-10-04T00:00:00').getTime() - now);
+  const timeLeft = Math.max(0, dropDeadline - now);
   const countdown = {
     days: Math.floor(timeLeft / 86400000),
     hours: Math.floor((timeLeft / 3600000) % 24),
@@ -61,7 +101,7 @@ function App() {
   };
 
   useEffect(() => {
-    const deadline = new Date('2026-10-04T00:00:00').getTime();
+    const deadline = dropDeadline;
     if (Date.now() >= deadline) return;
     const timer = window.setInterval(() => {
       const time = Date.now();
@@ -77,7 +117,18 @@ function App() {
   }, [toast]);
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Tab' && !event.defaultPrevented && menuOpenRef.current && headerRef.current) {
+        const items = Array.from(headerRef.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled])'))
+          .filter(el => el.getClientRects().length > 0 && !el.closest('[inert]'));
+        if (items.length) {
+          event.preventDefault();
+          const index = items.indexOf(document.activeElement as HTMLElement);
+          const next = index < 0 ? (event.shiftKey ? items.length - 1 : 0) : (index + (event.shiftKey ? -1 : 1) + items.length) % items.length;
+          items[next].focus({ preventScroll: true });
+        }
+      }
       if (event.key === 'Escape') {
+        if (menuOpenRef.current) menuToggleRef.current?.focus({ preventScroll: true });
         setCartOpen(false);
         setSearchOpen(false);
         setMenuOpen(false);
@@ -104,36 +155,59 @@ function App() {
     return () => observer.disconnect();
   }, [filteredProducts]);
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const targets = document.querySelectorAll<HTMLElement>('[data-parallax]');
     if (!targets.length) return;
 
-    const distance = window.matchMedia('(pointer: coarse)').matches ? 5 : 12;
+    const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileMq = window.matchMedia('(max-width: 680px)');
+    const distance = 12;
+    const values = new Map<HTMLElement, string>();
     let frame = 0;
     const update = () => {
       frame = 0;
+      if (reduceMq.matches || mobileMq.matches) {
+        targets.forEach(target => target.style.removeProperty('--parallax-y'));
+        values.clear();
+        return;
+      }
       const viewportHeight = window.innerHeight;
-      targets.forEach((target) => {
+      // Finish all reads before writing styles; don't repaint identical values.
+      const samples = Array.from(targets).map((target) => {
         const bounds = target.getBoundingClientRect();
-        if (bounds.bottom < 0 || bounds.top > viewportHeight) return;
+        if (bounds.bottom < 0 || bounds.top > viewportHeight) return null;
         const progress = (viewportHeight - bounds.top) / (viewportHeight + bounds.height) - 0.5;
         const offset = Math.max(-distance, Math.min(distance, progress * distance * 2));
-        target.style.setProperty('--parallax-y', `${offset.toFixed(1)}px`);
+        return { target, value: `${offset.toFixed(1)}px` };
+      });
+      samples.forEach(sample => {
+        if (!sample || values.get(sample.target) === sample.value) return;
+        sample.target.style.setProperty('--parallax-y', sample.value);
+        values.set(sample.target, sample.value);
       });
     };
     const onScroll = () => {
+      if (document.hidden || reduceMq.matches || mobileMq.matches) return;
       if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    const onMotionChange = () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      update();
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    reduceMq.addEventListener('change', onMotionChange);
+    mobileMq.addEventListener('change', onMotionChange);
     update();
     return () => {
       window.removeEventListener('scroll', onScroll);
+      reduceMq.removeEventListener('change', onMotionChange);
+      mobileMq.removeEventListener('change', onMotionChange);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
 
   const addToCart = (product: Product, size: string) => {
+    setMenuOpen(false);
     setCart((current) => {
       const existing = current.find((line) => line.product.id === product.id && line.size === size);
       if (existing) return current.map((line) => line.product.id === product.id && line.size === size ? { ...line, quantity: line.quantity + 1 } : line);
@@ -152,6 +226,9 @@ function App() {
   const selectedSizeFor = (product: Product) => selectedSizes[product.id] ?? 'M';
   const jumpTo = (id: string) => {
     setMenuOpen(false);
+    // Button-driven section changes need the same URL/history destination as
+    // native anchors. pushState preserves an intentionally opened search panel.
+    if (window.location.hash !== `#${id}`) window.history.pushState(null, '', `#${id}`);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.getElementById(id)?.scrollIntoView({ behavior });
   };
@@ -183,9 +260,9 @@ function App() {
   return (
     <>
       <div className="topbar" data-testid="announcement-bar">DROP 001 — 04.10.26 &nbsp; / &nbsp; SHIPPING WORLDWIDE</div>
-      <header className="nav">
+      <header className="nav" ref={headerRef}>
         <a className="brand" href="#home" aria-label="NEOTIC SUPPLY home" onClick={() => setMenuOpen(false)}>NEOTIC<small>SUPPLY</small></a>
-        <nav className={`navlinks ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
+        <nav id="main-navigation" className={`navlinks ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
           <a href="#shop" onClick={() => setMenuOpen(false)}>SHOP</a>
           <a href="#characters" onClick={() => setMenuOpen(false)}>CHARACTERS</a>
           <a href="#world" onClick={() => setMenuOpen(false)}>THE WORLD</a>
@@ -196,11 +273,11 @@ function App() {
           <button className="nav-action" aria-label="Search products" data-testid="search-toggle" onClick={() => { setSearchOpen((open) => !open); jumpTo('shop'); }}>
             <Search size={17} strokeWidth={1.5} />
           </button>
-          <button className="nav-action mono" aria-label={`Open bag, ${itemCount} items`} data-testid="cart-toggle" onClick={() => { setSelectedProduct(null); setCartOpen(true); }}>
+          <button className="nav-action mono" aria-label={`Open bag, ${itemCount} items`} data-testid="cart-toggle" onClick={() => { setMenuOpen(false); setSelectedProduct(null); setCartOpen(true); }}>
             <ShoppingBag size={16} strokeWidth={1.5} /><span className="bag-count" data-testid="cart-count">{String(itemCount).padStart(2, '0')}</span>
           </button>
         </div>
-        <button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} data-testid="menu-toggle" onClick={() => setMenuOpen((open) => !open)}>
+        <button ref={menuToggleRef} className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="main-navigation" data-testid="menu-toggle" onClick={() => setMenuOpen((open) => !open)}>
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </header>
@@ -225,7 +302,7 @@ function App() {
             <div className="products" data-testid="product-grid">
               {filteredProducts.length ? filteredProducts.map((product) => (
                 <article className="product" key={product.id} data-testid={`product-${product.id}`} data-reveal>
-                  <button className="product-preview" type="button" aria-label={`View details for ${product.name}`} onClick={() => { setCartOpen(false); setSelectedProduct(product); }} data-testid={`product-detail-open-${product.id}`}>
+                  <button className="product-preview" type="button" aria-label={`View details for ${product.name}`} onClick={() => { setMenuOpen(false); setCartOpen(false); setSelectedProduct(product); }} data-testid={`product-detail-open-${product.id}`}>
                     <div className="product-visual">
                       <span className="product-no">{product.character} / {product.characterNumber}</span>
                       <img className="product-img" src={`${brandRoot}${product.image}`} srcSet={productImageSources(`${brandRoot}${product.image}`)} sizes="(max-width:900px) 46vw, 24vw" alt={`${product.name}, official ${product.color.toLowerCase()} NEOTIC SUPPLY shirt`} loading="lazy" decoding="async" />
@@ -257,10 +334,10 @@ function App() {
           characters={characters}
           imageRoot={brandRoot}
           active={!cartOpen && !selectedProduct && !menuOpen && checkoutStage === 'storefront'}
-          navigationRequest={characterRequest}
           onOpenProduct={(name) => {
             const product = products.find((item) => item.character === name);
             if (!product) throw new Error(`Missing canonical product for ${name}`);
+            setMenuOpen(false);
             setCartOpen(false);
             setSelectedProduct(product);
           }}
@@ -270,7 +347,6 @@ function App() {
           characters={characters}
           imageRoot={brandRoot}
           active={!cartOpen && !selectedProduct && !menuOpen && checkoutStage === 'storefront'}
-          onExploreCharacter={(index) => setCharacterRequest((request) => ({ index, sequence: (request?.sequence ?? 0) + 1 }))}
         />
 
         <section className="section drop-section" id="drop" aria-labelledby="drop-title" data-parallax>
@@ -297,7 +373,7 @@ function App() {
       </footer>
 
       <div className={`overlay ${cartOpen ? 'open' : ''}`} onClick={() => setCartOpen(false)} aria-hidden="true" />
-      <aside className={`drawer ${cartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-hidden={!cartOpen} inert={!cartOpen} aria-label="Shopping bag" data-testid="cart-drawer">
+      <aside ref={cartRef} className={`drawer ${cartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-hidden={!cartOpen} inert={!cartOpen} aria-label="Shopping bag" data-testid="cart-drawer">
         <div className="drawer-head"><h2>YOUR BAG <span style={{ color: '#78d2d0' }}>({itemCount})</span></h2><button className="close-button" aria-label="Close bag" data-testid="cart-close" onClick={() => setCartOpen(false)}><X size={18} /></button></div>
         {cart.length ? <>
           <div className="cart-items">{cart.map(({ product, quantity, size }) => <div className="cart-item" key={`${product.id}-${size}`} data-testid={`cart-line-${product.id}-${size.toLowerCase()}`}>

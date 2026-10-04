@@ -1,0 +1,533 @@
+Ahora realiza una AUDITORÍA COMPLETA DE QA de todo el sitio web de NEOTIC SUPPLY.
+
+IMPORTANTE:
+Esta tarea es una auditoría, corrección de errores y revisión de estabilidad.
+NO es un rediseño.
+
+No cambies la identidad visual ni rediseñes las secciones que ya están aprobadas.
+
+SECCIONES APROBADAS:
+
+- HOME / HERO
+- THE WORLD
+- CHARACTERS
+- DROPS
+- ABOUT
+- SHOP
+- PRODUCT DETAIL
+- CART / BAG
+- CHECKOUT DEMO
+
+========================================
+1. AUDITORÍA DE NAVEGACIÓN
+========================================
+
+Prueba todos los elementos principales de navegación:
+
+HOME
+SHOP
+CHARACTERS
+THE WORLD
+DROPS
+ABOUT
+
+Verifica:
+
+- que cada elemento lleve al destino correcto
+- que no existan enlaces rotos
+- que no haya posiciones de scroll incorrectas
+- que no existan secciones duplicadas accidentalmente
+- que la navegación sea fluida
+- que los botones funcionen correctamente
+- que los botones de volver/atrás del navegador funcionen correctamente
+- que forward/back del navegador mantenga un comportamiento correcto
+
+========================================
+2. AUDITORÍA DEL HERO
+========================================
+
+Verifica:
+
+- que el HERO cargue correctamente
+- que no exista interacción de parallax con el mouse
+- que no exista lag durante el scroll
+- que la animación cinematográfica inicial funcione correctamente
+- que la transición HERO → siguiente sección sea fluida
+- que volver al HERO siga siendo fluido
+- que la animación pesada de entrada no se reproduzca innecesariamente cada vez que el usuario vuelve al HERO
+- que el CTA principal funcione
+- que no existan errores visuales durante la transición
+
+IMPORTANTE:
+
+El HERO ya fue optimizado recientemente.
+
+NO rediseñarlo.
+
+NO volver a agregar interacción con el mouse.
+
+NO agregar nuevos efectos.
+
+========================================
+3. AUDITORÍA DE THE WORLD
+========================================
+
+Verifica:
+
+- que la sección cargue correctamente
+- que todos los elementos visuales aparezcan
+- que los personajes sean correctos
+- que NEO / VEX / RAZE / MIKO estén correctamente representados
+- que la navegación hacia CHARACTERS funcione
+- que todos los enlaces funcionen
+- que el responsive funcione correctamente
+- que las animaciones sean fluidas
+
+========================================
+4. AUDITORÍA DE CHARACTERS
+========================================
+
+Verifica los cuatro personajes:
+
+001 NEO
+002 VEX
+003 RAZE
+004 MIKO
+
+Comprueba:
+
+- artwork correcto
+- nombre correcto
+- número correcto
+- título correcto
+- descripción correcta
+- personalidad correcta
+- enlaces correctos hacia sus productos
+- navegación entre personajes
+- anchors/enlaces internos
+- animaciones
+- comportamiento responsive
+- soporte para prefers-reduced-motion
+
+Asegúrate de que no se haya alterado la identidad visual de los personajes.
+
+========================================
+5. AUDITORÍA DE DROPS
+========================================
+
+Verifica:
+
+- que DROP 001 se muestre correctamente
+- que los personajes sean correctos
+- que el CTA funcione
+- que los enlaces hacia productos funcionen
+- que SHOP DROP 001 funcione
+- que no existan datos falsos de inventario
+- que no existan afirmaciones falsas sobre disponibilidad
+- que no existan errores con el contador
+
+IMPORTANTE:
+
+Si el contador actualmente muestra ceros o representa una fecha futura que no está realmente configurada, identifícalo claramente.
+
+NO inventes una fecha de lanzamiento.
+
+NO inventes información de disponibilidad.
+
+========================================
+6. AUDITORÍA DE SHOP
+========================================
+
+Verifica los cuatro productos:
+
+NEO TEE
+VEX TEE
+RAZE TEE
+MIKO TEE
+
+Para cada producto comprueba:
+
+- imagen correcta
+- nombre correcto
+- personaje correcto
+- precio correcto
+- disponibilidad correcta
+- selector de tallas
+- VIEW DETAILS
+- ADD TO BAG
+
+Asegúrate de que las imágenes sean las imágenes correctas proporcionadas para cada camiseta.
+
+========================================
+7. AUDITORÍA DE PRODUCT DETAIL
+========================================
+
+Prueba la página de detalle de cada producto.
+
+Para cada producto verifica:
+
+- imagen
+- nombre
+- personaje
+- número
+- tagline
+- precio
+- tallas
+- disponibilidad
+- descripción
+- detalles
+- ADD TO BAG
+- BACK TO SHOP
+- navegación entre productos
+
+Comprueba especialmente que la talla seleccionada se transfiera correctamente al carrito.
+
+========================================
+8. AUDITORÍA DEL CART / BAG
+========================================
+
+Prueba:
+
+- añadir producto
+- añadir el mismo producto con la misma talla
+- añadir el mismo producto con una talla diferente
+- aumentar cantidad
+- disminuir cantidad
+- eliminar producto
+- contador del carrito
+- subtotal
+- persistencia del carrito
+- carrito vacío
+- botón de checkout
+
+Verifica que las imágenes de los productos sean correctas.
+
+Verifica que las combinaciones:
+
+PRODUCTO + TALLA
+
+se mantengan correctamente separadas cuando corresponda.
+
+Por ejemplo:
+
+NEO TEE — M
+NEO TEE — L
+
+deben poder existir como líneas diferentes si corresponde.
+
+========================================
+9. AUDITORÍA DEL CHECKOUT DEMO
+========================================
+
+Verifica:
+
+- que checkout abra correctamente
+- que los datos del carrito se mantengan
+- campos de contacto
+- campos de envío
+- opciones de entrega
+- placeholder de pago
+- validaciones
+- resumen del pedido
+- PLACE ORDER
+- pantalla de confirmación
+
+Comprueba que el total del pedido coincida exactamente con el total del carrito.
+
+Comprueba que productos y tallas seleccionadas permanezcan correctos.
+
+NO agregues procesamiento de pagos reales.
+
+========================================
+10. AUDITORÍA DE CONFIRMACIÓN DEL PEDIDO
+========================================
+
+Verifica:
+
+- que aparezca correctamente la confirmación
+- que se genere una referencia de pedido
+- que los productos sean correctos
+- que las cantidades sean correctas
+- que las tallas sean correctas
+- que el total sea correcto
+- que la etiqueta DEMO / TEST sea clara
+- que no exista ninguna afirmación engañosa de que se procesó un pago real
+
+========================================
+11. AUDITORÍA RESPONSIVE
+========================================
+
+Prueba como mínimo estas resoluciones:
+
+DESKTOP:
+1440px
+1280px
+
+TABLET:
+1024px
+768px
+
+MOBILE:
+430px
+390px
+375px
+
+Comprueba:
+
+- ausencia de scroll horizontal
+- ausencia de texto cortado
+- ausencia de elementos fuera de pantalla
+- ausencia de layouts rotos
+- tamaños de texto apropiados
+- botones accesibles
+- navegación funcional
+- carrito funcional
+- checkout funcional
+- personajes correctamente posicionados
+- imágenes correctamente escaladas
+- CTA visibles y utilizables
+
+========================================
+12. AUDITORÍA DE RENDIMIENTO
+========================================
+
+Busca específicamente:
+
+- renders innecesarios de React
+- loops de animación innecesarios
+- listeners de scroll innecesarios
+- listeners de eventos que no se limpian correctamente
+- listeners de mouse innecesarios
+- imágenes excesivamente grandes
+- filtros CSS costosos
+- backdrop-filter excesivo
+- layout thrashing
+- componentes duplicados
+- posibles memory leaks
+- animaciones que puedan provocar stuttering
+- cargas repetidas de imágenes
+- estados que se actualicen innecesariamente durante scroll
+
+IMPORTANTE:
+
+No reduzcas la calidad visual de las imágenes simplemente para mejorar rendimiento.
+
+Prioriza optimización técnica.
+
+========================================
+13. AUDITORÍA DE ACCESIBILIDAD
+========================================
+
+Comprueba:
+
+- headings semánticos
+- alt text en imágenes
+- navegación mediante teclado
+- estados de focus visibles
+- etiquetas claras para botones
+- labels en formularios
+- contraste suficiente
+- soporte para prefers-reduced-motion
+- elementos interactivos accesibles
+
+========================================
+14. AUDITORÍA DE CONSOLA Y ERRORES
+========================================
+
+Comprueba si existen:
+
+- errores en consola
+- requests fallidos
+- assets inexistentes
+- imports rotos
+- warnings de React
+- problemas de routing
+- problemas de hidratación, si aplica
+- errores de carga de imágenes
+- errores de JavaScript
+
+Corrige los errores legítimos que encuentres.
+
+No ignores errores simplemente para que la consola parezca limpia.
+
+========================================
+15. AUDITORÍA DE CALIDAD DEL CÓDIGO
+========================================
+
+Busca:
+
+- datos de productos duplicados
+- lógica del carrito duplicada
+- estados innecesarios
+- componentes muertos
+- imports sin utilizar
+- rutas inconsistentes
+- código de animación duplicado
+- listeners duplicados
+- lógica repetida
+
+Haz correcciones específicas.
+
+NO reescribas toda la aplicación.
+
+NO cambies la arquitectura completa si no es necesario.
+
+========================================
+16. CONSISTENCIA VISUAL
+========================================
+
+Comprueba que todas las secciones mantengan coherencia con el sistema visual aprobado:
+
+- negro
+- charcoal
+- off-white
+- silver
+- cyan/teal como acento
+
+Verifica consistencia en:
+
+- tipografía
+- espaciado
+- botones
+- bordes
+- animaciones
+- tamaños de títulos
+- estilos técnicos
+- iconografía
+- comportamiento responsive
+
+NO rediseñes las secciones.
+
+Solo identifica inconsistencias reales.
+
+========================================
+17. GRAIN / TEXTURA
+========================================
+
+El tratamiento de grain/noise del sitio ya fue refinado.
+
+NO agregues nuevos efectos de grano.
+
+Comprueba que:
+
+- no haya exceso de grain
+- los personajes estén nítidos
+- los productos estén nítidos
+- la tipografía esté nítida
+- los logos estén nítidos
+- no existan overlays innecesarios que reduzcan la calidad visual
+
+========================================
+18. PERFORMANCE DEL HERO
+========================================
+
+Haz una revisión específica del HERO porque anteriormente tenía problemas de lag.
+
+Prueba esta secuencia:
+
+1. Abrir HOME.
+2. Esperar a que termine la animación inicial.
+3. Mover el mouse.
+4. Hacer scroll desde HERO hacia la siguiente sección.
+5. Volver al HERO.
+6. Volver a hacer scroll.
+7. Volver nuevamente al HERO.
+8. Repetir varias veces.
+
+Verifica que:
+
+- no aparezca stuttering
+- no aumente progresivamente el lag
+- no se acumulen listeners
+- no se acumulen animaciones
+- no se dupliquen efectos
+- no aumente el consumo de memoria innecesariamente
+
+El HERO debe mantenerse fluido después de múltiples entradas y salidas.
+
+========================================
+19. MOBILE PERFORMANCE
+========================================
+
+Comprueba especialmente el rendimiento en viewport móvil.
+
+En mobile:
+
+- no debe existir mouse interaction
+- reducir efectos costosos
+- reducir parallax innecesario
+- mantener transiciones suaves
+- mantener scroll fluido
+- priorizar respuesta táctil inmediata
+
+========================================
+20. REPORTE FINAL
+========================================
+
+Después de completar la auditoría, entrégame un reporte conciso dividido en:
+
+1. PROBLEMAS ENCONTRADOS
+
+Lista los problemas reales encontrados.
+
+2. PROBLEMAS CORREGIDOS
+
+Lista exactamente qué problemas corregiste.
+
+3. PROBLEMAS QUE REQUIEREN ATENCIÓN MANUAL
+
+Indica cualquier problema que no hayas podido solucionar automáticamente.
+
+4. PROBLEMAS DE RENDIMIENTO
+
+Indica si queda algún problema de rendimiento relevante.
+
+5. PROBLEMAS VISUALES
+
+Indica cualquier inconsistencia visual importante que recomiendes revisar.
+
+6. ESTADO GENERAL
+
+Indica si consideras que el sitio está:
+
+- LISTO PARA PULIDO FINAL
+o
+- NECESITA MÁS CORRECCIONES
+
+========================================
+REGLAS IMPORTANTES
+========================================
+
+NO rediseñes el sitio.
+
+NO agregues nuevas funcionalidades.
+
+NO agregues nuevas secciones.
+
+NO cambies el diseño aprobado.
+
+NO cambies el HERO visualmente.
+
+NO vuelvas a agregar mouse parallax.
+
+NO agregues más grain.
+
+NO modifiques innecesariamente SHOP, PRODUCT DETAIL, CART o CHECKOUT.
+
+NO cambies los personajes.
+
+NO inventes productos, precios, fechas o información de inventario.
+
+Esta es una auditoría de:
+
+ESTABILIDAD
+FUNCIONALIDAD
+RENDIMIENTO
+RESPONSIVE
+ACCESIBILIDAD
+CONSISTENCIA
+CALIDAD DEL CÓDIGO
+
+Haz correcciones específicas y conservadoras.
+
+El objetivo es dejar NEOTIC SUPPLY estable, fluido y listo para la etapa final de pulido.

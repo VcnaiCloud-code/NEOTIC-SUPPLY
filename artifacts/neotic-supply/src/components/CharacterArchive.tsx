@@ -7,7 +7,6 @@ type Props = {
   characters: Array<{ name: string; image: string }>;
   imageRoot: string;
   active: boolean;
-  navigationRequest: { index: number; sequence: number } | null;
   onOpenProduct: (name: string) => void;
 };
 
@@ -23,7 +22,6 @@ const META: Meta[] = [
   { key: 'miko', no: '004', name: 'MIKO', title: 'THE EXPLORER', lines: ['Curious. Fearless.', 'Always looking for the next adventure.'], phrase: "THERE'S ALWAYS SOMETHING BEYOND.", quote: '“New planet, same drip.”', tech: [['FREQUENCY', '004.0 / OPEN'], ['COORD', '07.5S 139.1E'], ['TEE', 'WHITE']] },
 ];
 
-const IDS = META.map((m) => `character-${m.key}`);
 
 /* ---- background layer: graphics only, swappable for future layered assets ---- */
 function Background({ k }: { k: string }) {
@@ -118,9 +116,9 @@ function Chapter({ m, src, i, onOpenProduct }: { m: Meta; src: string; i: number
   );
 }
 
-function CharacterArchive({ characters, imageRoot, active, navigationRequest, onOpenProduct }: Props) {
+function CharacterArchive({ characters, imageRoot, active, onOpenProduct }: Props) {
   const rootRef = useRef<HTMLElement>(null);
-  useCharacterArchive(rootRef, active, navigationRequest, IDS);
+  useCharacterArchive(rootRef, active);
   const srcFor = (name: string) => {
     const c = characters.find((x) => x.name === name);
     if (!c) throw new Error(`Missing canonical character artwork for ${name}`);

@@ -14,3 +14,9 @@ A loaded image and positive, fully in-viewport bounds do not prove the artwork i
 **Why:** A collapsed ancestor reveal mask kept loaded artwork invisible even when its bounding rectangle was fully on screen; intersection uses clipped geometry, unlike the reported layout bounds.
 
 **How to apply:** Observe an unmasked wrapper for zero-area clip-path reveals. Verify settled rendered artwork rather than treating asset completion or layout bounds as proof of visible paint.
+
+When a test reports a sticky-header click changing scroll position, establish whether the change occurs before pointerdown before attributing it to the app.
+
+**Why:** A locator click scrolled a visible sticky-header control to the page origin before dispatching pointerdown. Coordinate-based native clicks, Escape, the close button and outside-backdrop clicks preserved the original section and scroll position.
+
+**How to apply:** Compare native coordinate clicks with locator clicks and record scroll position at pointerdown, focus and click. Do not add production scroll-restoration workarounds for automation-induced scrolling.
