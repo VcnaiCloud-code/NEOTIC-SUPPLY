@@ -15,10 +15,10 @@ type Product = {
 type CartLine = { product: Product; quantity: number; size: string };
 
 const products: Product[] = [
-  { id: 'neo-tee', name: 'NEO TEE', character: 'NEO', characterNumber: '001', color: 'BLACK', tagline: 'THE CHAOS MIND', availability: 'AVAILABLE', price: 34.99, image: 'neo-tee-official.png' },
-  { id: 'vex-tee', name: 'VEX TEE', character: 'VEX', characterNumber: '002', color: 'WHITE', tagline: 'THE DREAMER', availability: 'AVAILABLE', price: 29.99, image: 'vex-tee-official.png' },
-  { id: 'raze-tee', name: 'RAZE TEE', character: 'RAZE', characterNumber: '003', color: 'WHITE', tagline: 'THE VISIONARY', availability: 'AVAILABLE', price: 32.99, image: 'raze-tee-official.png' },
-  { id: 'miko-tee', name: 'MIKO TEE', character: 'MIKO', characterNumber: '004', color: 'WHITE', tagline: 'THE EXPLORER', availability: 'AVAILABLE', price: 29.99, image: 'miko-tee-official.png' },
+  { id: 'neo-tee', name: 'NEO TEE', character: 'NEO', characterNumber: '001', color: 'BLACK', tagline: 'THE CHAOS MIND', availability: 'AVAILABLE', price: 34.99, image: 'neo-tee-transparent.png' },
+  { id: 'vex-tee', name: 'VEX TEE', character: 'VEX', characterNumber: '002', color: 'WHITE', tagline: 'THE DREAMER', availability: 'AVAILABLE', price: 29.99, image: 'vex-tee-transparent.png' },
+  { id: 'raze-tee', name: 'RAZE TEE', character: 'RAZE', characterNumber: '003', color: 'WHITE', tagline: 'THE VISIONARY', availability: 'AVAILABLE', price: 32.99, image: 'raze-tee-transparent.png' },
+  { id: 'miko-tee', name: 'MIKO TEE', character: 'MIKO', characterNumber: '004', color: 'WHITE', tagline: 'THE EXPLORER', availability: 'AVAILABLE', price: 29.99, image: 'miko-tee-transparent.png' },
 ];
 const shirtSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const characters = [
