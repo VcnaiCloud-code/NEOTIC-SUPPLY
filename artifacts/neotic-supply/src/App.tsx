@@ -1,15 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowDownRight, ArrowLeft, ArrowRight, Menu, Search, ShoppingBag, X } from 'lucide-react';
 
-type Product = { id: string; name: string; price: number; image: string; tag: string };
-type CartLine = { product: Product; quantity: number };
+type Product = {
+  id: string;
+  name: string;
+  character: string;
+  characterNumber: string;
+  color: 'BLACK' | 'WHITE';
+  tagline: string;
+  availability: string;
+  price: number;
+  image: string;
+};
+type CartLine = { product: Product; quantity: number; size: string };
 
 const products: Product[] = [
-  { id: 'neo-vex-tee', name: 'NEO / VEX CREW TEE', price: 34.99, image: 'tee-neo-vex.webp', tag: 'DROP 001 / 01' },
-  { id: 'core-black', name: 'CORE LOGO TEE / BLACK', price: 29.99, image: 'tee-core-black.webp', tag: 'CORE / 02' },
-  { id: 'miko-tee', name: 'MIKO / GRAPHIC TEE', price: 32.99, image: 'tee-miko.webp', tag: 'DROP 001 / 03' },
-  { id: 'core-white', name: 'CORE LOGO TEE / BONE', price: 29.99, image: 'tee-core-white.webp', tag: 'CORE / 04' },
+  { id: 'neo-tee', name: 'NEO TEE', character: 'NEO', characterNumber: '001', color: 'BLACK', tagline: 'THE CHAOS MIND', availability: 'AVAILABLE', price: 34.99, image: 'neo-tee-official.png' },
+  { id: 'vex-tee', name: 'VEX TEE', character: 'VEX', characterNumber: '002', color: 'WHITE', tagline: 'THE DREAMER', availability: 'AVAILABLE', price: 29.99, image: 'vex-tee-official.png' },
+  { id: 'raze-tee', name: 'RAZE TEE', character: 'RAZE', characterNumber: '003', color: 'WHITE', tagline: 'THE VISIONARY', availability: 'AVAILABLE', price: 32.99, image: 'raze-tee-official.png' },
+  { id: 'miko-tee', name: 'MIKO TEE', character: 'MIKO', characterNumber: '004', color: 'WHITE', tagline: 'THE EXPLORER', availability: 'AVAILABLE', price: 29.99, image: 'miko-tee-official.png' },
 ];
+const shirtSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const characters = [
   { name: 'NEO', index: '01 / 04', title: 'THE CHAOS MIND', quote: '“Ideas too big for this dimension.”', description: "Neo is impulsive, chaotic and always 10 steps ahead. He doesn't follow rules, he rewrites them.", image: 'char-neo.webp' },
   { name: 'VEX', index: '02 / 04', title: 'THE DREAMER', quote: '“Real world? That’s boring.”', description: "Vex lives in her own frequency. She sees things others can't and turns chaos into art.", image: 'char-vex.webp' },
@@ -29,12 +40,14 @@ function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [character, setCharacter] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
   const [toast, setToast] = useState('');
   const [now, setNow] = useState(Date.now());
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
-    return term ? products.filter((product) => product.name.toLowerCase().includes(term)) : products;
+    return term ? products.filter((product) => `${product.name} ${product.character} ${product.characterNumber} ${product.tagline} ${product.color}`.toLowerCase().includes(term)) : products;
   }, [query]);
   const itemCount = cart.reduce((total, line) => total + line.quantity, 0);
   const total = cart.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
@@ -61,6 +74,7 @@ function App() {
         setCartOpen(false);
         setSearchOpen(false);
         setMenuOpen(false);
+        setSelectedProduct(null);
       }
     };
     window.addEventListener('keydown', onKeyDown);
@@ -112,18 +126,23 @@ function App() {
     };
   }, []);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, size: string) => {
     setCart((current) => {
-      const existing = current.find((line) => line.product.id === product.id);
-      if (existing) return current.map((line) => line.product.id === product.id ? { ...line, quantity: line.quantity + 1 } : line);
-      return [...current, { product, quantity: 1 }];
+      const existing = current.find((line) => line.product.id === product.id && line.size === size);
+      if (existing) return current.map((line) => line.product.id === product.id && line.size === size ? { ...line, quantity: line.quantity + 1 } : line);
+      return [...current, { product, quantity: 1, size }];
     });
-    setToast(`${product.name} — AÑADIDO A LA BOLSA`);
+    setSelectedProduct(null);
+    setToast(`${product.name} / ${size} — AÑADIDO A LA BOLSA`);
     setCartOpen(true);
   };
-  const updateQuantity = (id: string, amount: number) => {
-    setCart((current) => current.map((line) => line.product.id === id ? { ...line, quantity: line.quantity + amount } : line).filter((line) => line.quantity > 0));
+  const updateQuantity = (id: string, size: string, amount: number) => {
+    setCart((current) => current.map((line) => line.product.id === id && line.size === size ? { ...line, quantity: line.quantity + amount } : line).filter((line) => line.quantity > 0));
   };
+  const chooseSize = (product: Product, size: string) => {
+    setSelectedSizes((current) => ({ ...current, [product.id]: size }));
+  };
+  const selectedSizeFor = (product: Product) => selectedSizes[product.id] ?? 'M';
   const jumpTo = (id: string) => {
     setMenuOpen(false);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
@@ -148,7 +167,7 @@ function App() {
           <button className="nav-action" aria-label="Search products" data-testid="search-toggle" onClick={() => { setSearchOpen((open) => !open); jumpTo('shop'); }}>
             <Search size={17} strokeWidth={1.5} />
           </button>
-          <button className="nav-action mono" aria-label={`Open bag, ${itemCount} items`} data-testid="cart-toggle" onClick={() => setCartOpen(true)}>
+          <button className="nav-action mono" aria-label={`Open bag, ${itemCount} items`} data-testid="cart-toggle" onClick={() => { setSelectedProduct(null); setCartOpen(true); }}>
             <ShoppingBag size={16} strokeWidth={1.5} /><span className="bag-count" data-testid="cart-count">{String(itemCount).padStart(2, '0')}</span>
           </button>
         </div>
@@ -189,12 +208,28 @@ function App() {
             <div className="products" data-testid="product-grid">
               {filteredProducts.length ? filteredProducts.map((product) => (
                 <article className="product" key={product.id} data-testid={`product-${product.id}`} data-reveal>
-                  <div className="product-visual">
-                    <span className="product-no">{product.tag}</span>
-                    <div className="product-img" style={{ backgroundImage: `url('${brandRoot}${product.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} role="img" aria-label={`${product.name} graphic tee`} />
+                  <button className="product-preview" type="button" aria-label={`View details for ${product.name}`} onClick={() => { setCartOpen(false); setSelectedProduct(product); }} data-testid={`product-detail-open-${product.id}`}>
+                    <div className="product-visual">
+                      <span className="product-no">{product.character} / {product.characterNumber}</span>
+                      <img className="product-img" src={`${brandRoot}${product.image}`} alt={`${product.name}, official ${product.color.toLowerCase()} NEOTIC SUPPLY shirt`} loading="lazy" decoding="async" />
+                      <span className="product-view">VIEW DETAILS <ArrowRight size={13} /></span>
+                    </div>
+                  </button>
+                  <div className="product-meta">
+                    <div className="product-name-group">
+                      <span className="product-name">{product.name}</span>
+                      <span className="product-character-line">{product.characterNumber} / {product.tagline}</span>
+                    </div>
+                    <strong>{formatPrice(product.price)}</strong>
                   </div>
-                  <div className="product-meta"><span>{product.name}</span><strong>{formatPrice(product.price)}</strong></div>
-                  <button className="add-button" onClick={() => addToCart(product)} data-testid={`add-${product.id}`}>ADD TO BAG <span aria-hidden="true">＋</span></button>
+                  <div className="product-availability"><span aria-hidden="true">●</span>{product.availability}</div>
+                  <div className="size-select-card">
+                    <div className="size-select-heading"><span>SELECT SIZE</span><span>SIZE {selectedSizeFor(product)}</span></div>
+                    <div className="size-options card-size-options" role="group" aria-label={`Select size for ${product.name}`}>
+                      {shirtSizes.map((size) => <button type="button" className={`size-option ${selectedSizeFor(product) === size ? 'selected' : ''}`} aria-pressed={selectedSizeFor(product) === size} key={size} onClick={() => chooseSize(product, size)} data-testid={`card-size-${product.id}-${size.toLowerCase()}`}>{size}</button>)}
+                    </div>
+                  </div>
+                  <button className="add-button" onClick={() => addToCart(product, selectedSizeFor(product))} data-testid={`add-${product.id}`}>ADD TO BAG <span aria-hidden="true">＋</span></button>
                 </article>
               )) : <div className="empty-search" data-testid="search-empty">NO MATCH FOUND.<br />Prueba otro término. El universo es grande.</div>}
             </div>
@@ -276,18 +311,46 @@ function App() {
       <aside className={`drawer ${cartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-label="Shopping bag" data-testid="cart-drawer">
         <div className="drawer-head"><h2>YOUR BAG <span style={{ color: '#78d2d0' }}>({itemCount})</span></h2><button className="close-button" aria-label="Close bag" data-testid="cart-close" onClick={() => setCartOpen(false)}><X size={18} /></button></div>
         {cart.length ? <>
-          <div className="cart-items">{cart.map(({ product, quantity }) => <div className="cart-item" key={product.id} data-testid={`cart-line-${product.id}`}>
-            <div className="cart-thumb" style={{ backgroundImage: `url('${brandRoot}${product.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-            <div><div className="cart-item-name">{product.name}</div><div className="cart-item-price">{formatPrice(product.price)}</div><div className="quantity">
-              <button aria-label={`Remove one ${product.name}`} onClick={() => updateQuantity(product.id, -1)} data-testid={`quantity-minus-${product.id}`}>−</button><span>{quantity}</span><button aria-label={`Add one ${product.name}`} onClick={() => updateQuantity(product.id, 1)} data-testid={`quantity-plus-${product.id}`}>＋</button>
+          <div className="cart-items">{cart.map(({ product, quantity, size }) => <div className="cart-item" key={`${product.id}-${size}`} data-testid={`cart-line-${product.id}-${size.toLowerCase()}`}>
+            <div className="cart-thumb" style={{ backgroundImage: `url('${brandRoot}${product.image}')`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
+            <div><div className="cart-item-name">{product.name}</div><div className="cart-item-size">{product.characterNumber} / {product.color} / SIZE {size}</div><div className="cart-item-price">{formatPrice(product.price)}</div><div className="quantity">
+              <button aria-label={`Remove one ${product.name}, size ${size}`} onClick={() => updateQuantity(product.id, size, -1)} data-testid={`quantity-minus-${product.id}-${size.toLowerCase()}`}>−</button><span>{quantity}</span><button aria-label={`Add one ${product.name}, size ${size}`} onClick={() => updateQuantity(product.id, size, 1)} data-testid={`quantity-plus-${product.id}-${size.toLowerCase()}`}>＋</button>
             </div></div>
-            <button className="remove" onClick={() => setCart((current) => current.filter((line) => line.product.id !== product.id))} data-testid={`remove-${product.id}`}>REMOVE</button>
+            <button className="remove" aria-label={`Remove ${product.name}, size ${size}`} onClick={() => setCart((current) => current.filter((line) => line.product.id !== product.id || line.size !== size))} data-testid={`remove-${product.id}-${size.toLowerCase()}`}>REMOVE</button>
           </div>)}</div>
           <div className="cart-total"><span>SUBTOTAL</span><strong data-testid="cart-subtotal">{formatPrice(total)}</strong></div>
           <button className="button" style={{ width: '100%' }} onClick={() => { setCartOpen(false); setToast('CHECKOUT NO DISPONIBLE — DROP 001 SOON'); }} data-testid="checkout-button">CONTINUE TO CHECKOUT <ArrowRight size={16} /></button>
           <p className="checkout-note">Checkout is not active yet. No payment will be collected.</p>
         </> : <div className="cart-empty" data-testid="cart-empty">TU BOLSA ESTÁ VACÍA.<br /><span>Some strange things belong in here.</span><button className="button" onClick={() => { setCartOpen(false); jumpTo('shop'); }}>EXPLORAR EL DROP <ArrowRight size={15} /></button></div>}
       </aside>
+      {selectedProduct && <>
+        <div className="product-detail-backdrop" aria-hidden="true" onClick={() => setSelectedProduct(null)} data-testid="product-detail-backdrop" />
+        <aside className="product-detail-panel" role="dialog" aria-modal="true" aria-labelledby="product-detail-title" data-testid={`product-detail-${selectedProduct.id}`}>
+          <div className="detail-toolbar">
+            <span>NEOTIC SUPPLY / CHARACTER {selectedProduct.characterNumber}</span>
+            <button className="close-button detail-close" aria-label="Close product details" onClick={() => setSelectedProduct(null)} data-testid="product-detail-close"><X size={18} /></button>
+          </div>
+          <div className="detail-content">
+            <div className="detail-photo-wrap">
+              <img className="detail-photo" src={`${brandRoot}${selectedProduct.image}`} alt={`${selectedProduct.name}, official ${selectedProduct.color.toLowerCase()} NEOTIC SUPPLY tee`} />
+            </div>
+            <div className="detail-copy">
+              <span className="kicker">{selectedProduct.character} / {selectedProduct.characterNumber}</span>
+              <h2 className="display" id="product-detail-title">{selectedProduct.name}</h2>
+              <p className="detail-tagline">{selectedProduct.tagline}</p>
+              <p className="detail-color">COLOR / {selectedProduct.color}</p>
+              <div className="detail-price-line"><strong>{formatPrice(selectedProduct.price)}</strong><span className="product-availability"><span aria-hidden="true">●</span>{selectedProduct.availability}</span></div>
+              <div className="size-select-card detail-size-select">
+                <div className="size-select-heading"><span>SELECT SIZE</span><span>SIZE {selectedSizeFor(selectedProduct)}</span></div>
+                <div className="size-options detail-size-options" role="group" aria-label={`Select size for ${selectedProduct.name}`}>
+                  {shirtSizes.map((size) => <button type="button" className={`size-option ${selectedSizeFor(selectedProduct) === size ? 'selected' : ''}`} aria-pressed={selectedSizeFor(selectedProduct) === size} key={size} onClick={() => chooseSize(selectedProduct, size)} data-testid={`detail-size-${selectedProduct.id}-${size.toLowerCase()}`}>{size}</button>)}
+                </div>
+              </div>
+              <button className="button detail-add-button" onClick={() => addToCart(selectedProduct, selectedSizeFor(selectedProduct))} data-testid={`detail-add-${selectedProduct.id}`}>ADD TO BAG <ArrowRight size={16} /></button>
+            </div>
+          </div>
+        </aside>
+      </>}
       <div className={`toast ${toast ? 'show' : ''}`} role="status" aria-live="polite" data-testid="toast">{toast}</div>
     </>
   );
